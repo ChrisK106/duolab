@@ -1,0 +1,13 @@
+table.dataTable tr:hover{
+    cursor: pointer;
+}
+
+.select2{
+	width:100% !important;
+}
+
+/*
+.select2 span.select2-selection{
+    height: calc(2.25rem + 2px);
+}
+*/
