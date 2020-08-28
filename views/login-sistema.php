@@ -5,6 +5,7 @@ session_start();
 if (isset($_SESSION['loggedInUser'])) {
   header('Location: views/home');
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,11 +16,11 @@ if (isset($_SESSION['loggedInUser'])) {
     <meta name="author" content="ESG Peru">
     <meta name="theme-color" content="#563d7c">
     <title>DuoLab Group</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
     <link href="./plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link rel="icon" href="./img/favicons/laboratory-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="./img/favicons/laboratory-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="./img/favicons/chemistry-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="./img/favicons/chemistry-16x16.png" sizes="16x16" type="image/png">
 
     <link href="./css/floating-labels.css" rel="stylesheet">
 
@@ -58,11 +59,13 @@ if (isset($_SESSION['loggedInUser'])) {
         <label for="inputPassword">Contraseña</label>
       </div>
 
+      <!--
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Recordarme
         </label>
       </div>
+      -->
 
       <button type="submit" class="btn btn-lg btn-primary btn-block" name="btnLogin" id="btnLogin">Ingresar</button>
 

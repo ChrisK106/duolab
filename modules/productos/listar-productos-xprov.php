@@ -4,6 +4,7 @@ $ID_PROV = "";
 $COND_PROV = "";
 $sqlquery_adic = "";
 $ESTADO_PROD = $_POST["ESTADO"];
+
 if(isset($_POST["PROV_ID"])){
     $ID_PROV = $_POST["PROV_ID"];
     $COND_PROV = " WHERE provider_id=:PROVID ";
@@ -15,26 +16,34 @@ if(isset($_POST["PROV_ID"])){
         $sqlquery_adic = " WHERE active_status = $ESTADO_PROD ";
     }
 }
-$sqlStatement = $pdo->prepare("SELECT * FROM tbl_product $COND_PROV $sqlquery_adic ORDER BY name ASC");
+
+$sqlStatement = $pdo->prepare("SELECT tbl_product.id AS ID, tbl_product.name as NAME, tbl_product.code as CODE FROM tbl_product JOIN tbl_provider ON tbl_product.provider_id=tbl_provider.id $COND_PROV $sqlquery_adic ORDER BY name ASC");
+
 if(isset($_POST["PROV_ID"])){
     $sqlStatement->bindParam("PROVID", $ID_PROV, PDO::PARAM_INT);
 }
+
 $sqlStatement->execute();
 $rowsNumber = $sqlStatement->rowCount();
 $DATA = array();
+
+array_push($DATA, ["id" => "", "text" => "Seleccione un producto"]);
+
 if ($rowsNumber > 0) {
-    array_push($DATA, ["id" => "", "text" => "Seleccione un producto"]);
+    
     while ($LST = $sqlStatement->fetch()) {
-        $ID_PROD = $LST["id"];
-        $NOM_PROD = $LST["name"];
-        $COD_PROD = $LST["code"];
+        $ID_PROD = $LST["ID"];
+        $NOM_PROD = $LST["NAME"];
+        $COD_PROD = $LST["CODE"];
         $ROW = [
             "id" => $ID_PROD,
             "text" => $NOM_PROD . " - " . $COD_PROD
         ];
         array_push($DATA, $ROW);
     }
+
 } else {
     array_push($DATA, ["id" => "", "text" => "No se encontraron productos"]);    
 }
+
 echo json_encode($DATA);

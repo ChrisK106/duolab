@@ -16,6 +16,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $p_desc = trim($_POST['producto_description']);
     $p_marca = trim($_POST['producto_marca']);
     $p_proveedor = $_POST['producto_proveedor'];
+    $p_proveedor_ref = $_POST['producto_proveedor_referencia'];
     $p_cantidad = $_POST['producto_cantidad'];
     $p_unitvalue = $_POST['producto_unitvalue'];
     $p_precio = $_POST['producto_precio'];
@@ -43,18 +44,18 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
             }            
             //$p_code = "PROD-".$IDPROD;
             
-            $sqlStatement = $pdo->prepare("INSERT INTO tbl_product(code,name,description,active_status,brand,stock_quantity,unit_price,provider_id,expiration_date,unit_value) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $sqlStatement = $pdo->prepare("INSERT INTO tbl_product(code,name,description,active_status,brand,stock_quantity,unit_price,provider_id,provider_reference,expiration_date,unit_value) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
             if ($sqlStatement) {
-                $sqlStatement->execute([$p_code,$p_nombre,$p_desc,$p_estado,$p_marca,$p_cantidad,$p_precio,$p_proveedor,$p_fecven,$p_unitvalue]);
+                $sqlStatement->execute([$p_code,$p_nombre,$p_desc,$p_estado,$p_marca,$p_cantidad,$p_precio,$p_proveedor,$p_proveedor_ref,$p_fecven,$p_unitvalue]);
                 //print_r($sqlStatement->errorInfo());
                 echo "OK_INSERT";
             } else {
                 echo "ERROR";
             }
         } else {
-            $sqlStatement = $pdo->prepare("UPDATE tbl_product SET code=?,name=?,description=?,active_status=?,brand=?,stock_quantity=?,unit_price=?,provider_id=?,expiration_date=?,unit_value=? WHERE id=?");
+            $sqlStatement = $pdo->prepare("UPDATE tbl_product SET code=?,name=?,description=?,active_status=?,brand=?,stock_quantity=?,unit_price=?,provider_id=?,provider_reference=?,expiration_date=?,unit_value=? WHERE id=?");
             if ($sqlStatement) {
-                $sqlStatement->execute([$p_code,$p_nombre,$p_desc,$p_estado,$p_marca,$p_cantidad,$p_precio,$p_proveedor,$p_fecven,$p_unitvalue,$p_idprod]);
+                $sqlStatement->execute([$p_code,$p_nombre,$p_desc,$p_estado,$p_marca,$p_cantidad,$p_precio,$p_proveedor,$p_proveedor_ref,$p_fecven,$p_unitvalue,$p_idprod]);
                 echo "OK_UPDATE";
             } else {
                 echo "ERROR";

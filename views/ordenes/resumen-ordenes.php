@@ -62,9 +62,16 @@
                                     <input type="date" name="orden_fecfin" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <button id="btn-buscar" class="btn btn-primary btn-block" type="button">
-                                   <i class="fa fa-search"></i> &nbsp;Buscar órdenes
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button id="btn-reset" class="btn btn-primary btn-block">
+                                    <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar filtros
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <button id="btn-buscar" class="btn btn-success btn-block" type="button">
+                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Órdenes
                                 </button>
                             </div>
                         </div>
@@ -73,6 +80,9 @@
 
                 <div class="card mt-3">
                     <div class="card-body">
+                        <div>
+                            <label>Haga clic derecho sobre un ítem para ver opciones disponibles.</label>
+                        </div>
                         <div class="table-responsive">
                             <table id="table-ordenes" class="table table-bordered table-hover" style="width: 100%">
                                 <thead>

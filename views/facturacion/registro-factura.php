@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;Facturación
+                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Facturación
                     </div>
                 </div>
             </div>
@@ -82,25 +82,29 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>N° Factura</label>
                                         <div class="input-group mb-3">
+                                            <!--
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     F001
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Correlativo de factura" name="facturacion_nro" readonly>
+                                            -->
+                                            <input type="text" class="form-control" placeholder="Correlativo de factura" name="facturacion_nro" required>
                                         </div>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Vendedor</label>
                                         <input type="text" class="form-control" placeholder="Vendedor de cotización" name="facturacion_cotizvendedor" readonly>
                                     </div>
                                 </div>
+                                -->
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
@@ -118,7 +122,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Fecha de Cotización</label>
+                                        <label>Fecha de Factura</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">

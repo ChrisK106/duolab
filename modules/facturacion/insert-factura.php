@@ -34,6 +34,8 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $f_user_id = $_SESSION['loggedInUser']['USERID'];
     $id_facturacion = "";
 
+    $f_faccod = $_POST["facturacion_nro"];
+
     $f_fecreg = date("Y-m-d H:i:s");
 
     $id_prod = "";
@@ -44,9 +46,11 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $import_prod = 0;
     $cant_prod = 0;
 
+    /*
     $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_invoice ORDER BY id DESC");
     $LSTMAXID->execute();
     $NEXT_ID = 0;
+
     while ($LMI = $LSTMAXID->fetch()) {
         $MAX_ID = $LMI["MAXID"];
     }
@@ -81,8 +85,8 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     }
 
     $f_faccod = "F001-" . $NEXT_ID;
-
-
+    */
+    
     $sqlStatement = $pdo->prepare("INSERT INTO tbl_invoice (number,status,quotation_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     if ($sqlStatement) {
         $sqlStatement->execute([$f_faccod, $f_estado, $f_selectcotizid, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);

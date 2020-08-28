@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/select2/css/select2-bootstrap4.min.css">
 
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.bootstrap4.min.css">
  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css"> 
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/notifyjs/dist/notify.css" />
@@ -39,8 +41,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <!-- Favicons -->
-  <link rel="icon" href="<?php echo $funciones->direct_sistema(); ?>/img/favicons/laboratory-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="<?php echo $funciones->direct_sistema(); ?>/img/favicons/laboratory-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="<?php echo $funciones->direct_sistema(); ?>/img/favicons/chemistry-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="<?php echo $funciones->direct_sistema(); ?>/img/favicons/chemistry-16x16.png" sizes="16x16" type="image/png">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

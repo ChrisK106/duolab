@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-box"></i>&nbsp;&nbsp;Mantenedor de Productos
+                        <i class="fas fa-box"></i>&nbsp;&nbsp;Registro de Productos
                     </div>
                 </div>
             </div>
@@ -61,10 +61,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Descripción</label>
                                         <input type="text" class="form-control" placeholder="Ingrese descripción de producto" name="producto_description">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nro. Guía / Orden</label>
+                                        <input type="text" class="form-control" placeholder="Ingrese número de guía u orden" name="producto_proveedor_referencia">
                                     </div>
                                 </div>
                             </div>
@@ -126,38 +132,18 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button id="btn-new" class="btn btn-primary"><i class="fa fa-file fa-1x"></i>&nbsp;&nbsp;Nuevo</button>
+                            <button id="btn-new" class="btn btn-primary">
+                                <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar campos
+                            </button>
+                            <button id="btn-product-list" class="btn btn-secondary">
+                                <i class="fa fa-box fa-1x"></i>&nbsp;&nbsp;Listado de Productos
+                            </button>
                             <div class="float-right">
                                 <button type="submit" id="btn-save-product" class="btn btn-success btn-md"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Guardar producto</font></button>
-                                <button type="button" js-id="" id="btn-delete-product" class="btn btn-danger"><i class="fa fa-trash fa-1x"></i>&nbsp;&nbsp;Eliminar producto</button>
                             </div>
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="table-productos" class="table table-bordered table-hover" style="width: 100%">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Código</th>
-                                    <th>Producto</th>
-                                    <th>Descripción</th>
-                                    <th>Marca</th>
-                                    <th>Stock</th>
-                                    <th>Precio</th>
-                                    <th>Proveedor</th>
-                                    <th>Fec. Vencimiento</th>
-                                    <th>Fec. Registro</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

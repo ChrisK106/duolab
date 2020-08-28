@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;Resumen de Facturas
+                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Resumen de Facturas
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="card-header">
                         <div class="row justify-content-end">
                             <div class="col-md-4">
-                                <a href="registro-factura" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva factura</a>
+                                <a href="registro-factura" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva Factura</a>
                             </div>
                         </div>
                     </div>
@@ -48,9 +48,16 @@
                                     <input type="date" name="factura_fecfin" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <button id="btn-buscar" class="btn btn-primary btn-block" type="button">
-                                   <i class="fa fa-search"></i>&nbsp;Buscar Facturas
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button id="btn-reset" class="btn btn-primary btn-block">
+                                    <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar filtros
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <button id="btn-buscar" class="btn btn-success btn-block" type="button">
+                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Facturas
                                 </button>
                             </div>
                         </div>

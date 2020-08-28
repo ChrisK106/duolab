@@ -427,9 +427,10 @@ $("#btn-select-factura").click(function() {
   }
 });
 
-
 $("#btn-select-cotizacion").click(function() {
-  DATA_ID = $('select[name="facturacion_listadocotiz"]').val();
+
+  var DATA_ID = $('select[name="facturacion_listadocotiz"]').val();
+  
   if (DATA_ID != "" && DATA_ID != null) {
 
     $('input[name="id_factura"]').val("");
@@ -447,8 +448,7 @@ $("#btn-select-cotizacion").click(function() {
       if(data != "" && data != null){
         $('input[name="facturacion_nro"]').val(data);
       }
-    }
-    );
+    });
 
     /*$.post(
       "../../modules/facturacion/consultar-factura.php",
@@ -478,10 +478,9 @@ $("#btn-select-cotizacion").click(function() {
       }
     );*/
 
-    $.post(
-      "../../modules/cotizaciones/consultar-cotizacion.php",
-      { FILTER: DATA_ID, ESTADO: "ALL" },
-      function(data) {
+    $.post("../../modules/cotizaciones/consultar-cotizacion.php",
+      { FILTER: DATA_ID, ESTADO: "ALL" }, function(data) {
+
         var data_json = JSON.parse(data);
         $('input[name="facturacion_valcliente"]').focus();
         $('input[name="facturacion_fecha"]').val(data_json[0]["FECREG"]);
@@ -521,17 +520,16 @@ $("#btn-select-cotizacion").click(function() {
         total_temporal = data_json[0]["TOTAL_NET"];
         codigo_idcotiz = data_json[0]["CODIGOID"];
 
-        $.post(
-          "../../modules/cotizaciones/consultar-detalle-cotizacion.php",
-          { IDCOTIZ: codigo_idcotiz },
-          function(data) {
+        $.post("../../modules/cotizaciones/consultar-detalle-cotizacion.php",
+          { IDCOTIZ: codigo_idcotiz }, function(data) {
             $('select[name="facturacion_producto"]').val("");
             $('select[name="facturacion_producto"]').trigger("change");
             $('input[name="facturacion_proddesc"]').val("");
             $('input[name="facturacion_prodprecio"]').val("");
             $('input[name="facturacion_prodcant"]').val(0);
             $("#btn-add-prodtofactura").prop("disabled", true);
-            //$("#btn-save-facturaprod").prop("disabled", false);
+            
+            $("#btn-save-facturaprod").prop("disabled", false);
 
             tbl_prodfactura.clear().draw();
             detacotiz_json = JSON.parse(data);
@@ -557,6 +555,7 @@ $("#btn-select-cotizacion").click(function() {
       Swal.close();
     });
   }
+
 });
 
 $("#table-productsfactura").on("dblclick", "tr", function() {
@@ -640,7 +639,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
     processData: false,
     beforeSend: function() {
       Swal.fire({
-        html: "<h4>Guardando cotización</h4>",
+        html: "<h4>Guardando factura</h4>",
         allowOutsideClick: false,
         onBeforeOpen: () => {
           Swal.showLoading();
@@ -654,7 +653,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
           "error",
           "bottom-right",
           "Error de guardado",
-          "No se pudo guardar la cotización"
+          "No se pudo guardar la factura"
         );
         Swal.close();
       } else if (data == "OK_INSERT") {
@@ -663,7 +662,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
         $.Notification.notify(
           "success",
           "bottom-right",
-          "Cotización guardada",
+          "Factura guardada",
           "Datos almacenados"
         );
         form.find("input, textarea, select").val("");
@@ -680,6 +679,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
   });
 });
 
+/*
 $("#btn-nuevafac").click(function() { 
   $('input[name="id_factura"]').val("");
   $('select[name="facturacion_estado"]').val("1");
@@ -703,6 +703,12 @@ $("#btn-nuevafac").click(function() {
   $("#col-btn-save-facturaprod").attr("class", "col-md-12");  
   $("#btn-save-facturaprod").prop("disabled", true);
 })
+*/
+
+$("#btn-nuevafac").click(function (e) {
+    e.preventDefault();
+    location.reload();
+});
 
 $("#btn-anular-factura").click(function() {
   element = $(this);

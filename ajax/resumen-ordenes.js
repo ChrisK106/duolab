@@ -78,8 +78,35 @@ $('input[name="orden_fecinic"]').on("change", function() {
     }
 });
 
+$(document).ready(function() {
+    $.post(
+      "../../modules/ordenes/consultar-orden.php",
+      { FILTER: "ALL", ESTADO: "ALL"},
+      function(data) {
+        tbl_ordenes.clear().draw();
+        data_orden = JSON.parse(data);
+        for (i = 0; i < data_orden.length; i++) {
+          tbl_ordenes.rows
+            .add([
+              {
+                0: data_orden[i]["IDORDEN"],
+                1: data_orden[i]["ORDNUMBER"],
+                2: data_orden[i]["NOMPROV"],
+                3: data_orden[i]["OBSERV"],
+                4: data_orden[i]["TOTNET"],
+                5: data_orden[i]["ORDESTADO"],
+                6: data_orden[i]["TIPOORDEN"],
+              }
+            ])
+            .draw();
+        }
+      }
+    );
+})
+
 $('select[name="ordenes_tipo"]').on("change", function() {
   ORD_TIPO = $(this).val();
+
   if (ORD_TIPO != "") {
     $('input[name="orden_numero"]').val("");
     $('input[name="orden_proveedor"]').val("");
@@ -94,6 +121,7 @@ $('select[name="ordenes_tipo"]').on("change", function() {
     });
     $("#btn-nuevo").attr("js-type",ORD_TIPO);
     $("#btn-nuevo").prop("disabled",false);
+    
     $.post(
       "../../modules/ordenes/consultar-orden.php",
       { FILTER: "ALL", ESTADO: "ALL", TIPO_ORDEN: ORD_TIPO },
@@ -257,4 +285,9 @@ $("#table-ordenes").contextMenu({
       }
     }
   }
+});
+
+$("#btn-reset").click(function (e) {
+    e.preventDefault();
+    location.reload();
 });

@@ -613,7 +613,8 @@ $("#btn-anular-cotizprod").click(function() {
   }
 });
 
-$("#btn-nuevo").click(function() { 
+/*
+$("#btn-nuevo").click(function() {
   $('input[name="cotizacion_fecha"]').focus();
   $('input[name="cotizacion_valcliente"]').val("");
   $('input[name="id_cotizacion"]').val("");
@@ -634,6 +635,12 @@ $("#btn-nuevo").click(function() {
   $("#col-btn-save-cotizprod").show("fast");
   $("#col-btn-save-cotizprod").attr("class", "col-md-12");  
   $("#btn-save-cotizprod").prop("disabled", true);
+});
+*/
+
+$("#btn-nuevo").click(function (e) {
+    e.preventDefault();
+    location.reload();
 });
 
 $( document ).ready(function() {

@@ -37,6 +37,15 @@
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables-bs4/dataTables.bootstrap4.js"></script>
 
+<!-- DataTables Buttons -->
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.html5.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.flash.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.print.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/jszip.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/pdfmake.min.js"></script>
+<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/vfs_fonts.js"></script>
+
 <!-- MOMENT JS -->
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/moment/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/4.0.1/moment-range.js"></script>

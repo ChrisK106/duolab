@@ -203,3 +203,8 @@ $("#table-cotizaciones").contextMenu({
     }
   }
 });
+
+$("#btn-reset").click(function (e) {
+    e.preventDefault();
+    location.reload();
+});
