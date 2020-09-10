@@ -7,6 +7,13 @@ $('input[name="facturacion_prodcant"]').prop("disabled", true);
 $('#div_diaspago').hide();
 $('input[name="facturacion_formpago"]').prop("required",false);
 
+$(document).ready(function(){
+  $("#m_registro_factura").attr("class","nav-link active");
+  $("#m_facturacion").attr("class","nav-link active");
+  $("#m_facturacion").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Registro de Factura - DuoLab Group');
+});
+
 $('select[name="facturacion_formpagotext"]').on("change", function() {
   valtipo = $(this).val();
   cotiztipopago = $('input[name="facturacion_formpago"]');

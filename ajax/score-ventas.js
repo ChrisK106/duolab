@@ -2,6 +2,11 @@ $('select[name="reporte_periodo_month"]').prop("disabled",true);
 $('select[name="reporte_periodo_year"]').prop("disabled",true);
 $("#div-filtro-periodo").hide();
 
+$(document).ready(function(){
+  $("#m_score_ventas").attr("class","nav-link active");
+  $(document).prop('title', 'Score de Ventas - DuoLab Group');
+});
+
 var year_actual = parseInt(moment().format('YYYY'));
 var meses = [
   "",

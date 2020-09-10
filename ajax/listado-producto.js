@@ -1,3 +1,10 @@
+$(document).ready(function(){
+  $("#m_almacen").attr("class","nav-link active");
+  $("#m_almacen").parent().attr("class","nav-item has-treeview menu-open");
+  $("#m_listado_producto").attr("class","nav-link active");
+  $(document).prop('title', 'Listado de Productos - DuoLab Group');
+});
+
 var tabla_productos = $('#table-productos');
 
 tabla_productos.DataTable({

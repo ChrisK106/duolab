@@ -1,5 +1,12 @@
 $("#btn-buscar").prop("disabled",true);
 
+$(document).ready(function(){
+  $("#m_resumen_cotizacion").attr("class","nav-link active");
+  $("#m_cotizacion").attr("class","nav-link active");
+  $("#m_cotizacion").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Resumen de Cotizaciones - DuoLab Group');
+});
+
 var tbl_cotizaciones = $("#table-cotizaciones").DataTable({
   language: { url: "../../plugins/datatables/Spanish.json" }
 });

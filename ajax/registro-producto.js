@@ -1,3 +1,10 @@
+$(document).ready(function(){
+  $("#m_almacen").attr("class","nav-link active");
+  $("#m_almacen").parent().attr("class","nav-item has-treeview menu-open");
+  $("#m_registro_producto").attr("class","nav-link active");
+  $(document).prop('title', 'Registro de Productos - DuoLab Group');
+});
+
 $.post("../../modules/proveedores/listar-proveedores.php", function (data) {
     $('select[name="producto_proveedor"]').empty();
     $('select[name="producto_proveedor"]').select2({

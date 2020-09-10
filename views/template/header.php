@@ -7,6 +7,7 @@
   include $root_sistema."/modules/home.php";
   $funciones = new Funciones();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -110,6 +111,7 @@
 
     </ul>
   </nav>
+  
   <?php 
     include $root_sistema."/views/template/sidebar.php";
   ?>

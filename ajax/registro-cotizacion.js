@@ -6,6 +6,13 @@ $('input[name="cotizacion_prodcant"]').prop("disabled", true);
 $('#div_diaspago').hide();
 $('input[name="cotizacion_formpago"]').prop("required",false);
 
+$(document).ready(function(){
+  $("#m_registro_cotizacion").attr("class","nav-link active");
+  $("#m_cotizacion").attr("class","nav-link active");
+  $("#m_cotizacion").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Registro de Cotización - DuoLab Group');
+});
+
 $('select[name="cotizacion_formpagotext"]').on("change", function() {
   valtipo = $(this).val();
   cotiztipopago = $('input[name="cotizacion_formpago"]');

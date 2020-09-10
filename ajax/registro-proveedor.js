@@ -1,5 +1,10 @@
 $("#col-btn-delete-proveedor").hide();
 
+$(document).ready(function(){
+  $("#m_proveedores").attr("class","nav-link active");
+  $(document).prop('title', 'Proveedores - DuoLab Group');
+});
+
 $('select[name="proveedor_banco_1"], select[name="proveedor_banco_2"]').select2({
     data: [
         { id:"", text:"Seleccione" },

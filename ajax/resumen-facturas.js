@@ -1,5 +1,12 @@
 $("#btn-buscar").prop("disabled",true);
 
+$(document).ready(function(){
+  $("#m_resumen_factura").attr("class","nav-link active");
+  $("#m_facturacion").attr("class","nav-link active");
+  $("#m_facturacion").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Resumen de Facturas - DuoLab Group');
+});
+
 var tbl_facturas = $("#table-facturas").DataTable({
   language: { url: "../../plugins/datatables/Spanish.json" }
 });

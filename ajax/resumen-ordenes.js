@@ -3,6 +3,13 @@ $('select[name="ordenes_tipo"]').trigger("change");
 $("#btn-nuevo").prop("disabled",true);
 $("#btn-buscar").prop("disabled",true);
 
+$(document).ready(function(){
+  $("#m_ordenes").attr("class","nav-link active");
+  $("#m_ordenes").parent().attr("class","nav-item has-treeview menu-open");
+  $("#m_resumen_orden").attr("class","nav-link active");
+  $(document).prop('title', 'Resumen de Órdenes - DuoLab Group');
+});
+
 var tbl_ordenes = $("#table-ordenes").DataTable({
   language: { url: "../../plugins/datatables/Spanish.json" }
 });

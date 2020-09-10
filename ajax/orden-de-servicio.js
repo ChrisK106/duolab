@@ -5,6 +5,13 @@ $("#btn-select-orden").prop("disabled", true);
 $('#div_diaspago').hide();
 $('input[name="orden_tipopago"]').prop("required",false);
 
+$(document).ready(function(){
+  $("#m_ordenes").attr("class","nav-link active");
+  $("#m_ordenes").parent().attr("class","nav-item has-treeview menu-open");
+  $("#m_orden_servicio").attr("class","nav-link active");
+  $(document).prop('title', 'Orden de Servicio - DuoLab Group');
+});
+
 var porc_igv = 0.18;
 
 $('select[name="orden_tipopagotext"]').on("change", function() {
