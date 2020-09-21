@@ -12,5 +12,6 @@ DuoLab es un **pequeño sistema web** que permite gestionar de forma sencilla:
 * Órdenes de Compra y Servicio
 * Cotizaciones
 * Facturas
+* Boletas
 
 También cuenta reportes que permiten filtrar y mostrar información relevante relacionada a productos, órdenes y ventas.
