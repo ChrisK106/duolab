@@ -194,7 +194,7 @@ $("#btn-add-prodtocotiz").click(function() {
   idprod = $('select[name="cotizacion_producto"]').val();
   producto = $('input[name="cotizacion_nameprod"]').val();
   descripcion = $('input[name="cotizacion_proddesc"]').val();
-  precio = $('input[name="cotizacion_prodprecio"]').val();
+  precio = parseFloat($('input[name="cotizacion_prodprecio"]').val());
   cantidad = parseInt($('input[name="cotizacion_prodcant"]').val());
   importe = precio * cantidad;
   var importe_actual = importe;
@@ -220,9 +220,9 @@ $("#btn-add-prodtocotiz").click(function() {
           0: idprod,
           1: producto,
           2: descripcion,
-          3: precio,
+          3: precio.toFixed(2),
           4: cantidad,
-          5: importe
+          5: importe.toFixed(2)
         }
       ])
       .draw();
@@ -246,7 +246,9 @@ $("#btn-add-prodtocotiz").click(function() {
     $('input[name="cotizacion_opergrab"]').val(importe_totactual.toFixed(2));
     $('input[name="cotizacion_igv"]').val(new_igv.toFixed(2));
     $('input[name="cotizacion_total"]').val(new_total.toFixed(2));
+
     $('input[name="cotizacion_prodcant"]').val(0);
+    $('input[name="cotizacion_prodprecio"]').val(0.00);
 
     $.Notification.notify(
       "success",
@@ -257,10 +259,9 @@ $("#btn-add-prodtocotiz").click(function() {
 
     if (tbl_data.length > 0) {
       $("#btn-save-cotizprod").prop("disabled", false);
-      porc_desc =
-        parseFloat($('input[name="cotizacion_porcdesc"]').val()) / 100;
+      porc_desc = parseFloat($('input[name="cotizacion_porcdesc"]').val()) / 100;
       val_desc = new_total * porc_desc;
-      $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(2));
+      $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(3));
     } else {
       $('input[name="cotizacion_cantdesc"]').val(0);
       $('input[name="cotizacion_porcdesc"]').val(0);
@@ -349,17 +350,15 @@ $("#btn-select-cotizacion").click(function() {
 
         $('input[name="cotizacion_porcdesc"]').val(data_json[0]["DESC_RATE"]);
         $('input[name="cotizacion_cantdesc"]').val(data_json[0]["DESC_VAL"]);
-        $('input[name="cotizacion_opergrab"]').val(data_json[0]["TOTAL_SUB"]);
-        $('input[name="cotizacion_igv"]').val(data_json[0]["TOTAL_TAX"]);
-        $('input[name="cotizacion_total"]').val(data_json[0]["TOTAL_NET"]);
+        $('input[name="cotizacion_opergrab"]').val(parseFloat(data_json[0]["TOTAL_SUB"]).toFixed(2));
+        $('input[name="cotizacion_igv"]').val(parseFloat(data_json[0]["TOTAL_TAX"]).toFixed(2));
+        $('input[name="cotizacion_total"]').val(parseFloat(data_json[0]["TOTAL_NET"]).toFixed(2));
 
         total_temporal = data_json[0]["TOTAL_NET"];
         codigo_idcotiz = data_json[0]["CODIGOID"];
 
-        $.post(
-          "../../modules/cotizaciones/consultar-detalle-cotizacion.php",
-          { IDCOTIZ: codigo_idcotiz },
-          function(data) {
+        $.post("../../modules/cotizaciones/consultar-detalle-cotizacion.php",
+          { IDCOTIZ: codigo_idcotiz }, function(data) {
             $('select[name="cotizacion_producto"]').val("");
             $('select[name="cotizacion_producto"]').trigger("change");
             $('input[name="cotizacion_proddesc"]').val("");
@@ -371,15 +370,18 @@ $("#btn-select-cotizacion").click(function() {
             tbl_prodcotiz.clear().draw();
             detacotiz_json = JSON.parse(data);
             for (i = 0; i < detacotiz_json.length; i++) {
+              var precio = parseFloat(detacotiz_json[i]["PRECIOUNIT"]).toFixed(2);
+              var importe = parseFloat(detacotiz_json[i]["IMPORTE"]).toFixed(2);
+
               tbl_prodcotiz.rows
                 .add([
                   {
                     0: detacotiz_json[i]["IDPROD"],
                     1: detacotiz_json[i]["NOMBRE"],
                     2: detacotiz_json[i]["DESCRIP"],
-                    3: detacotiz_json[i]["PRECIOUNIT"],
+                    3: precio,
                     4: detacotiz_json[i]["CANTIDAD"],
-                    5: detacotiz_json[i]["IMPORTE"]
+                    5: importe
                   }
                 ])
                 .draw();
@@ -441,7 +443,7 @@ $("#table-productscotiz").on("dblclick", "tr", function() {
     $("#btn-save-cotizprod").prop("disabled", false);
     porc_desc = parseFloat($('input[name="cotizacion_porcdesc"]').val()) / 100;
     val_desc = new_total * porc_desc;
-    $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(2));
+    $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(3));
   } else {
     $("#btn-save-cotizprod").prop("disabled", true);
     $('input[name="cotizacion_cantdesc"]').val(0);
@@ -451,10 +453,13 @@ $("#table-productscotiz").on("dblclick", "tr", function() {
 });
 
 $('input[name="cotizacion_porcdesc"]').on("change", function() {
-  porc_desc = parseFloat($(this).val()) / 100;
+  num_desc = parseFloat($(this).val());
+  if (isNaN(num_desc)) num_desc=0;
+
+  porc_desc = num_desc / 100;
   total_actual = parseFloat($('input[name="cotizacion_total"]').val());
   val_desc = total_actual * porc_desc;
-  $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(2));
+  $('input[name="cotizacion_cantdesc"]').val(val_desc.toFixed(3));
 
   total_desc = total_temporal - val_desc;
   $('input[name="cotizacion_total"]').val(total_desc.toFixed(2));
@@ -539,6 +544,7 @@ $("#FRM_INSERT_COTIZACION").submit(function(e) {
           $('#div_diaspago').hide();
           $('input[name="cotizacion_formpago"]').prop("required",false);
         }
+
         $.Notification.notify(
           "success",
           "bottom-right",
@@ -546,7 +552,7 @@ $("#FRM_INSERT_COTIZACION").submit(function(e) {
           "Datos actualizados"
         );
         tbl_prodcotiz.clear().draw();
-        Swal.close();
+        
         $("#btn-save-cotizprod").prop("disabled", true);
 
         $.post("../../modules/cotizaciones/listar-cotizaciones.php", function(
@@ -557,6 +563,8 @@ $("#FRM_INSERT_COTIZACION").submit(function(e) {
             data: JSON.parse(data)
           });
         });
+
+        Swal.close();
       }
     }
   });
@@ -619,31 +627,6 @@ $("#btn-anular-cotizprod").click(function() {
     });
   }
 });
-
-/*
-$("#btn-nuevo").click(function() {
-  $('input[name="cotizacion_fecha"]').focus();
-  $('input[name="cotizacion_valcliente"]').val("");
-  $('input[name="id_cotizacion"]').val("");
-  tbl_prodcotiz.clear().draw();
-  $("#FRM_INSERT_COTIZACION")
-    .find("input, textarea, select")
-    .val("");
-  $('select[name="cotizacion_listado"]').trigger("change");
-  $('select[name="cotizacion_producto"]').trigger("change");
-  $('select[name="cotizacion_estado"]').val("1");
-  $("#btn-add-prodtocotiz").prop("disabled", false);
-  $("#btn-save-cotizprod").prop("disabled", true);
-  $('select[name="cotizacion_formpagotext"]').prop("disabled",false);
-  $('#div_diaspago').hide();
-  $('input[name="cotizacion_formpago"]').prop("required",false);
-  $("#btn-anular-cotizprod").prop("disabled",true);
-  $("#col-btn-anular-cotizprod").hide();  
-  $("#col-btn-save-cotizprod").show("fast");
-  $("#col-btn-save-cotizprod").attr("class", "col-md-12");  
-  $("#btn-save-cotizprod").prop("disabled", true);
-});
-*/
 
 $("#btn-nuevo").click(function (e) {
     e.preventDefault();

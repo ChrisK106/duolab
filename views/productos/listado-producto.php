@@ -23,12 +23,14 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Código</th>
+                                    <th>Marca</th>
                                     <th>Producto</th>
                                     <th>Descripción</th>
-                                    <th>Marca</th>
+                                    <th>Medida</th>
                                     <th>Stock</th>
                                     <th>Precio</th>
                                     <th>Proveedor</th>
+                                    <th>Prov. Ref.</th>
                                     <th>Fec. Vencimiento</th>
                                     <th>Fec. Registro</th>
                                     <th>Estado</th>

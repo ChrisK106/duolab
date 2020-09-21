@@ -10,7 +10,7 @@ if ($FILTER_PROD == "ALL") {
         $sqlquery_adic = " WHERE tp.active_status = $ESTADO_PROD ";
     }
 
-    $sqlStatement = $pdo->prepare("SELECT tp.id AS IDPROD, tp.code AS CODE, tp.description AS DESCPROD, tp.name AS NOMPROD, tp.brand AS MARCA, tp.stock_quantity AS CANTIDAD, ROUND(tp.unit_price,2) AS PRECIO, tpo.business_name AS PROVEEDOR, tp.provider_reference AS PROVEEDOR_REF, tp.expiration_date AS FECVENC, tp.registration_date AS FECREG, tp.active_status AS ESTADO FROM tbl_product tp JOIN tbl_provider tpo ON tp.provider_id=tpo.id $sqlquery_adic ORDER BY tp.id DESC");
+    $sqlStatement = $pdo->prepare("SELECT tp.id AS IDPROD, tp.code AS CODE, tp.description AS DESCPROD, tp.name AS NOMPROD, tp.brand AS MARCA, tp.stock_quantity AS CANTIDAD, ROUND(tp.unit_price,2) AS PRECIO, tp.unit_value AS VALORMEDIDA, tpo.business_name AS PROVEEDOR, tp.provider_reference AS PROVEEDOR_REF, tp.expiration_date AS FECVENC, tp.registration_date AS FECREG, tp.active_status AS ESTADO FROM tbl_product tp JOIN tbl_provider tpo ON tp.provider_id=tpo.id $sqlquery_adic ORDER BY tp.id DESC");
     $sqlStatement->execute();
     $rowsNumber = $sqlStatement->rowCount();
     $json_data = array();
@@ -23,9 +23,28 @@ if ($FILTER_PROD == "ALL") {
             $ROWDATA['MARCA'] = $ROW["MARCA"];
             $ROWDATA['CANTIDAD'] = $ROW["CANTIDAD"];
             $ROWDATA['PRECIO'] = $ROW["PRECIO"];
+            $ROWDATA['VALORMEDIDA'] = $ROW["VALORMEDIDA"];
+
+            if ($ROW["VALORMEDIDA"] == ""){
+                $ROWDATA['VALORMEDIDA'] = "-";
+            }else{
+                $ROWDATA['VALORMEDIDA'] = $ROW["VALORMEDIDA"];
+            }
+
             $ROWDATA['PROVEEDOR'] = $ROW["PROVEEDOR"];
-            $ROWDATA['PROVEEDOR_REF'] = $ROW["PROVEEDOR_REF"];
-            $ROWDATA['FECVENC'] = date("d/m/Y",strtotime($ROW["FECVENC"]));
+
+            if ($ROW["PROVEEDOR_REF"] == ""){
+                $ROWDATA['PROVEEDOR_REF'] = "-";
+            }else{
+                $ROWDATA['PROVEEDOR_REF'] = $ROW["PROVEEDOR_REF"];
+            }
+
+            if ($ROW["FECVENC"] == "1970-01-01"){
+                $ROWDATA['FECVENC'] = "-";
+            }else{
+                $ROWDATA['FECVENC'] = date("d/m/Y",strtotime($ROW["FECVENC"]));
+            }
+
             $ROWDATA['FECREG'] = date("d/m/Y H:i",strtotime($ROW["FECREG"]));
             $ROWDATA['ESTADO'] = $ROW["ESTADO"]==1?"Activo":"Inactivo";
             

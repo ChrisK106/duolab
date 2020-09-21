@@ -13,6 +13,13 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+$(document).ready(function(){
+  $("#m_almacen").attr("class","nav-link active");
+  $("#m_almacen").parent().attr("class","nav-item has-treeview menu-open");
+  $("#m_registro_producto").attr("class","nav-link active");
+  $(document).prop('title', 'Editar Producto - DuoLab Group');
+});
+
 $(document).ready(function() {
     var product_id = getUrlParameter('id');
 
@@ -38,7 +45,11 @@ $(document).ready(function() {
         $('input[name="producto_description"]').val(data_json[0]["DESCRIPTION"]);
         $('input[name="producto_marca"]').val(data_json[0]["MARCA"]);
         $('input[name="producto_proveedor_referencia"]').val(data_json[0]["PROVEEDOR_REF"]);
-        $('input[name="producto_fecvenc"]').val(data_json[0]["FECVENC"]);
+
+        if (data_json[0]["FECVENC"] != "1970-01-01"){
+            $('input[name="producto_fecvenc"]').val(data_json[0]["FECVENC"]);
+        }
+        
         $('input[name="producto_cantidad"]').val(data_json[0]["CANTIDAD"]);        
         $('input[name="producto_precio"]').val(data_json[0]["PRECIO"]);
         

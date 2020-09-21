@@ -323,14 +323,15 @@
 	                                    </div>
 	                                    <div class="col-md-2">
 		                                    <div class="form-group">
-		                                        <label>Valor de Unidad</label>
+		                                        <label>Valor de Medida</label>
 		                                        <select class="form-control select2" name="orden_valunit">
 		                                            <option value="">Seleccione</option>
-		                                            <option value="Litros">Litros</option>
-		                                            <option value="Mililitros">Mililitros</option>
-		                                            <option value="Gramos">Gramos</option>
-		                                            <option value="Miligramos">Miligramos</option>
-		                                            <option value="Galón">Galón</option>
+		                                            <option value="gr">gr (Gramos)</option>
+		                                            <option value="mg">mg (Miligramos)</option>
+		                                            <option value="lt">lt (Litros)</option>
+		                                            <option value="ml">ml (Mililitros)</option>
+		                                            <option value="gl">gl (Galones)</option>
+		                                            <option value="und">und (Unidad)</option>
 		                                        </select>
 		                                    </div>
 		                                </div>

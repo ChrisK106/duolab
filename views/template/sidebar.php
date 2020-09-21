@@ -99,7 +99,7 @@
             <a id="m_facturacion" href="#" class="nav-link">
             <i class="nav-icon fas fa-file-invoice"></i>
               <p>
-                Facturación
+                Factura
                 <i class="right fas fa-angle-left nav-icon"></i>
               </p>
             </a>
@@ -114,6 +114,30 @@
                 <a id="m_resumen_factura" href="<?php echo $funciones->direct_paginas()."facturacion/resumen-facturas" ?>" class="nav-link">
                   <i class="nav-icon far fa-circle text-info"></i>
                   <p>Resumen de Facturas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview menu-close">
+            <a id="m_boleta" href="#" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice"></i>
+              <p>
+                Boleta
+                <i class="right fas fa-angle-left nav-icon"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a id="m_registro_boleta" href="<?php echo $funciones->direct_paginas()."facturacion/registro-boleta" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p>Registro de Boleta</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_resumen_boleta" href="<?php echo $funciones->direct_paginas()."facturacion/resumen-boletas" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p>Resumen de Boletas</p>
                 </a>
               </li>
             </ul>

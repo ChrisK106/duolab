@@ -16,12 +16,14 @@ tabla_productos.DataTable({
     "columns": [
         { "data": "ID" },
         { "data": "CODIGO" },
+        { "data": "MARCA" },
         { "data": "NOMBRE" },
         { "data": "DESCPROD" },
-        { "data": "MARCA" },
+        { "data": "VALORMEDIDA" },
         { "data": "CANTIDAD" },
         { "data": "PRECIO" },
         { "data": "PROVEEDOR" },
+        { "data": "PROVEEDOR_REF" },
         { "data": "FECVENC" },
         { "data": "FECREG" },
         { "data": "ESTADO" }

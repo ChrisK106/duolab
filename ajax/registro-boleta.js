@@ -8,10 +8,10 @@ $('#div_diaspago').hide();
 $('input[name="facturacion_formpago"]').prop("required",false);
 
 $(document).ready(function(){
-  $("#m_registro_factura").attr("class","nav-link active");
-  $("#m_facturacion").attr("class","nav-link active");
-  $("#m_facturacion").parent().attr("class","nav-item has-treeview menu-open");
-  $(document).prop('title', 'Registro de Factura - DuoLab Group');
+  $("#m_registro_boleta").attr("class","nav-link active");
+  $("#m_boleta").attr("class","nav-link active");
+  $("#m_boleta").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Registro de Boleta - DuoLab Group');
 });
 
 $('select[name="facturacion_formpagotext"]').on("change", function() {
@@ -31,7 +31,7 @@ $('select[name="facturacion_formpagotext"]').on("change", function() {
   }
 });
 
-$.post("../../modules/facturacion/listar-facturas.php", function(data) {
+$.post("../../modules/facturacion/listar-boletas.php", function(data) {
   $('select[name="facturas_listado"]').empty();
   $('select[name="facturas_listado"]').select2({
     data: JSON.parse(data)
@@ -72,7 +72,7 @@ $('input[name="facturacion_valcliente"]').autocomplete({
   }
 });
 
-$.post("../../modules/facturacion/listar-factura-codigo.php", function(data) {
+$.post("../../modules/facturacion/listar-boleta-codigo.php", function(data) {
     if(data != "" && data != null){
       $('input[name="facturacion_nro"]').val(data);
     }
@@ -282,7 +282,7 @@ $("#btn-add-prodtofactura").click(function() {
       "success",
       "bottom-right",
       "Producto añadido",
-      "El producto ha sido agregado a la factura correctamente"
+      "El producto ha sido agregado a la boleta correctamente"
     );
 
     if (tbl_data.length > 0) {
@@ -324,7 +324,7 @@ $("#btn-select-factura").click(function() {
     $('select[name="facturacion_estado"]').val("1");
 
     Swal.fire({
-      html: "<h4>Cargando datos de factura</h4>",
+      html: "<h4>Cargando datos de boleta</h4>",
       allowOutsideClick: false,
       onBeforeOpen: () => {
         Swal.showLoading();
@@ -332,8 +332,8 @@ $("#btn-select-factura").click(function() {
     });
 
     $.post(
-      "../../modules/facturacion/consultar-factura.php",
-      { FILTER: DATA_ID,  ESTADO:"ALL" },
+      "../../modules/facturacion/consultar-boleta.php",
+      { FILTER: DATA_ID, ESTADO:"ALL" },
       function(data) {
         var data_json = JSON.parse(data);
         if(data_json.length > 0){
@@ -393,7 +393,7 @@ $("#btn-select-factura").click(function() {
           codigo_idfac = data_json[0]["CODIGOID"];
 
           $.post(
-            "../../modules/facturacion/consultar-detalle-factura.php",
+            "../../modules/facturacion/consultar-detalle-boleta.php",
             { FAC_ID: codigo_idfac },
             function(data) {
               $('select[name="facturacion_producto"]').val("");
@@ -448,14 +448,14 @@ $("#btn-select-cotizacion").click(function() {
     $('select[name="facturacion_estado"]').val("1");
 
     Swal.fire({
-      html: "<h4>Cargando datos de factura</h4>",
+      html: "<h4>Cargando datos de boleta</h4>",
       allowOutsideClick: false,
       onBeforeOpen: () => {
         Swal.showLoading();
       }
     });
 
-    $.post("../../modules/facturacion/listar-factura-codigo.php", function(data) {
+    $.post("../../modules/facturacion/listar-boleta-codigo.php", function(data) {
       if(data != "" && data != null){
         $('input[name="facturacion_nro"]').val(data);
       }
@@ -627,7 +627,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
     processData: false,
     beforeSend: function() {
       Swal.fire({
-        html: "<h4>Guardando factura</h4>",
+        html: "<h4>Guardando boleta</h4>",
         allowOutsideClick: false,
         onBeforeOpen: () => {
           Swal.showLoading();
@@ -641,7 +641,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
           "error",
           "bottom-right",
           "Error de guardado",
-          "No se pudo guardar la factura"
+          "No se pudo guardar la boleta"
         );
         Swal.close();
 
@@ -651,7 +651,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
         $.Notification.notify(
           "success",
           "bottom-right",
-          "Factura guardada",
+          "Boleta guardada",
           "Datos almacenados"
         );
 
@@ -664,7 +664,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
         $('input[name="facturacion_formpago"]').prop("required",false);
         tbl_prodfactura.clear().draw();
 
-        $.post("../../modules/facturacion/listar-facturas.php", function(data) {
+        $.post("../../modules/facturacion/listar-boletas.php", function(data) {
         $('select[name="facturas_listado"]').empty();
         $('select[name="facturas_listado"]').select2({
           data: JSON.parse(data)
@@ -687,7 +687,7 @@ $("#btn-anular-factura").click(function() {
   id_val = element.attr("js-id");
   if (id_val != "" && id_val != null) {
     Swal.fire({
-      title: "Se anulará esta factura",
+      title: "Se anulará esta boleta",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -696,7 +696,7 @@ $("#btn-anular-factura").click(function() {
     }).then(result => {
       if (result.value) {
         $.post(
-          "../../modules/facturacion/anular-factura.php",
+          "../../modules/facturacion/anular-boleta.php",
           { ID_FACTURA: id_val },
           function(data) {
             if (data == true) {
@@ -721,8 +721,8 @@ $("#btn-anular-factura").click(function() {
               $.Notification.notify(
                 "success",
                 "bottom-right",
-                "Factura anulada",
-                "Datos de factura anulados"
+                "Boleta anulada",
+                "Datos de boleta anulados"
               );
             }
           }
@@ -732,7 +732,7 @@ $("#btn-anular-factura").click(function() {
   }
 });
 
-$( document ).ready(function() {
+$(document).ready(function() {
   var cookie_idfact = leer_cookie('COOKIE_ID_FACT');
   if (cookie_idfact != "") {
     setTimeout(function(){

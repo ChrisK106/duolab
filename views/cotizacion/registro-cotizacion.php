@@ -43,10 +43,10 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="card-title">Datos de Cotización</div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <div class="" style="height: 2.2rem;">
                                         <div class="row">
                                             <div class="col-md-3">
@@ -59,7 +59,7 @@
                                                     <input type="text" class="form-control" placeholder="N° Cotización" name="cotizacion_nro" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2 text-right">
+                                            <div class="col-md-1 text-right">
                                                 <label>Estado:</label>
                                             </div>
                                             <div class="col-md-2">
@@ -71,7 +71,7 @@
                                             <div class="col-md-2 text-right">
                                                 <label>Vendedor:</label>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input type="hidden" name="cotizacion_usuarioid">
                                                 <select class="select2 form-control" name="cotizacion_usuario"></select>
                                             </div>
@@ -189,7 +189,7 @@
                                 
                                 <div class="col-md-2">
                                     <label>Precio Unitario</label>
-                                    <input type="text" class="form-control" name="cotizacion_prodprecio" placeholder="" readonly>
+                                    <input type="number" min="0" class="form-control" name="cotizacion_prodprecio" placeholder="" value="0.00">
                                 </div>
                                 <div class="col-md-2">
                                     <label>Cantidad</label>
@@ -241,7 +241,7 @@
                                             <label>Descuento %</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="number" name="cotizacion_porcdesc" placeholder="Porcentaje de descuento" min="0" step="5" value="0" class="form-control">
+                                            <input type="number" name="cotizacion_porcdesc" min="0" step="5" value="0" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -249,7 +249,7 @@
                                             <label>Valor Dscto.</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" name="cotizacion_cantdesc" placeholder="" class="form-control" readonly>
+                                            <input type="text" name="cotizacion_cantdesc" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
