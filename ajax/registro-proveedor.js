@@ -43,6 +43,21 @@ tabla_proveedores.dataTable({
         { "data": "FECREG" }
     ],
     "order": [[0, "DESC"]],
+    dom: 'Bfrtip',
+    buttons: [
+            {
+                extend: 'csv',
+                text: '<i class="fa fa-file-csv"></i>&nbsp;&nbsp;Descargar CSV'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-file-excel"></i>&nbsp;&nbsp;Descargar Excel'
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimir'
+            }
+        ],
     "language": {
             "url": "../../plugins/datatables/Spanish.json"
         }
