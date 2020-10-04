@@ -1,5 +1,3 @@
-# DuoLab
-
 ![DuoLab](https://github.com/ChristianK106/duolab/blob/master/img/preview/duolab_logo.png)
 
 DuoLab es un **sistema web**, escrito en su mayoría en **PHP** y **JS**.
