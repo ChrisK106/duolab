@@ -1,8 +1,10 @@
 # DuoLab
 
-![DuoLab](https://github.com/ChristianK106/duolab/blob/master/img/duolab_banner.png)
+![DuoLab](https://github.com/ChristianK106/duolab/blob/master/img/preview/duolab_logo.png)
 
-DuoLab es un **pequeño sistema web** que permite gestionar de forma sencilla:
+DuoLab es un **sistema web**, escrito en su mayoría en **PHP** y **JS**.
+
+Este sistema permite gestionar de forma sencilla:
 
 * Clientes
 * Productos
@@ -14,4 +16,6 @@ DuoLab es un **pequeño sistema web** que permite gestionar de forma sencilla:
 * Facturas
 * Boletas
 
-También cuenta reportes que permiten filtrar y mostrar información relevante relacionada a productos, órdenes y ventas.
+También cuenta con reportes que permiten filtrar y mostrar información relevante relacionada a productos, órdenes y ventas.
+
+![DuoLab Inicio](https://github.com/ChristianK106/duolab/blob/master/img/preview/home.png)
