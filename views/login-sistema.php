@@ -12,16 +12,29 @@ if (isset($_SESSION['loggedInUser'])) {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Duo Lab Group">
-    <meta name="author" content="ESG Peru">
-    <meta name="theme-color" content="#563d7c">
-    <title>DuoLab Group</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-    <link href="./plugins/toastr/toastr.min.css" rel="stylesheet">
+    <title>DuoLab Group</title>
+    <meta name="description" content="Empresa peruana del rubro cosmético y farmacéutico, dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos.">
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="DuoLab Group"/>
+    <meta property="twitter:title" content="DuoLab Group">
+    <meta property="og:site" content="DuoLab Group">
+    <meta property="og:url" content="https://duolabgroup.com"/>
+    <meta property="og:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar."/>
+    <meta property="twitter:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar.">
+    <meta property="og:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png"/>
+    <meta name="twitter:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <!--<meta name="twitter:site" content="@duolabgroup">-->
+    <meta name="author" content="Christian CA">
+    <meta name="theme-color" content="#563d7c">
     <link rel="icon" href="./img/favicons/chemistry-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="./img/favicons/chemistry-16x16.png" sizes="16x16" type="image/png">
-
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"> 
+    <link href="./plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="./css/floating-labels.css" rel="stylesheet">
 
     <style>
@@ -43,10 +56,9 @@ if (isset($_SESSION['loggedInUser'])) {
   </head>
   <body>
     <form class="form-signin" id="login-form">
-      <div class="text-center mb-4">
-        <img class="mb-4" src="./img/flasks.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">DuoLab Group</h1>
-        <p></p>
+      <div class="text-center mb-3">
+        <img class="mb-0" src="./img/duolabgroup_logo_alt.png" width="225" height="225">
+        <!--<h1 class="h3 mb-3 font-weight-normal">DuoLab Group</h1>-->
       </div>
 
       <div class="form-label-group">
