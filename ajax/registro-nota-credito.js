@@ -11,10 +11,10 @@ $('#div_diaspago').hide();
 $('input[name="facturacion_formpago"]').prop("required",false);
 
 $(document).ready(function(){
-  $("#m_registro_boleta").attr("class","nav-link active");
-  $("#m_boleta").attr("class","nav-link active");
-  $("#m_boleta").parent().attr("class","nav-item has-treeview menu-open");
-  $(document).prop('title', 'Registro de Boleta - DuoLab Group');
+  $("#m_registro_nota_credito").attr("class","nav-link active");
+  $("#m_nota_credito").attr("class","nav-link active");
+  $("#m_nota_credito").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Registro de Nota de Crédito - DuoLab Group');
 });
 
 $('select[name="facturacion_formpagotext"]').on("change", function() {
@@ -34,7 +34,7 @@ $('select[name="facturacion_formpagotext"]').on("change", function() {
   }
 });
 
-$.post("../../modules/facturacion/listar-boletas.php", function(data) {
+$.post("../../modules/facturacion/listar-notas-credito.php", function(data) {
   $('select[name="facturas_listado"]').empty();
   $('select[name="facturas_listado"]').select2({
     data: JSON.parse(data)
@@ -102,9 +102,9 @@ $('select[name="facturacion_usuario"]').on("change", function(){
   $('input[name="facturacion_usuarioid"]').val($(this).val());
 });
 
-$.post("../../modules/cotizaciones/listar-cotizaciones.php", function(data) {
-  $('select[name="facturacion_listadocotiz"]').empty();
-  $('select[name="facturacion_listadocotiz"]').select2({
+$.post("../../modules/facturacion/listar-facturas.php", function(data) {
+  $('select[name="facturacion_listadofact"]').empty();
+  $('select[name="facturacion_listadofact"]').select2({
     data: JSON.parse(data)
   });
 });
@@ -280,7 +280,7 @@ $("#btn-add-prodtofactura").click(function() {
       "success",
       "bottom-right",
       "Producto añadido",
-      "El producto ha sido agregado a la boleta correctamente"
+      "El producto ha sido agregado a la factura correctamente"
     );
 
     if (tbl_data.length > 0) {
@@ -305,7 +305,7 @@ $("#btn-add-prodtofactura").click(function() {
   }
 });
 
-$('select[name="facturacion_listadocotiz"]').on("change", function() {
+$('select[name="facturacion_listadofact"]').on("change", function() {
   val_lstcotiz = $(this).val();
   if (val_lstcotiz != "" && val_lstcotiz != null) {
     $("#btn-select-cotizacion").prop("disabled", false);
@@ -322,7 +322,7 @@ $("#btn-select-factura").click(function() {
     $('select[name="facturacion_estado"]').val("1");
 
     Swal.fire({
-      html: "<h4>Cargando datos de boleta</h4>",
+      html: "<h4>Cargando datos de nota de crédito</h4>",
       allowOutsideClick: false,
       onBeforeOpen: () => {
         Swal.showLoading();
@@ -330,7 +330,7 @@ $("#btn-select-factura").click(function() {
     });
 
     $.post(
-      "../../modules/facturacion/consultar-boleta.php",
+      "../../modules/facturacion/consultar-nota-credito.php",
       { FILTER: DATA_ID, ESTADO:"ALL" },
       function(data) {
         var data_json = JSON.parse(data);
@@ -370,7 +370,7 @@ $("#btn-select-factura").click(function() {
           $('select[name="facturacion_estado"]').prop("disabled",true);
 
           $('input[name="id_factura"]').val(id_factura);
-
+          
           $("#btn-anular-factura").attr("js-id",id_factura);
           $("#btn-pendiente-factura").attr("js-id",id_factura);
           $("#btn-cancelar-factura").attr("js-id",id_factura);
@@ -381,7 +381,7 @@ $("#btn-select-factura").click(function() {
 
           $('input[name="facturacion_nro"]').val(data_json[0]["CODIGO_CORRELATIVO"]);
           $('input[name="facturacion_nro"]').prop("disabled",true);
-
+          
           $('select[name="facturacion_estado"]').val(est_factura);
           $('input[name="facturacion_valcliente"]').focus();
           $('input[name="facturacion_fecha"]').val(data_json[0]["FECREG"]);
@@ -422,7 +422,7 @@ $("#btn-select-factura").click(function() {
           codigo_idfac = data_json[0]["CODIGOID"];
 
           $.post(
-            "../../modules/facturacion/consultar-detalle-boleta.php",
+            "../../modules/facturacion/consultar-detalle-nota-credito.php",
             { FAC_ID: codigo_idfac },
             function(data) {
               $('select[name="facturacion_producto"]').val("");
@@ -470,7 +470,7 @@ $("#btn-select-factura").click(function() {
 
 $("#btn-select-cotizacion").click(function() {
 
-  var DATA_ID = $('select[name="facturacion_listadocotiz"]').val();
+  var DATA_ID = $('select[name="facturacion_listadofact"]').val();
   
   if (DATA_ID != "" && DATA_ID != null) {
 
@@ -478,7 +478,7 @@ $("#btn-select-cotizacion").click(function() {
     $('select[name="facturacion_estado"]').val("1");
 
     Swal.fire({
-      html: "<h4>Cargando datos de boleta</h4>",
+      html: "<h4>Cargando datos de factura</h4>",
       allowOutsideClick: false,
       onBeforeOpen: () => {
         Swal.showLoading();
@@ -487,7 +487,7 @@ $("#btn-select-cotizacion").click(function() {
 
     buscarCorrelativo();
 
-    $.post("../../modules/cotizaciones/consultar-cotizacion.php",
+    $.post("../../modules/facturacion/consultar-factura.php",
       { FILTER: DATA_ID, ESTADO: "ALL" }, function(data) {
 
         var data_json = JSON.parse(data);
@@ -527,10 +527,10 @@ $("#btn-select-cotizacion").click(function() {
         $('input[name="facturacion_total"]').val(parseFloat(data_json[0]["TOTAL_NET"]).toFixed(2));
 
         total_temporal = data_json[0]["TOTAL_NET"];
-        codigo_idcotiz = data_json[0]["CODIGOID"];
+        codigo_idfac = data_json[0]["CODIGOID"];
 
-        $.post("../../modules/cotizaciones/consultar-detalle-cotizacion.php",
-          { IDCOTIZ: codigo_idcotiz }, function(data) {
+        $.post("../../modules/facturacion/consultar-detalle-factura.php",
+          { FAC_ID: codigo_idfac }, function(data) {
             $('select[name="facturacion_producto"]').val("");
             $('select[name="facturacion_producto"]').trigger("change");
             $('input[name="facturacion_proddesc"]').val("");
@@ -540,20 +540,20 @@ $("#btn-select-cotizacion").click(function() {
             $("#btn-save-facturaprod").prop("disabled", false);
 
             tbl_prodfactura.clear().draw();
-            detacotiz_json = JSON.parse(data);
-            for (i = 0; i < detacotiz_json.length; i++) {
-              var precio = parseFloat(detacotiz_json[i]["PRECIOUNIT"]).toFixed(2);
-              var importe = parseFloat(detacotiz_json[i]["IMPORTE"]).toFixed(2);
+            detallefac_json = JSON.parse(data);
+            for (i = 0; i < detallefac_json.length; i++) {
+              var precio = parseFloat(detallefac_json[i]["PRECIOUNIT"]).toFixed(2);
+              var importe = parseFloat(detallefac_json[i]["IMPORTE"]).toFixed(2);
 
               tbl_prodfactura.rows
                 .add([
                   {
-                    0: detacotiz_json[i]["IDPROD"],
-                    1: detacotiz_json[i]["CODPROD"],
-                    2: detacotiz_json[i]["NOMBRE"],
-                    3: detacotiz_json[i]["DESCRIP"],
+                    0: detallefac_json[i]["IDPROD"],
+                    1: detallefac_json[i]["CODPROD"],
+                    2: detallefac_json[i]["NOMBRE"],
+                    3: detallefac_json[i]["DESCRIP"],
                     4: precio,
-                    5: detacotiz_json[i]["CANTIDAD"],
+                    5: detallefac_json[i]["CANTIDAD"],
                     6: importe
                   }
                 ])
@@ -566,7 +566,6 @@ $("#btn-select-cotizacion").click(function() {
       Swal.close();
     });
   }
-
 });
 
 $("#table-productsfactura").on("dblclick", "tr", function() {
@@ -653,7 +652,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
     processData: false,
     beforeSend: function() {
       Swal.fire({
-        html: "<h4>Guardando boleta</h4>",
+        html: "<h4>Guardando nota de crédito</h4>",
         allowOutsideClick: false,
         onBeforeOpen: () => {
           Swal.showLoading();
@@ -667,7 +666,7 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
           "error",
           "bottom-right",
           "Error de guardado",
-          "No se pudo guardar la boleta"
+          "No se pudo guardar la nota de crédito"
         );
         Swal.close();
 
@@ -677,13 +676,13 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
         $.Notification.notify(
           "success",
           "bottom-right",
-          "Boleta guardada",
+          "Nota de crédito guardada",
           "Datos almacenados"
         );
 
         postCambioEstado();
-
-        $.post("../../modules/facturacion/listar-boletas.php", function(data) {
+        
+        $.post("../../modules/facturacion/listar-notas-credito.php", function(data) {
         $('select[name="facturas_listado"]').empty();
         $('select[name="facturas_listado"]').select2({
           data: JSON.parse(data)
@@ -706,7 +705,7 @@ $("#btn-anular-factura").click(function() {
   id_val = element.attr("js-id");
   if (id_val != "" && id_val != null) {
     Swal.fire({
-      title: "¿Está seguro de ANULAR esta boleta?",
+      title: "¿Está seguro de ANULAR esta nota de crédito?",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -716,7 +715,7 @@ $("#btn-anular-factura").click(function() {
       if (result.value) {
         $.post(
           "../../modules/facturacion/cambiar-estado-doc.php",
-          { TIPO_DOC: 'RECEIPT', ID_DOC: id_val, ESTADO_DOC : 2},
+          { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: id_val, ESTADO_DOC : 2},
           function(data) {
             if (data == true) {
               postCambioEstado();
@@ -724,15 +723,15 @@ $("#btn-anular-factura").click(function() {
               $.Notification.notify(
                 "success",
                 "bottom-right",
-                "Boleta Anulada",
-                "La boleta fue ANULADA con éxito"
+                "Nota de Crédito Anulada",
+                "La nota de crédito fue ANULADA con éxito"
               );
             }else{
               $.Notification.notify(
                 "error",
                 "bottom-right",
                 "Error",
-                "La boleta no pudo ser ANULADA"
+                "La nota de crédito no pudo ser ANULADA"
               );
             }
           }
@@ -747,7 +746,7 @@ $("#btn-pendiente-factura").click(function() {
   id_val = element.attr("js-id");
   if (id_val != "" && id_val != null) {
     Swal.fire({
-      title: "¿Está seguro de marcar como PENDIENTE DE PAGO esta boleta?",
+      title: "¿Está seguro de marcar como PENDIENTE DE PAGO esta nota de crédito?",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -757,7 +756,7 @@ $("#btn-pendiente-factura").click(function() {
       if (result.value) {
         $.post(
           "../../modules/facturacion/cambiar-estado-doc.php",
-          { TIPO_DOC: 'RECEIPT', ID_DOC: id_val, ESTADO_DOC : 3},
+          { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: id_val, ESTADO_DOC : 3},
           function(data) {
             if (data == true) {
               postCambioEstado();
@@ -765,15 +764,15 @@ $("#btn-pendiente-factura").click(function() {
               $.Notification.notify(
                 "success",
                 "bottom-right",
-                "Boleta Pendiente de Pago",
-                "La boleta fue marcada como PENDIENTE DE PAGO con éxito"
+                "Nota de Crédito Pendiente de Pago",
+                "La factura fue marcada como PENDIENTE DE PAGO con éxito"
               );
             }else{
               $.Notification.notify(
                 "error",
                 "bottom-right",
                 "Error",
-                "La boleta no pudo ser marcada como PENDIENTE DE PAGO"
+                "La nota de crédito no pudo ser marcada como PENDIENTE DE PAGO"
               );
             }
           }
@@ -788,7 +787,7 @@ $("#btn-cancelar-factura").click(function() {
   id_val = element.attr("js-id");
   if (id_val != "" && id_val != null) {
     Swal.fire({
-      title: "¿Está seguro de marcar como CANCELADA esta boleta?",
+      title: "¿Está seguro de marcar como CANCELADA esta nota de crédito?",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -798,7 +797,7 @@ $("#btn-cancelar-factura").click(function() {
       if (result.value) {
         $.post(
           "../../modules/facturacion/cambiar-estado-doc.php",
-          { TIPO_DOC: 'RECEIPT', ID_DOC: id_val, ESTADO_DOC : 4},
+          { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: id_val, ESTADO_DOC : 4},
           function(data) {
             if (data == true) {
               postCambioEstado();
@@ -806,15 +805,15 @@ $("#btn-cancelar-factura").click(function() {
               $.Notification.notify(
                 "success",
                 "bottom-right",
-                "Boleta Cancelada",
-                "La boleta fue marcada como CANCELADA con éxito"
+                "Nota de Crédito Cancelada",
+                "La nota de crédito fue marcada como CANCELADA con éxito"
               );
             }else{
               $.Notification.notify(
                 "error",
                 "bottom-right",
                 "Error",
-                "La boleta no pudo ser marcada como CANCELADA"
+                "La nota de crédito no pudo ser marcada como CANCELADA"
               );
             }
           }
@@ -872,7 +871,7 @@ function buscarCorrelativo(){
   serieFactura = $('select[name="facturacion_series"]').val();
   
   $.post("../../modules/facturacion/obtener-correlativo-doc.php",
-    { TIPO_DOC: "RECEIPT", SERIE: serieFactura }, function(data) {
+    { TIPO_DOC: "CREDIT_NOTE", SERIE: serieFactura }, function(data) {
     if(data != "" && data != null){
       $('input[name="facturacion_nro"]').val(data);
     }

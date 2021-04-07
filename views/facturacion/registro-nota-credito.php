@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Boleta
+                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Nota de Crédito
                     </div>
                 </div>
             </div>
@@ -20,26 +20,26 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <select class="form-control select2" name="facturas_listado">
-                                        <option value="">No se han encontrado boletas</option>
+                                        <option value="">No se han encontrado NC</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
-                                <button type="button" id="btn-select-factura" class="form-control btn btn-primary">Seleccionar boleta</button>
+                                <button type="button" id="btn-select-factura" class="form-control btn btn-primary">Seleccionar NC</button>
                             </div>
                         </div>
                     </div>
                     <div id="col-btn-nuevafac" class="col-md-6">
-                        <button type="button" id="btn-nuevafac" class="btn btn-primary btn-block"><i class="fa fa-plus fa-1x"></i>&nbsp;&nbsp;<font>Nueva boleta</font></button>
+                        <button type="button" id="btn-nuevafac" class="btn btn-primary btn-block"><i class="fa fa-plus fa-1x"></i>&nbsp;&nbsp;<font>Nueva nota de crédito</font></button>
                     </div>
                 </div>
-                <form id="FRM_INSERT_FACTURA" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/facturacion/insert-boleta.php" enctype="multipart/form-data">
+                <form id="FRM_INSERT_FACTURA" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/facturacion/insert-nota-credito.php" enctype="multipart/form-data">
                     <input type="hidden" name="id_factura">
                     <div class="card card-primary">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div class="card-title">Datos de Boleta</div>
+                                    <div class="card-title">Datos de Facturación</div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="" style="height: 2.2rem;">
@@ -70,17 +70,17 @@
 
                         </div>
                         <div class="card-body">
-                            <label>N° de cotización</label>
+                            <label>N° de Factura</label>
                             <div class="row">
                                 <div class="col-md-8 col-lg-4">
                                     <div class="form-group">
-                                        <select class="form-control select2" name="facturacion_listadocotiz">
-                                            <option value="">No se han encontrado cotizaciones</option>
+                                        <select class="form-control select2" name="facturacion_listadofact">
+                                            <option value="">No se han encontrado facturas</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-lg-4">
-                                    <button type="button" id="btn-select-cotizacion" class="form-control btn btn-primary">Seleccionar cotización</button>
+                                    <button type="button" id="btn-select-cotizacion" class="form-control btn btn-primary">Seleccionar Factura</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -90,15 +90,15 @@
                                             <div class="form-group">
                                                 <label>Serie</label>
                                                 <select class="form-control select2" name="facturacion_series">
-                                                    <option value="B001" selected>B001</option>
-                                                    <option value="B002">B002</option>
+                                                    <option value="N001" selected>N001</option>
+                                                    <option value="N002">N002</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label>N° Boleta</label>
-                                                <input type="text" class="form-control" placeholder="Correlativo de factura" name="facturacion_nro" required>
+                                                <label>N° Nota de Crédito</label>
+                                                <input type="text" class="form-control" placeholder="Correlativo de NC" name="facturacion_nro" required>
                                             </div>
                                         </div>
                                     </div>
@@ -115,20 +115,20 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Doc. Identidad</label>
-                                        <input type="text" maxlength="11" class="form-control" name="facturacion_cliruc" placeholder="DNI" required>
+                                        <label>RUC</label>
+                                        <input type="text" maxlength="11" class="form-control" name="facturacion_cliruc" placeholder="RUC" required>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
-                                        <label>Nombres y Apellidos</label>
+                                        <label>Razón Social / Nombre</label>
                                         <input type="text" name="facturacion_valcliente" class="form-control" placeholder="Nombre de cliente" required>
                                     </div>
                                     <input type="hidden" name="facturacion_cliente">
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Fecha de Boleta</label>
+                                        <label>Fecha de Nota de Crédito</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
@@ -313,10 +313,10 @@
 
                             <div class="row mt-3">
                                 <div id="col-btn-save-facturaprod" class="col-md-12">
-                                    <button type="submit" id="btn-save-facturaprod" class="btn btn-success btn-block"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Grabar boleta</font></button>
+                                    <button type="submit" id="btn-save-facturaprod" class="btn btn-success btn-block"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Grabar nota de crédito</font></button>
                                 </div>
                                 <div id="col-btn-anular-factura" class="col-md-4">
-                                    <button type="button" id="btn-anular-factura" class="btn btn-danger btn-block"><i class="fa fa-minus-circle fa-1x"></i>&nbsp;&nbsp;<font><b>Anular</b> boleta</font></button>
+                                    <button type="button" id="btn-anular-factura" class="btn btn-danger btn-block"><i class="fa fa-minus-circle fa-1x"></i>&nbsp;&nbsp;<font><b>Anular</b> Nota de Crédito</font></button>
                                 </div>
                                 <div id="col-btn-pendiente-factura" class="col-md-4">
                                     <button type="button" id="btn-pendiente-factura" class="btn btn-warning btn-block"><i class="fa fa-dollar-sign fa-1x"></i>&nbsp;&nbsp;<font>Marcar como <b>Pendiente de Pago</b></font></button>

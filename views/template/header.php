@@ -60,6 +60,21 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?php echo $funciones->direct_paginas()."home" ?>" class="nav-link">Inicio</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo $funciones->direct_paginas()."clientes/registro-cliente" ?>" class="nav-link">Clientes</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo $funciones->direct_paginas()."productos/listado-producto" ?>" class="nav-link">Listado de Productos</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo $funciones->direct_paginas()."facturacion/registro-factura" ?>" class="nav-link">Factura</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo $funciones->direct_paginas()."facturacion/registro-boleta" ?>" class="nav-link">Boleta</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo $funciones->direct_paginas()."facturacion/registro-nota-credito" ?>" class="nav-link">Nota de Crédito</a>
+      </li>
 
     </ul>
 

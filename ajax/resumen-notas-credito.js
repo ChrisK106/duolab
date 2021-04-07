@@ -1,10 +1,10 @@
 $("#btn-buscar").prop("disabled",true);
 
 $(document).ready(function(){
-  $("#m_resumen_factura").attr("class","nav-link active");
-  $("#m_facturacion").attr("class","nav-link active");
-  $("#m_facturacion").parent().attr("class","nav-item has-treeview menu-open");
-  $(document).prop('title', 'Resumen de Facturas - DuoLab Group');
+  $("#m_resumen_nota_credito").attr("class","nav-link active");
+  $("#m_nota_credito").attr("class","nav-link active");
+  $("#m_nota_credito").parent().attr("class","nav-item has-treeview menu-open");
+  $(document).prop('title', 'Resumen de Notas de Crédito - DuoLab Group');
 });
 
 var tbl_facturas = $("#table-facturas").DataTable({
@@ -37,7 +37,7 @@ tbl_facturas.columns([0]).visible(false);
 
 $('input[name="factura_numero"]').autocomplete({
     source: function(request, response) {
-      $.getJSON("../../modules/facturacion/obtener-facturas.php", { factura_num: $('input[name="factura_numero"]').val() }, response);
+      $.getJSON("../../modules/facturacion/obtener-notas-credito.php", { factura_num: $('input[name="factura_numero"]').val() }, response);
     },
     select: function (event, ui) {
       $(this).val(ui.item.label);
@@ -124,12 +124,12 @@ $("#table-facturas").contextMenu({
 
 		        case "edit":
 		            crear_cookie('COOKIE_ID_FACT', row_id, 1, "/");
-		            location.href = "registro-factura";
+		            location.href = "registro-nota-credito";
 		            break;
 
 		        case "vigente":
 		        	Swal.fire({
-		        		title: "¿Está seguro de marcar como VIGENTE la factura " + data_row[1] + "?",
+		        		title: "¿Está seguro de marcar como VIGENTE la nota de crédito " + data_row[1] + "?",
 				      	showCancelButton: true,
 				      	confirmButtonColor: "#3085d6",
 				      	cancelButtonColor: "#d33",
@@ -139,22 +139,22 @@ $("#table-facturas").contextMenu({
 				      	if (result.value) {
 				      		$.post(
 				            	"../../modules/facturacion/cambiar-estado-doc.php",
-				                { TIPO_DOC: 'INVOICE', ID_DOC: row_id, ESTADO_DOC : 1},
+				                { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: row_id, ESTADO_DOC : 1},
 				                function(data) {
 				                    if(data){
 				                    	listarDocumentos();
 				                    	$.Notification.notify(
 				                          "success",
 				                          "bottom-right",
-				                          "Factura Vigente",
-				                          "La factura " + data_row[1] + " fue marcada con éxito"
+				                          "Nota de Crédito Vigente",
+				                          "La nota de crédito " + data_row[1] + " fue marcada con éxito"
 				                          );
 				                    }else{
 				                    	$.Notification.notify(
 				                          "error",
 				                          "bottom-right",
 				                          "Error",
-				                          "La factura " + data_row[1] + " no pudo ser marcada como vigente"
+				                          "La nota de crédito " + data_row[1] + " no pudo ser marcada como vigente"
 				                          );
 				                    }
 				                }
@@ -164,7 +164,7 @@ $("#table-facturas").contextMenu({
 
 		        case "anulado":
 		        	Swal.fire({
-		        		title: "¿Está seguro de ANULAR la factura " + data_row[1] + "?",
+		        		title: "¿Está seguro de ANULAR la nota de crédito " + data_row[1] + "?",
 				      	showCancelButton: true,
 				      	confirmButtonColor: "#3085d6",
 				      	cancelButtonColor: "#d33",
@@ -174,22 +174,22 @@ $("#table-facturas").contextMenu({
 				      	if (result.value) {
 				      		$.post(
 				            	"../../modules/facturacion/cambiar-estado-doc.php",
-				                { TIPO_DOC: 'INVOICE', ID_DOC: row_id, ESTADO_DOC : 2},
+				                { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: row_id, ESTADO_DOC : 2},
 				                function(data) {
 				                    if(data){
 				                    	listarDocumentos();
 				                    	$.Notification.notify(
 				                          "success",
 				                          "bottom-right",
-				                          "Factura Anulada",
-				                          "La factura " + data_row[1] + " fue anulada con éxito"
+				                          "Nota de Crédito Anulada",
+				                          "La nota de crédito " + data_row[1] + " fue anulada con éxito"
 				                          );
 				                    }else{
 				                    	$.Notification.notify(
 				                          "error",
 				                          "bottom-right",
 				                          "Error",
-				                          "La factura " + data_row[1] + " no pudo ser anulada"
+				                          "La nota de crédito " + data_row[1] + " no pudo ser anulada"
 				                          );
 				                    }
 				                }
@@ -199,7 +199,7 @@ $("#table-facturas").contextMenu({
 
 		        case "pendiente":
 		        	Swal.fire({
-		        		title: "¿Está seguro de marcar como PENDIENTE DE PAGO la factura " + data_row[1] + "?",
+		        		title: "¿Está seguro de marcar como PENDIENTE DE PAGO la nota de crédito " + data_row[1] + "?",
 				      	showCancelButton: true,
 				      	confirmButtonColor: "#3085d6",
 				      	cancelButtonColor: "#d33",
@@ -209,22 +209,22 @@ $("#table-facturas").contextMenu({
 				      	if (result.value) {
 				      		$.post(
 				            	"../../modules/facturacion/cambiar-estado-doc.php",
-				                { TIPO_DOC: 'INVOICE', ID_DOC: row_id, ESTADO_DOC : 3},
+				                { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: row_id, ESTADO_DOC : 3},
 				                function(data) {
 				                    if(data){
 				                    	listarDocumentos();
 				                    	$.Notification.notify(
 				                          "success",
 				                          "bottom-right",
-				                          "Factura Pendiente de Pago",
-				                          "La factura " + data_row[1] + " fue marcada con éxito"
+				                          "Nota de crédito Pendiente de Pago",
+				                          "La nota de crédito " + data_row[1] + " fue marcada con éxito"
 				                          );
 				                    }else{
 				                    	$.Notification.notify(
 				                          "error",
 				                          "bottom-right",
 				                          "Error",
-				                          "La factura " + data_row[1] + " no pudo ser marcada como pendiente de pago"
+				                          "La nota de crédito " + data_row[1] + " no pudo ser marcada como pendiente de pago"
 				                          );
 				                    }
 				                }
@@ -234,7 +234,7 @@ $("#table-facturas").contextMenu({
 
 		        case "cancelado":
 		        	Swal.fire({
-		        		title: "¿Está seguro de marcar como CANCELADA la factura " + data_row[1] + "?",
+		        		title: "¿Está seguro de marcar como CANCELADA la nota de crédito " + data_row[1] + "?",
 				      	showCancelButton: true,
 				      	confirmButtonColor: "#3085d6",
 				      	cancelButtonColor: "#d33",
@@ -244,22 +244,22 @@ $("#table-facturas").contextMenu({
 				      	if (result.value) {
 				      		$.post(
 				            	"../../modules/facturacion/cambiar-estado-doc.php",
-				                { TIPO_DOC: 'INVOICE', ID_DOC: row_id, ESTADO_DOC : 4},
+				                { TIPO_DOC: 'CREDIT_NOTE', ID_DOC: row_id, ESTADO_DOC : 4},
 				                function(data) {
 				                    if(data){
 				                    	listarDocumentos();
 				                    	$.Notification.notify(
 				                          "success",
 				                          "bottom-right",
-				                          "Factura Cancelada",
-				                          "La factura " + data_row[1] + " fue cancelada con éxito"
+				                          "Nota de Crédito Cancelada",
+				                          "La nota de crédito " + data_row[1] + " fue cancelada con éxito"
 				                          );
 				                    }else{
 				                    	$.Notification.notify(
 				                          "error",
 				                          "bottom-right",
 				                          "Error",
-				                          "La factura " + data_row[1] + " no pudo ser cancelada"
+				                          "La nota de crédito " + data_row[1] + " no pudo ser cancelada"
 				                          );
 				                    }
 				                }
@@ -298,7 +298,7 @@ function listarDocumentos(){
     fact_ffin = $('input[name="factura_fecfin"]').val();
 
     Swal.fire({
-        html: "<h4>Cargando facturas</h4>",
+        html: "<h4>Cargando notas de crédito</h4>",
         allowOutsideClick: false,
         onBeforeOpen: () => {
           Swal.showLoading();
@@ -307,7 +307,7 @@ function listarDocumentos(){
 
     $.post(
         "../../modules/facturacion/filtrar-doc.php",
-        { TIPO_DOC: 'INVOICE', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, fact_ffin:fact_ffin },
+        { TIPO_DOC: 'CREDIT_NOTE', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, fact_ffin:fact_ffin },
         function(data) {
             tbl_facturas.clear().draw();
             data_factura = JSON.parse(data);

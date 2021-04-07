@@ -78,6 +78,7 @@
                                         <th>Cliente</th>
                                         <th>Monto</th>
                                         <th>Estado</th>
+                                        <th>Vendedor</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

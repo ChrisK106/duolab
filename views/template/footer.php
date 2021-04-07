@@ -5,7 +5,7 @@
       
     </div>
     <!-- Default to the left -->
-    <strong>&copy; 2020 <a href="#">DuoLab Group</a>.</strong> Todos los derechos reservados.
+    <strong>&copy; 2021 DuoLab Group</strong>
   </footer>
 </div>
 <!-- ./wrapper -->

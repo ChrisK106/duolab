@@ -51,6 +51,8 @@
                                                 <select class="form-control" name="facturacion_estado">
                                                     <option value="">Seleccione</option>
                                                     <option value="1" selected>Vigente</option>
+                                                    <option value="3">Pendiente de Pago</option>
+                                                    <option value="4">Cancelada</option>
                                                     <option value="2">Anulada</option>
                                                 </select>
                                             </div>
@@ -83,17 +85,21 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>N° Factura</label>
-                                        <div class="input-group mb-3">
-                                            <!--
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    F001
-                                                </span>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Serie</label>
+                                                <select class="form-control select2" name="facturacion_series">
+                                                    <option value="F001" selected>F001</option>
+                                                    <option value="F002">F002</option>
+                                                </select>
                                             </div>
-                                            -->
-                                            <input type="text" class="form-control" placeholder="Correlativo de factura" name="facturacion_nro" required>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>N° Factura</label>
+                                                <input type="text" class="form-control" placeholder="Correlativo de factura" name="facturacion_nro" required>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -307,10 +313,16 @@
 
                             <div class="row mt-3">
                                 <div id="col-btn-save-facturaprod" class="col-md-12">
-                                    <button type="submit" id="btn-save-facturaprod" class="btn btn-success btn-block"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Grabar factura </font></button>
+                                    <button type="submit" id="btn-save-facturaprod" class="btn btn-success btn-block"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Grabar factura</font></button>
                                 </div>
-                                <div id="col-btn-anular-factura" class="col-md-6">
-                                    <button type="button" id="btn-anular-factura" class="btn btn-danger btn-block"><i class="fa fa-trash fa-1x"></i>&nbsp;&nbsp;<font>Anular factura </font></button>
+                                <div id="col-btn-anular-factura" class="col-md-4">
+                                    <button type="button" id="btn-anular-factura" class="btn btn-danger btn-block"><i class="fa fa-minus-circle fa-1x"></i>&nbsp;&nbsp;<font><b>Anular</b> Factura</font></button>
+                                </div>
+                                <div id="col-btn-pendiente-factura" class="col-md-4">
+                                    <button type="button" id="btn-pendiente-factura" class="btn btn-warning btn-block"><i class="fa fa-dollar-sign fa-1x"></i>&nbsp;&nbsp;<font>Marcar como <b>Pendiente de Pago</b></font></button>
+                                </div>
+                                <div id="col-btn-cancelar-factura" class="col-md-4">
+                                    <button type="button" id="btn-cancelar-factura" class="btn btn-success btn-block"><i class="fa fa-check-circle fa-1x"></i>&nbsp;&nbsp;<font>Marcar como <b>Cancelada</b></font></button>
                                 </div>
                             </div>
 

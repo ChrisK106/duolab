@@ -81,7 +81,7 @@ if (isset($_SESSION['loggedInUser'])) {
 
       <button type="submit" class="btn btn-lg btn-primary btn-block" name="btnLogin" id="btnLogin">Ingresar</button>
 
-      <p class="mt-5 mb-3 text-muted text-center">© 2020 DuoLab Group</p>
+      <p class="mt-5 mb-3 text-muted text-center">© 2021 DuoLab Group</p>
     </form>
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/toastr/toastr.min.js"></script>

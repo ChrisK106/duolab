@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>N° Proveedor</label>
+                                        <label>RUC Proveedor</label>
                                         <input type="text" class="form-control" name="proveedor_numero" 
                                         placeholder="Número de proveedor" required>
                                     </div>

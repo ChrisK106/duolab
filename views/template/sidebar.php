@@ -143,6 +143,30 @@
             </ul>
           </li>
 
+          <li class="nav-item has-treeview menu-close">
+            <a id="m_nota_credito" href="#" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice"></i>
+              <p>
+                Nota de Crédito
+                <i class="right fas fa-angle-left nav-icon"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a id="m_registro_nota_credito" href="<?php echo $funciones->direct_paginas()."facturacion/registro-nota-credito" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p>Registro de NC</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_resumen_nota_credito" href="<?php echo $funciones->direct_paginas()."facturacion/resumen-notas-credito" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p>Resumen de NC</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-header">COMPRAS / SERVICIOS</li>
 
           <li class="nav-item has-treeview menu-close">

@@ -29,7 +29,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $f_lst_prods = $_POST['facturacion_prods'];
     $f_lst_prods = json_decode($f_lst_prods);
     $f_estado = $_POST["facturacion_estado"];
-    $f_selectcotizid = $_POST["facturacion_listadocotiz"];
+    $f_selectcotizid = $_POST["facturacion_listadofact"];
     $f_selectcotizid = $f_selectcotizid == "" ? 0 : $f_selectcotizid;
 
     $f_seller_id = $_POST["facturacion_usuarioid"];
@@ -48,12 +48,12 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $import_prod = 0;
     $cant_prod = 0;
     
-    $sqlStatement = $pdo->prepare("INSERT INTO tbl_invoice (series,number,status,quotation_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $sqlStatement = $pdo->prepare("INSERT INTO tbl_credit_note (series,number,status,referenced_doc_id,referenced_doc_type_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     if ($sqlStatement) {
-        $sqlStatement->execute([$f_series,$f_faccod, $f_estado, $f_selectcotizid, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
+        $sqlStatement->execute([$f_series,$f_faccod, $f_estado, $f_selectcotizid, 1, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
         echo "OK_INSERT";
 
-        $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_invoice ORDER BY id DESC");
+        $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_credit_note ORDER BY id DESC");
         $LSTMAXID->execute();
         while ($LMI = $LSTMAXID->fetch()) {
             $id_facturacion = $LMI["MAXID"];
@@ -98,7 +98,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
                     while($lpxi=$lstprodxid->fetch()){
                         $stock_actual = $lpxi["stock_quantity"];
                     }
-                    $new_stock = $stock_actual - $cant_prod;
+                    $new_stock = $stock_actual + $cant_prod;
     
                     $update_producto = $pdo->prepare("UPDATE tbl_product SET stock_quantity=? WHERE id=?");
                     if ($update_producto) {
@@ -106,7 +106,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
                     }
                 }
 
-                $sqlStatement = $pdo->prepare("INSERT INTO tbl_invoice_detail (item_description,item_id,item_code, item_name,item_quantity,item_unit_price,invoice_id) VALUES (?,?,?,?,?,?,?)");
+                $sqlStatement = $pdo->prepare("INSERT INTO tbl_credit_note_detail (item_description,item_id,item_code, item_name,item_quantity,item_unit_price,credit_note_id) VALUES (?,?,?,?,?,?,?)");
                 $sqlStatement->execute([$desc_prod, $id_prod, $cod_prod, $nom_prod, $cant_prod, $prec_prod, $id_facturacion]);
             }
         }

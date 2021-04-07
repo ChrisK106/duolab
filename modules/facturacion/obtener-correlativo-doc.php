@@ -1,11 +1,38 @@
 <?php
     require '../../global/connection.php';
-    $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_invoice ORDER BY id DESC");
+
+    $tipoDoc = $_POST["TIPO_DOC"];
+    $serie = $_POST["SERIE"];
+
+    if ($serie == "DEFAULT"){
+        if ($tipoDoc == "INVOICE") $serie="F001";
+        if ($tipoDoc == "RECEIPT") $serie="B001";
+        if ($tipoDoc == "CREDIT_NOTE") $serie="N001";      
+    }
+
+    $table = "";
+
+    if ($tipoDoc == "INVOICE"){
+        $table = "tbl_invoice";
+    }else if($tipoDoc == "RECEIPT"){
+        $table = "tbl_receipt";
+    }else if($tipoDoc == "CREDIT_NOTE"){
+        $table = "tbl_credit_note";
+    }else{
+        echo false;
+        return;
+    }
+
+    $LSTMAXID = $pdo->prepare("SELECT CONVERT(MAX(number),UNSIGNED) AS MAXID FROM " . $table . " WHERE series=:SERIE ORDER BY id DESC");
+    $LSTMAXID->bindParam(":SERIE", $serie, PDO::PARAM_STR);
     $LSTMAXID->execute();
+    
     $NEXT_ID = 0;
+    
     while ($LMI = $LSTMAXID->fetch()) {
         $MAX_ID = $LMI["MAXID"];
     }
+    
     if ($MAX_ID == "" || $MAX_ID == 0) {
         $NEXT_ID = 1;
     } else {

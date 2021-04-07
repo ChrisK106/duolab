@@ -3,7 +3,7 @@ require '../../global/connection.php';
 $FILTER_ID = $_POST["FILTER"];
 $ESTADO_FAC = $_POST["ESTADO"];
 
-$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.series AS SERIEFAC, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_invoice ti ";
+$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.series AS SERIEFAC, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_credit_note ti ";
 
 if ($FILTER_ID == "ALL") {
     $sqlquery_adic = "";
@@ -63,7 +63,7 @@ if ($FILTER_ID == "ALL") {
     }
 
     if(isset($_POST["FILTER_BYCOTIZ"])){
-        $sqlStatement = $pdo->prepare($QUERY_SELECT." WHERE ti.quotation_id=:IDFILTER $sqlquery_adic");
+        $sqlStatement = $pdo->prepare($QUERY_SELECT." WHERE ti.referenced_doc_id=:IDFILTER $sqlquery_adic");
     } else {
         $sqlStatement = $pdo->prepare($QUERY_SELECT." WHERE ti.id=:IDFILTER $sqlquery_adic");
     }    

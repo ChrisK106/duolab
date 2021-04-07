@@ -9,7 +9,12 @@ $(document).ready(function(){
 
 var tbl_facturas = $("#table-boletas").DataTable({
   dom: 'Bfrtip',
+  "order": [[0, "DESC"]],
   buttons: [
+            {
+                extend: 'pdf',
+                text: '<i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Descargar PDF'
+            },
             {
                 extend: 'csv',
                 text: '<i class="fa fa-file-csv"></i>&nbsp;&nbsp;Descargar CSV'
@@ -26,29 +31,7 @@ var tbl_facturas = $("#table-boletas").DataTable({
   language: { url: "../../plugins/datatables/Spanish.json" }
 });
 
-$.post(
-  "../../modules/facturacion/consultar-boleta.php",
-  { FILTER: "ALL", ESTADO: "ALL" },
-  function(data) {
-    tbl_facturas.clear().draw();
-    data_factura = JSON.parse(data);
-    for (i = 0; i < data_factura.length; i++) {
-      tbl_facturas.rows
-        .add([
-          {
-            0: data_factura[i]["CODIGOID"],
-            1: data_factura[i]["CODIGO"],
-            2: data_factura[i]["CLIENTNAME"],
-            3: data_factura[i]["TOTAL_NET"],
-            4: data_factura[i]["ESTADO_VAL"]
-          }
-        ])
-        .draw();
-    }
-  }
-).then(function() {
-    Swal.close();
-});
+listarDocumentos();
 
 tbl_facturas.columns([0]).visible(false);
 
@@ -99,6 +82,7 @@ $('input[name="factura_numero"], input[name="factura_cliente"], input[name="fact
         fecfin = $('input[name="factura_fecfin"]');
         rango_dias = moment.range(moment(fecinic.val()).format('YYYY-MM-DD'), moment(fecfin.val()).format('YYYY-MM-DD'));
         dif_days = rango_dias.diff('days');
+
         if (dif_days < 0) { //ERROR
             new_date = moment(fecinic.val()).add(1, 'day');
             fecfin.val(new_date.format('YYYY-MM-DD'));
@@ -109,7 +93,8 @@ $('input[name="factura_numero"], input[name="factura_cliente"], input[name="fact
                 fecfin.val(new_date.format('YYYY-MM-DD'));
             }
         }
-    }    
+    }
+
 });
 
 $('input[name="factura_fecini"]').on("change", function() {
@@ -122,107 +107,182 @@ $('input[name="factura_fecini"]').on("change", function() {
 });
 
 $("#btn-buscar").click(function(){
-    fact_nroo = $('input[name="factura_numero"]').val();
-    fact_client = $('input[name="factura_cliente"]').val();
-    fact_fini = $('input[name="factura_fecini"]').val();
-    fact_ffin = $('input[name="factura_fecfin"]').val();
-    if(fact_nroo != "" || fact_client != "" || (fact_fini != "" && fact_ffin != "") ){
-        Swal.fire({
-            html: "<h4>Buscando boletas</h4>",
-            allowOutsideClick: false,
-            onBeforeOpen: () => {
-              Swal.showLoading();
-            }
-        });
-        $.post(
-            "../../modules/facturacion/filtrar-boletas.php",
-            { fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, fact_ffin:fact_ffin  },
-            function(data) {
-                tbl_facturas.clear().draw();
-                data_factura = JSON.parse(data);
-                for (i = 0; i < data_factura.length; i++) {
-                tbl_facturas.rows
-                    .add([
-                    {
-                      0: data_factura[i]["CODIGOID"],
-                      1: data_factura[i]["CODIGO"],
-                      2: data_factura[i]["CLIENTNAME"],
-                      3: data_factura[i]["TOTAL_NET"],
-                      4: data_factura[i]["ESTADO_VAL"]
-                    }
-                    ])
-                    .draw();
-                }
-            }
-        ).then(function() {
-            Swal.close();
-        });
-    }
+  listarDocumentos();
 });
 
 $("#table-boletas").contextMenu({
   selector: "tbody tr",
   callback: function(key, options) {
     tbl_data = tbl_facturas.rows().data().toArray();  
+
     if(tbl_data.length > 0){
-        var data_row = tbl_facturas.row(this).data();
-        var row_id = data_row[0];
-        var accion = key;
-        switch (accion) {
-        case "edit":
-            crear_cookie('COOKIE_ID_FACT', row_id, 1, "/");
-            location.href = "registro-boleta";
-            break;
-        case "delete":
-            $.post(
-                "../../modules/facturacion/anular-boleta.php",
-                { ID_FACTURA:row_id },
-                function(data) {
-                    if(data == true){
-                     $.post(
-                         "../../modules/facturacion/consultar-boleta.php",
-                         { FILTER: "ALL", ESTADO: "ALL" },
-                         function(data) {
-                           tbl_facturas.clear().draw();
-                           data_factura = JSON.parse(data);
-                           for (i = 0; i < data_factura.length; i++) {
-                             tbl_facturas.rows
-                               .add([
-                                 {
-                                   0: data_factura[i]["CODIGOID"],
-                                   1: data_factura[i]["CODIGO"],
-                                   2: data_factura[i]["CLIENTNAME"],
-                                   3: data_factura[i]["TOTAL_NET"],
-                                   4: data_factura[i]["ESTADO_VAL"]
-                                 }
-                               ])
-                               .draw();
-                           }
-                         }
-                      )
-                      $.Notification.notify(
-                          "success",
-                          "bottom-right",
-                          "Operación completada",
-                          "Boleta anulada correctamente"
-                      );
-                    }
-                }
-            );
-            break;
+      var data_row = tbl_facturas.row(this).data();
+          var row_id = data_row[0];
+          var action = key;
+          
+          switch (action) {
+
+            case "edit":
+                crear_cookie('COOKIE_ID_FACT', row_id, 1, "/");
+                location.href = "registro-boleta";
+                break;
+
+            case "vigente":
+              Swal.fire({
+                title: "¿Está seguro de marcar como VIGENTE la boleta " + data_row[1] + "?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Marcar como VIGENTE",
+                cancelButtonText: "Cancelar"
+              }).then(result => {
+                if (result.value) {
+                  $.post(
+                      "../../modules/facturacion/cambiar-estado-doc.php",
+                        { TIPO_DOC: 'RECEIPT', ID_DOC: row_id, ESTADO_DOC : 1},
+                        function(data) {
+                            if(data){
+                              listarDocumentos();
+                              $.Notification.notify(
+                                  "success",
+                                  "bottom-right",
+                                  "Boleta Vigente",
+                                  "La boleta " + data_row[1] + " fue marcada con éxito"
+                                  );
+                            }else{
+                              $.Notification.notify(
+                                  "error",
+                                  "bottom-right",
+                                  "Error",
+                                  "La boleta " + data_row[1] + " no pudo ser marcada como vigente"
+                                  );
+                            }
+                        }
+                    );
+                }});
+                break;
+
+            case "anulado":
+              Swal.fire({
+                title: "¿Está seguro de ANULAR la boleta " + data_row[1] + "?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Anular",
+                cancelButtonText: "Cancelar"
+              }).then(result => {
+                if (result.value) {
+                  $.post(
+                      "../../modules/facturacion/cambiar-estado-doc.php",
+                        { TIPO_DOC: 'RECEIPT', ID_DOC: row_id, ESTADO_DOC : 2},
+                        function(data) {
+                            if(data){
+                              listarDocumentos();
+                              $.Notification.notify(
+                                  "success",
+                                  "bottom-right",
+                                  "Boleta Anulada",
+                                  "La boleta " + data_row[1] + " fue anulada con éxito"
+                                  );
+                            }else{
+                              $.Notification.notify(
+                                  "error",
+                                  "bottom-right",
+                                  "Error",
+                                  "La boleta " + data_row[1] + " no pudo ser anulada"
+                                  );
+                            }
+                        }
+                    );
+                }});
+                break;
+
+            case "pendiente":
+              Swal.fire({
+                title: "¿Está seguro de marcar como PENDIENTE DE PAGO la boleta " + data_row[1] + "?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Marcar como PENDIENTE DE PAGO",
+                cancelButtonText: "Cancelar"
+              }).then(result => {
+                if (result.value) {
+                  $.post(
+                      "../../modules/facturacion/cambiar-estado-doc.php",
+                        { TIPO_DOC: 'RECEIPT', ID_DOC: row_id, ESTADO_DOC : 3},
+                        function(data) {
+                            if(data){
+                              listarDocumentos();
+                              $.Notification.notify(
+                                  "success",
+                                  "bottom-right",
+                                  "Boleta Pendiente de Pago",
+                                  "La boleta " + data_row[1] + " fue marcada con éxito"
+                                  );
+                            }else{
+                              $.Notification.notify(
+                                  "error",
+                                  "bottom-right",
+                                  "Error",
+                                  "La boleta " + data_row[1] + " no pudo ser marcada como pendiente de pago"
+                                  );
+                            }
+                        }
+                    );
+                }});
+                break;
+
+            case "cancelado":
+              Swal.fire({
+                title: "¿Está seguro de marcar como CANCELADA la boleta " + data_row[1] + "?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Marcar como CANCELADA",
+                cancelButtonText: "Cancelar"
+              }).then(result => {
+                if (result.value) {
+                  $.post(
+                      "../../modules/facturacion/cambiar-estado-doc.php",
+                        { TIPO_DOC: 'RECEIPT', ID_DOC: row_id, ESTADO_DOC : 4},
+                        function(data) {
+                            if(data){
+                              listarDocumentos();
+                              $.Notification.notify(
+                                  "success",
+                                  "bottom-right",
+                                  "Boleta Cancelada",
+                                  "La boleta " + data_row[1] + " fue cancelada con éxito"
+                                  );
+                            }else{
+                              $.Notification.notify(
+                                  "error",
+                                  "bottom-right",
+                                  "Error",
+                                  "La boleta " + data_row[1] + " no pudo ser cancelada"
+                                  );
+                            }
+                        }
+                    );
+                }});
+                break;
         }
     }
   },
   items: {
-    edit: { name: "Visualizar", icon: "edit" },
-    delete: { name: "Anular", icon: "delete" },
-    sep1: "---------",
-    quit: {
-      name: "Cancelar",
-      icon: function($element, key, item) {
-        return "context-menu-icon context-menu-icon-quit";
-      }
-    }
+      "edit": {"name": "Ver y editar", "icon": "edit"},
+      "separator1": "",
+      "status": {
+        "name": "Cambiar estado",
+        "items": {
+          "vigente": {"name": "Vigente"},
+          "anulado": {"name": "Anulado"},
+          "pendiente": {"name": "Pendiente de Pago"},
+          "cancelado": {"name": "Cancelado"}
+        }
+      },
+      "separator2": "",
+      "close": {"name": "Cerrar", "icon": "quit"}
   }
 });
 
@@ -230,3 +290,43 @@ $("#btn-reset").click(function (e) {
     e.preventDefault();
     location.reload();
 });
+
+function listarDocumentos(){
+  fact_nroo = $('input[name="factura_numero"]').val();
+    fact_client = $('input[name="factura_cliente"]').val();
+    fact_fini = $('input[name="factura_fecini"]').val();
+    fact_ffin = $('input[name="factura_fecfin"]').val();
+
+    Swal.fire({
+        html: "<h4>Cargando boletas</h4>",
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        }
+    });
+
+    $.post(
+        "../../modules/facturacion/filtrar-doc.php",
+        { TIPO_DOC: 'RECEIPT', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, fact_ffin:fact_ffin },
+        function(data) {
+            tbl_facturas.clear().draw();
+            data_factura = JSON.parse(data);
+            for (i = 0; i < data_factura.length; i++) {
+            tbl_facturas.rows
+                .add([
+                {
+                  0: data_factura[i]["CODIGOID"],
+                  1: data_factura[i]["CODIGO"],
+                  2: data_factura[i]["CLIENTNAME"],
+                  3: data_factura[i]["TOTAL_NET"],
+                  4: data_factura[i]["ESTADO_VAL"],
+                  5: data_factura[i]["SELLER_NAME"]
+                }
+                ])
+                .draw();
+            }
+        }
+    ).then(function() {
+        Swal.close();
+    });
+}

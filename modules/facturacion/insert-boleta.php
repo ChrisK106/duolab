@@ -6,6 +6,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     require '../../global/connection.php';
 
     $f_faccod = "";
+    $f_series = $_POST['facturacion_series'];
 
     $f_cliid = $_POST['facturacion_cliente'];
     $f_cliid = $f_cliid == "" ? 0 : $f_cliid;
@@ -46,51 +47,10 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $prec_prod = 0;
     $import_prod = 0;
     $cant_prod = 0;
-
-    /*
-    $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_invoice ORDER BY id DESC");
-    $LSTMAXID->execute();
-    $NEXT_ID = 0;
-
-    while ($LMI = $LSTMAXID->fetch()) {
-        $MAX_ID = $LMI["MAXID"];
-    }
-    if ($MAX_ID == "" || $MAX_ID == 0) {
-        $NEXT_ID = 1;
-    } else {
-        $NEXT_ID = $MAX_ID + 1;
-    }
-
-    switch ($NEXT_ID) {
-        case ($NEXT_ID < 10):
-            $NEXT_ID = "000000" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 100):
-            $NEXT_ID = "00000" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 1000):
-            $NEXT_ID = "0000" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 10000):
-            $NEXT_ID = "000" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 100000):
-            $NEXT_ID = "00" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 1000000):
-            $NEXT_ID = "0" . $NEXT_ID;
-            break;
-        case ($NEXT_ID < 10000000):
-            $NEXT_ID = $NEXT_ID;
-            break;
-    }
-
-    $f_faccod = "F001-" . $NEXT_ID;
-    */
     
-    $sqlStatement = $pdo->prepare("INSERT INTO tbl_receipt (number,status,quotation_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $sqlStatement = $pdo->prepare("INSERT INTO tbl_receipt (series,number,status,quotation_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     if ($sqlStatement) {
-        $sqlStatement->execute([$f_faccod, $f_estado, $f_selectcotizid, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
+        $sqlStatement->execute([$f_series,$f_faccod, $f_estado, $f_selectcotizid, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
         echo "OK_INSERT";
 
         $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_receipt ORDER BY id DESC");

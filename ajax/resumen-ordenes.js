@@ -12,7 +12,12 @@ $(document).ready(function(){
 
 var tbl_ordenes = $("#table-ordenes").DataTable({
   dom: 'Bfrtip',
+  "order": [[0, "DESC"]],
   buttons: [
+        {
+                extend: 'pdf',
+                text: '<i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Descargar PDF'
+            },
             {
                 extend: 'csv',
                 text: '<i class="fa fa-file-csv"></i>&nbsp;&nbsp;Descargar CSV'
@@ -24,7 +29,7 @@ var tbl_ordenes = $("#table-ordenes").DataTable({
             {
                 extend: 'print',
                 text: '<i class="fa fa-print"></i>&nbsp;&nbsp;Imprimir'
-            }
+            } 
         ],
   language: { url: "../../plugins/datatables/Spanish.json" }
 });

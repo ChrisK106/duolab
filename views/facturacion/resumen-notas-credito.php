@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Resumen de Facturas
+                        <i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Resumen de Notas de Crédito
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="card-header">
                         <div class="row justify-content-end">
                             <div class="col-md-4">
-                                <a href="registro-factura" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva Factura</a>
+                                <a href="registro-nota-credito" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva Nota de Crédito</a>
                             </div>
                         </div>
                     </div>
@@ -26,8 +26,8 @@
                         <div class="row">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="form-group">
-                                    <label>N° Factura</label>
-                                    <input type="text" name="factura_numero" class="form-control" placeholder="Nro de factura">
+                                    <label>N° Nota de Crédito</label>
+                                    <input type="text" name="factura_numero" class="form-control" placeholder="Nro de nota de crédito">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-3">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-8">
                                 <button id="btn-buscar" class="btn btn-success btn-block" type="button">
-                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Facturas
+                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Notas de Crédito
                                 </button>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nro. Factura</th>
+                                        <th>Nro. Nota de Crédito</th>
                                         <th>Cliente</th>
                                         <th>Monto</th>
                                         <th>Estado</th>

@@ -3,7 +3,7 @@ require '../../global/connection.php';
 $FILTER_ID = $_POST["FILTER"];
 $ESTADO_FAC = $_POST["ESTADO"];
 
-$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_receipt ti ";
+$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.series AS SERIEFAC, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_receipt ti ";
 
 if ($FILTER_ID == "ALL") {
     $sqlquery_adic = "";
@@ -16,13 +16,16 @@ if ($FILTER_ID == "ALL") {
     $json_data = array();
     if ($rowsNumber > 0) {        
         foreach ($sqlStatement as $ROW) {
-            $CLIENTE_ID = $ROW["CLIID"];
+            $STATUS_ID = $ROW["ESTFAC"];
+            $CUSTOMER_ID = $ROW["CLIID"];
+
+            $ROWDATA['SERIE'] = $ROW["SERIEFAC"];
+            $ROWDATA['CODIGO'] = $ROW["NUMFAC"];
+            
             $ROWDATA['CLIENTRUC'] = $ROW["CLIRUC"];
             $ROWDATA['CODIGOID'] = $ROW["IDFACT"];
-            $ROWDATA['CODIGO'] = $ROW["NUMFAC"];
-            $ROWDATA['ESTADO'] = $ROW["ESTFAC"];
-            $ROWDATA['ESTADO_VAL'] = $ROW["ESTFAC"]==1?"Vigente":"Anulado";
-            $ROWDATA['CLIENTID'] = $CLIENTE_ID;
+            $ROWDATA['ESTADO'] = $STATUS_ID;
+            $ROWDATA['CLIENTID'] = $CUSTOMER_ID;
             $ROWDATA['CLIENTNAME'] = $ROW["CLINOM"];
             $ROWDATA['CLIENTADDR'] = $ROW["CLIADD"];
             $ROWDATA['CLIENTREFER'] = $ROW["CLIREF"];
@@ -37,6 +40,17 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['SELLER_ID'] = $ROW["SELLERID"];
             $ROWDATA['USER_ID'] = $ROW["USERID"];
             $ROWDATA['FECREG'] = date("d-m-Y",strtotime($ROW["FECHA"]));
+
+            if ($STATUS_ID == 1){
+                $ROWDATA['ESTADO_VAL'] = "Vigente";
+            }elseif($STATUS_ID == 2){
+                $ROWDATA['ESTADO_VAL'] = "Anulado";
+            }elseif($STATUS_ID == 3){
+                $ROWDATA['ESTADO_VAL'] = "Pendiente de Pago";
+            }elseif($STATUS_ID == 4){
+                $ROWDATA['ESTADO_VAL'] = "Cancelado";
+            }
+
             array_push($json_data, $ROWDATA);
         }        
     }
@@ -63,7 +77,8 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['CLIENTRUC'] = $ROW["CLIRUC"];
             $ROWDATA['CODIGOID'] = $ROW["IDFACT"];
             $ROWDATA['CODIGO'] = $ROW["NUMFAC"];
-            $ROWDATA['CODIGO_CORRELATIVO'] = str_replace("F001-","",$ROW["NUMFAC"]);
+            $ROWDATA['SERIE'] = $ROW["SERIEFAC"];
+            $ROWDATA['CODIGO_CORRELATIVO'] = $ROW["NUMFAC"];
             $ROWDATA['ESTADO'] = $ROW["ESTFAC"];
             $ROWDATA['CLIENTID'] = $CLIENTE_ID;
             $ROWDATA['CLIENTNAME'] = $ROW["CLINOM"];            

@@ -1,4 +1,7 @@
 $("#col-btn-anular-factura").hide();
+$("#col-btn-pendiente-factura").hide();
+$("#col-btn-cancelar-factura").hide();
+
 $("#btn-save-facturaprod").prop("disabled", true);
 $("#btn-add-prodtofactura").prop("disabled", true);
 $("#btn-select-cotizacion").prop("disabled", true);
@@ -72,12 +75,7 @@ $('input[name="facturacion_valcliente"]').autocomplete({
   }
 });
 
-$.post("../../modules/facturacion/listar-factura-codigo.php", function(data) {
-    if(data != "" && data != null){
-      $('input[name="facturacion_nro"]').val(data);
-    }
-  }
-);
+buscarCorrelativo();
 
 $.post("../../modules/usuarios/listar-usuarios-xtipo.php", function(data) {
   mydata = JSON.parse(data);
@@ -333,27 +331,58 @@ $("#btn-select-factura").click(function() {
 
     $.post(
       "../../modules/facturacion/consultar-factura.php",
-      { FILTER: DATA_ID,  ESTADO:"ALL" },
+      { FILTER: DATA_ID, ESTADO:"ALL" },
       function(data) {
         var data_json = JSON.parse(data);
+
         if(data_json.length > 0){
+
           id_factura = data_json[0]["CODIGOID"];
           est_factura = data_json[0]["ESTADO"];
 
           $("#col-btn-save-facturaprod").hide("fast");
-          if(est_factura == 2){
-            $('select[name="facturacion_estado"]').val("2");
-            $('select[name="facturacion_estado"]').prop("disabled",true);
-            $("#btn-anular-factura").prop("disabled",true);
-          } else {
-            $('select[name="facturacion_estado"]').prop("disabled",false);
+
+          if(est_factura == 1) //VIGENTE
+          {
             $("#btn-anular-factura").prop("disabled",false);
+            $("#btn-pendiente-factura").prop("disabled",false);
+            $("#btn-cancelar-factura").prop("disabled",false);
+          }
+          else if (est_factura == 2) //ANULADA
+          {
+            $("#btn-anular-factura").prop("disabled",true);
+            $("#btn-pendiente-factura").prop("disabled",false);
+            $("#btn-cancelar-factura").prop("disabled",false);
+          }
+          else if (est_factura == 3) //PENDIENTE DE PAGO
+          {
+            $("#btn-anular-factura").prop("disabled",false);
+            $("#btn-pendiente-factura").prop("disabled",true);
+            $("#btn-cancelar-factura").prop("disabled",false);
+          }
+          else if (est_factura == 4) //CANCELADA
+          {
+            $("#btn-anular-factura").prop("disabled",false);
+            $("#btn-pendiente-factura").prop("disabled",false);
+            $("#btn-cancelar-factura").prop("disabled",true);
           }
 
+          $('select[name="facturacion_estado"]').prop("disabled",true);
+
           $('input[name="id_factura"]').val(id_factura);
+          
           $("#btn-anular-factura").attr("js-id",id_factura);
+          $("#btn-pendiente-factura").attr("js-id",id_factura);
+          $("#btn-cancelar-factura").attr("js-id",id_factura);
+
+          $('select[name="facturacion_series"]').val(data_json[0]["SERIE"]);
+          $('select[name="facturacion_series"]').trigger("change");
+          $('select[name="facturacion_series"]').prop("disabled",true);
+
           $('input[name="facturacion_nro"]').val(data_json[0]["CODIGO_CORRELATIVO"]);
-          $('select[name="facturacion_estado"]').val(data_json[0]["ESTADO"]);
+          $('input[name="facturacion_nro"]').prop("disabled",true);
+          
+          $('select[name="facturacion_estado"]').val(est_factura);
           $('input[name="facturacion_valcliente"]').focus();
           $('input[name="facturacion_fecha"]').val(data_json[0]["FECREG"]);
           $('select[name="facturacion_usuario"]').val(data_json[0]["USER_ID"]);
@@ -431,7 +460,8 @@ $("#btn-select-factura").click(function() {
         }
         $("#col-btn-save-facturaprod").hide("fast");
         $("#col-btn-anular-factura").show("fast");        
-        $("#col-btn-anular-factura").attr("class", "col-md-12");
+        $("#col-btn-pendiente-factura").show("fast");        
+        $("#col-btn-cancelar-factura").show("fast");
       }
     );
 
@@ -455,11 +485,7 @@ $("#btn-select-cotizacion").click(function() {
       }
     });
 
-    $.post("../../modules/facturacion/listar-factura-codigo.php", function(data) {
-      if(data != "" && data != null){
-        $('input[name="facturacion_nro"]').val(data);
-      }
-    });
+    buscarCorrelativo();
 
     $.post("../../modules/cotizaciones/consultar-cotizacion.php",
       { FILTER: DATA_ID, ESTADO: "ALL" }, function(data) {
@@ -655,15 +681,8 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
           "Datos almacenados"
         );
 
-        form.find("input, textarea, select").val("");
-        $('select[name="facturacion_producto"]').trigger("change");
-        $("#btn-save-facturaprod").prop("disabled", true);
-        $("#btn-add-prodtofactura").prop("disabled", true);
-        $('select[name="facturacion_formpagotext"]').prop("disabled",false);
-        $('#div_diaspago').hide();
-        $('input[name="facturacion_formpago"]').prop("required",false);
-        tbl_prodfactura.clear().draw();
-
+        postCambioEstado();
+        
         $.post("../../modules/facturacion/listar-facturas.php", function(data) {
         $('select[name="facturas_listado"]').empty();
         $('select[name="facturas_listado"]').select2({
@@ -687,7 +706,7 @@ $("#btn-anular-factura").click(function() {
   id_val = element.attr("js-id");
   if (id_val != "" && id_val != null) {
     Swal.fire({
-      title: "Se anulará esta factura",
+      title: "¿Está seguro de ANULAR esta factura?",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -696,33 +715,24 @@ $("#btn-anular-factura").click(function() {
     }).then(result => {
       if (result.value) {
         $.post(
-          "../../modules/facturacion/anular-factura.php",
-          { ID_FACTURA: id_val },
+          "../../modules/facturacion/cambiar-estado-doc.php",
+          { TIPO_DOC: 'INVOICE', ID_DOC: id_val, ESTADO_DOC : 2},
           function(data) {
             if (data == true) {
-              $('select[name="facturacion_estado"]').val("1");
-              $('input[name="facturacion_fecha"]').focus();
-              tbl_prodfactura.clear().draw();
-              $("#FRM_INSERT_FACTURA")
-                .find("input, textarea, select")
-                .val("");
-              $('select[name="facturacion_producto"]').trigger("change");
-              $("#btn-add-prodtofactura").prop("disabled", false);              
-              $('input[name="id_factura"]').val("");
-              $('input[name="facturacion_valcliente"]').val("");
-
-              $("#btn-save-facturaprod").prop("disabled", true);
-              $("#col-btn-save-facturaprod").attr("class", "col-md-12");
-              $("#col-btn-anular-factura").hide();
-
-              $('select[name="facturacion_formpagotext"]').prop("disabled",false);
-              $('#div_diaspago').hide();
-              $('input[name="facturacion_formpago"]').prop("required",false);
+              postCambioEstado();
+              
               $.Notification.notify(
                 "success",
                 "bottom-right",
-                "Factura anulada",
-                "Datos de factura anulados"
+                "Factura Anulada",
+                "La factura fue ANULADA con éxito"
+              );
+            }else{
+              $.Notification.notify(
+                "error",
+                "bottom-right",
+                "Error",
+                "La factura no pudo ser ANULADA"
               );
             }
           }
@@ -732,7 +742,121 @@ $("#btn-anular-factura").click(function() {
   }
 });
 
-$( document ).ready(function() {
+$("#btn-pendiente-factura").click(function() {
+  element = $(this);
+  id_val = element.attr("js-id");
+  if (id_val != "" && id_val != null) {
+    Swal.fire({
+      title: "¿Está seguro de marcar como PENDIENTE DE PAGO esta factura?",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Marcar como PENDIENTE",
+      cancelButtonText: "Cancelar"
+    }).then(result => {
+      if (result.value) {
+        $.post(
+          "../../modules/facturacion/cambiar-estado-doc.php",
+          { TIPO_DOC: 'INVOICE', ID_DOC: id_val, ESTADO_DOC : 3},
+          function(data) {
+            if (data == true) {
+              postCambioEstado();
+
+              $.Notification.notify(
+                "success",
+                "bottom-right",
+                "Factura Pendiente de Pago",
+                "La factura fue marcada como PENDIENTE DE PAGO con éxito"
+              );
+            }else{
+              $.Notification.notify(
+                "error",
+                "bottom-right",
+                "Error",
+                "La factura no pudo ser marcada como PENDIENTE DE PAGO"
+              );
+            }
+          }
+        );
+      }
+    });
+  }
+});
+
+$("#btn-cancelar-factura").click(function() {
+  element = $(this);
+  id_val = element.attr("js-id");
+  if (id_val != "" && id_val != null) {
+    Swal.fire({
+      title: "¿Está seguro de marcar como CANCELADA esta factura?",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Marcar como CANCELADA",
+      cancelButtonText: "Cancelar"
+    }).then(result => {
+      if (result.value) {
+        $.post(
+          "../../modules/facturacion/cambiar-estado-doc.php",
+          { TIPO_DOC: 'INVOICE', ID_DOC: id_val, ESTADO_DOC : 4},
+          function(data) {
+            if (data == true) {
+              postCambioEstado();
+
+              $.Notification.notify(
+                "success",
+                "bottom-right",
+                "Factura Cancelada",
+                "La factura fue marcada como CANCELADA con éxito"
+              );
+            }else{
+              $.Notification.notify(
+                "error",
+                "bottom-right",
+                "Error",
+                "La factura no pudo ser marcada como CANCELADA"
+              );
+            }
+          }
+        );
+      }
+    });
+  }
+});
+
+function postCambioEstado(){
+  $('select[name="facturacion_estado"]').val("1");
+  $('input[name="facturacion_fecha"]').focus();
+  tbl_prodfactura.clear().draw();
+
+  $("#FRM_INSERT_FACTURA")
+    .find("input, textarea, select")
+    .val("");
+
+  $("#FRM_INSERT_FACTURA")[0].reset();
+
+  $('select[name="facturacion_producto"]').trigger("change");
+  $("#btn-add-prodtofactura").prop("disabled", false);              
+  $('input[name="id_factura"]').val("");
+  $('input[name="facturacion_valcliente"]').val("");
+
+  $("#btn-save-facturaprod").prop("disabled", true);
+  $("#col-btn-save-facturaprod").show();
+  $("#col-btn-anular-factura").hide();
+  $("#col-btn-pendiente-factura").hide();
+  $("#col-btn-cancelar-factura").hide();
+
+  $('select[name="facturacion_formpagotext"]').prop("disabled",false);
+  $('#div_diaspago').hide();
+  $('input[name="facturacion_formpago"]').prop("required",false);
+
+  $('select[name="facturacion_series"]').prop("disabled",false);
+  $('input[name="facturacion_nro"]').prop("disabled",false);
+  $('select[name="facturacion_series"]').trigger("change");
+  $('select[name="facturacion_estado"]').prop("disabled",false);
+}
+
+$(document).ready(function() {
   var cookie_idfact = leer_cookie('COOKIE_ID_FACT');
   if (cookie_idfact != "") {
     setTimeout(function(){
@@ -742,4 +866,20 @@ $( document ).ready(function() {
       eliminar_cookie("COOKIE_ID_FACT");
     },500);
   }
+});
+
+function buscarCorrelativo(){
+  serieFactura = $('select[name="facturacion_series"]').val();
+  
+  $.post("../../modules/facturacion/obtener-correlativo-doc.php",
+    { TIPO_DOC: "INVOICE", SERIE: serieFactura }, function(data) {
+    if(data != "" && data != null){
+      $('input[name="facturacion_nro"]').val(data);
+    }
+  });
+}
+
+$( 'select[name="facturacion_series"]' ).change(function() {
+  idDoc = $('input[name="id_factura"]').val();
+  if (idDoc == "") buscarCorrelativo();
 });
