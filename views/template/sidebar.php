@@ -213,6 +213,12 @@
               <p>Ventas por Periodo</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a id="m_rpt_productos" href="<?php echo $funciones->direct_paginas()."reportes/productos" ?>" class="nav-link">
+              <i class="fas fa-chart-bar nav-icon"></i>
+              <p>Productos</p>
+            </a>
+          </li>
 
           <li class="nav-header"><i class="nav-icon fas fa-layer-group"></i> SISTEMA</li>
 
