@@ -24,25 +24,49 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>N° Nota de Crédito</label>
                                     <input type="text" name="factura_numero" class="form-control" placeholder="Nro de nota de crédito">
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Cliente</label>
                                     <input type="text" name="factura_cliente" class="form-control" placeholder="Nombre de cliente">
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <select class="form-control select2" style="width: 100%;" name="factura_estado">
+                                        <option value="" selected>(Todos)</option>
+                                        <option value="1">Vigente</option>
+                                        <option value="2">Anulado</option>
+                                        <option value="3">Pendiente de Pago</option>
+                                        <option value="4">Cancelado</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Vendedor</label>
+                                    <select class="form-control select2" style="width: 100%;" name="factura_vendedor">
+                                        <option value="">(Todos)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            -->
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Fecha Inicio</label>
                                     <input type="date" name="factura_fecini" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Fecha Fin</label>
                                     <input type="date" name="factura_fecfin" class="form-control">
@@ -74,9 +98,10 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nro. Nota de Crédito</th>
+                                        <th>Nro. Factura</th>
+                                        <th>F. Emisión</th>
                                         <th>Cliente</th>
-                                        <th>Monto</th>
+                                        <th>Total Neto</th>
                                         <th>Estado</th>
                                         <th>Vendedor</th>
                                     </tr>

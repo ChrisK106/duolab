@@ -1,5 +1,3 @@
-$("#btn-buscar").prop("disabled",true);
-
 $(document).ready(function(){
   $("#m_resumen_nota_credito").attr("class","nav-link active");
   $("#m_nota_credito").attr("class","nav-link active");
@@ -35,6 +33,7 @@ listarDocumentos();
 
 tbl_facturas.columns([0]).visible(false);
 
+/*
 $('input[name="factura_numero"]').autocomplete({
     source: function(request, response) {
       $.getJSON("../../modules/facturacion/obtener-notas-credito.php", { factura_num: $('input[name="factura_numero"]').val() }, response);
@@ -43,6 +42,7 @@ $('input[name="factura_numero"]').autocomplete({
       $(this).val(ui.item.label);
     }
 });
+*/
 
 $('input[name="factura_cliente"]').autocomplete({  
     source: function(request, response) {
@@ -55,23 +55,11 @@ $('input[name="factura_cliente"]').autocomplete({
     }
 });
 
-$('input[name="factura_numero"], input[name="factura_cliente"]').on("keyup", function() {
-    fact_nroo = $('input[name="factura_numero"]').val();
-    fact_client = $('input[name="factura_cliente"]').val();
-    if(fact_nroo != "" || fact_client != ""){
-        $("#btn-buscar").prop("disabled",false);
-    } else {
-        $("#btn-buscar").prop("disabled",true);
-    }
-});
-
-$('input[name="factura_numero"], input[name="factura_cliente"], input[name="factura_fecini"], input[name="factura_fecfin"]').on("change", function() {
-    fact_nroo = $('input[name="factura_numero"]').val();
-    fact_client = $('input[name="factura_cliente"]').val();
+$('input[name="factura_fecini"], input[name="factura_fecfin"]').on("change", function() {
     fact_fini = $('input[name="factura_fecini"]').val();
     fact_ffin = $('input[name="factura_fecfin"]').val();
 
-    if(fact_nroo != "" || fact_client != "" || (fact_fini != "" && fact_ffin != "") ){
+    if(fact_fini != "" && fact_ffin != ""){
         $("#btn-buscar").prop("disabled",false);
     } else {
         $("#btn-buscar").prop("disabled",true);
@@ -296,6 +284,8 @@ function listarDocumentos(){
     fact_client = $('input[name="factura_cliente"]').val();
     fact_fini = $('input[name="factura_fecini"]').val();
     fact_ffin = $('input[name="factura_fecfin"]').val();
+    fact_estado = $('select[name="factura_estado"]').val();
+    fact_vendedor = $('select[name="factura_vendedor"]').val();
 
     Swal.fire({
         html: "<h4>Cargando notas de crédito</h4>",
@@ -307,23 +297,24 @@ function listarDocumentos(){
 
     $.post(
         "../../modules/facturacion/filtrar-doc.php",
-        { TIPO_DOC: 'CREDIT_NOTE', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, fact_ffin:fact_ffin },
+        { TIPO_DOC: 'CREDIT_NOTE', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, 
+          fact_ffin:fact_ffin, fact_estado:fact_estado, fact_vendedor: fact_vendedor },
         function(data) {
             tbl_facturas.clear().draw();
             data_factura = JSON.parse(data);
             for (i = 0; i < data_factura.length; i++) {
-            tbl_facturas.rows
-                .add([
+            	tbl_facturas.rows.add([
                 {
-                  0: data_factura[i]["CODIGOID"],
-                  1: data_factura[i]["CODIGO"],
-                  2: data_factura[i]["CLIENTNAME"],
-                  3: data_factura[i]["TOTAL_NET"],
-                  4: data_factura[i]["ESTADO_VAL"],
-                  5: data_factura[i]["SELLER_NAME"]
-                }
-                ])
-                .draw();
+                  0: data_factura[i]["ID"],
+                  1: data_factura[i]["SERIES_NUMBER"],
+                  2: data_factura[i]["DATE"],
+                  3: data_factura[i]["CUSTOMER"],
+                  4: data_factura[i]["TOTAL_NET"],
+                  5: data_factura[i]["STATUS"],
+                  6: data_factura[i]["SELLER_NAME"]
+                }]).draw();
+
+                tbl_facturas.columns.adjust().draw();
             }
         }
     ).then(function() {

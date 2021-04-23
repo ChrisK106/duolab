@@ -30,7 +30,7 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['CLIENTADDR'] = $ROW["CLIADD"];
             $ROWDATA['CLIENTREFER'] = $ROW["CLIREF"];
             $ROWDATA['PAY_DAYS'] = $ROW["PAYDAYS"];
-            $ROWDATA['DELIV_DATE'] = date("d-m-Y",strtotime($ROW["DELDATE"]));
+            $ROWDATA['DELIV_DATE'] = date("Y-m-d",strtotime($ROW["DELDATE"]));
             $ROWDATA['CURRENCY'] = $ROW["CURRENCY"];
             $ROWDATA['DESC_RATE'] = $ROW["DESCRATE"];
             $ROWDATA['DESC_VAL'] = $ROW["DESCVAL"];
@@ -39,7 +39,7 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['TOTAL_NET'] = $ROW["TOTNETO"];
             $ROWDATA['SELLER_ID'] = $ROW["SELLERID"];
             $ROWDATA['USER_ID'] = $ROW["USERID"];
-            $ROWDATA['FECREG'] = date("d-m-Y",strtotime($ROW["FECHA"]));
+            $ROWDATA['FECREG'] = date("Y-m-d",strtotime($ROW["FECHA"]));
 
             if ($STATUS_ID == 1){
                 $ROWDATA['ESTADO_VAL'] = "Vigente";

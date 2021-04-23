@@ -102,7 +102,7 @@ $('select[name="facturacion_usuario"]').on("change", function(){
   $('input[name="facturacion_usuarioid"]').val($(this).val());
 });
 
-$.post("../../modules/facturacion/listar-facturas.php", function(data) {
+$.post("../../modules/facturacion/listar-factura-boleta.php", function(data) {
   $('select[name="facturacion_listadofact"]').empty();
   $('select[name="facturacion_listadofact"]').select2({
     data: JSON.parse(data)
@@ -367,6 +367,19 @@ $("#btn-select-factura").click(function() {
             $("#btn-cancelar-factura").prop("disabled",true);
           }
 
+          $docType = data_json[0]["REFERENCED_DOC_TYPE"];
+          $('select[name="facturacion_listadofact"] option:selected').removeAttr("selected"); 
+
+          if ($docType == 1){
+            $("select[name='facturacion_listadofact'] option[value=" + data_json[0]["REFERENCED_DOC_ID"] + "]:contains('F')").attr('selected','selected');
+          }else{
+            $("select[name='facturacion_listadofact'] option[value=" + data_json[0]["REFERENCED_DOC_ID"] + "]:contains('B')").attr('selected','selected');
+          }
+          
+          $('select[name="facturacion_listadofact"]').trigger("change");
+          $('select[name="facturacion_listadofact"]').prop("disabled",true);
+          $("#btn-select-cotizacion").prop("disabled",true);
+
           $('select[name="facturacion_estado"]').prop("disabled",true);
 
           $('input[name="id_factura"]').val(id_factura);
@@ -379,7 +392,7 @@ $("#btn-select-factura").click(function() {
           $('select[name="facturacion_series"]').trigger("change");
           $('select[name="facturacion_series"]').prop("disabled",true);
 
-          $('input[name="facturacion_nro"]').val(data_json[0]["CODIGO_CORRELATIVO"]);
+          $('input[name="facturacion_nro"]').val(data_json[0]["CODIGO"]);
           $('input[name="facturacion_nro"]').prop("disabled",true);
           
           $('select[name="facturacion_estado"]').val(est_factura);
@@ -470,25 +483,39 @@ $("#btn-select-factura").click(function() {
 
 $("#btn-select-cotizacion").click(function() {
 
-  var DATA_ID = $('select[name="facturacion_listadofact"]').val();
+  var docId = $('select[name="facturacion_listadofact"]').val();
+  var docNumber = $('select[name="facturacion_listadofact"] option:selected').text();
+  var docUrl = "";
+  var docDetailUrl = "";
   
-  if (DATA_ID != "" && DATA_ID != null) {
+  if (docId != "" && docId != null) {
 
     $('input[name="id_factura"]').val("");
     $('select[name="facturacion_estado"]').val("1");
 
     Swal.fire({
-      html: "<h4>Cargando datos de factura</h4>",
+      html: "<h4>Cargando datos de documento</h4>",
       allowOutsideClick: false,
       onBeforeOpen: () => {
         Swal.showLoading();
       }
     });
 
+    if (docNumber.charAt(0) == "F") {
+      $('select[name="facturacion_series"]').val("FNC1");
+      docUrl = "../../modules/facturacion/consultar-factura.php";
+      docDetailUrl = "../../modules/facturacion/consultar-detalle-factura.php";
+    } else {
+      $('select[name="facturacion_series"]').val("BNC1");
+      docUrl = "../../modules/facturacion/consultar-boleta.php";
+      docDetailUrl = "../../modules/facturacion/consultar-detalle-boleta.php";
+    }
+
+    $('select[name="facturacion_series"]').trigger("change");
+
     buscarCorrelativo();
 
-    $.post("../../modules/facturacion/consultar-factura.php",
-      { FILTER: DATA_ID, ESTADO: "ALL" }, function(data) {
+    $.post(docUrl, { FILTER: docId, ESTADO: "ALL" }, function(data) {
 
         var data_json = JSON.parse(data);
         $('input[name="facturacion_valcliente"]').focus();
@@ -529,8 +556,7 @@ $("#btn-select-cotizacion").click(function() {
         total_temporal = data_json[0]["TOTAL_NET"];
         codigo_idfac = data_json[0]["CODIGOID"];
 
-        $.post("../../modules/facturacion/consultar-detalle-factura.php",
-          { FAC_ID: codigo_idfac }, function(data) {
+        $.post(docDetailUrl, { FAC_ID: codigo_idfac }, function(data) {
             $('select[name="facturacion_producto"]').val("");
             $('select[name="facturacion_producto"]').trigger("change");
             $('input[name="facturacion_proddesc"]').val("");
@@ -683,10 +709,10 @@ $("#FRM_INSERT_FACTURA").submit(function(e) {
         postCambioEstado();
         
         $.post("../../modules/facturacion/listar-notas-credito.php", function(data) {
-        $('select[name="facturas_listado"]').empty();
-        $('select[name="facturas_listado"]').select2({
-          data: JSON.parse(data)
-          });
+          $('select[name="facturas_listado"]').empty();
+          $('select[name="facturas_listado"]').select2({
+            data: JSON.parse(data)
+            });
         });
 
         Swal.close();
@@ -853,6 +879,11 @@ function postCambioEstado(){
   $('input[name="facturacion_nro"]').prop("disabled",false);
   $('select[name="facturacion_series"]').trigger("change");
   $('select[name="facturacion_estado"]').prop("disabled",false);
+
+  //$('select[name="facturacion_listadofact"]').val(-1);
+  $('select[name="facturacion_listadofact"]').trigger("change");
+  $('select[name="facturacion_listadofact"]').prop("disabled",false);
+
 }
 
 $(document).ready(function() {

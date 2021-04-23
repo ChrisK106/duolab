@@ -70,7 +70,7 @@
 
                         </div>
                         <div class="card-body">
-                            <label>N° de Factura</label>
+                            <label>N° de Factura o Boleta</label>
                             <div class="row">
                                 <div class="col-md-8 col-lg-4">
                                     <div class="form-group">
@@ -90,8 +90,10 @@
                                             <div class="form-group">
                                                 <label>Serie</label>
                                                 <select class="form-control select2" name="facturacion_series">
-                                                    <option value="N001" selected>N001</option>
-                                                    <option value="N002">N002</option>
+                                                    <option value="FNC1" selected>FNC1</option>
+                                                    <option value="FNC2">FNC2</option>
+                                                    <option value="BNC1">BNC1</option>
+                                                    <option value="BNC2">BNC2</option>
                                                 </select>
                                             </div>
                                         </div>

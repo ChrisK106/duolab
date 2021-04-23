@@ -7,7 +7,7 @@
     if ($serie == "DEFAULT"){
         if ($tipoDoc == "INVOICE") $serie="F001";
         if ($tipoDoc == "RECEIPT") $serie="B001";
-        if ($tipoDoc == "CREDIT_NOTE") $serie="N001";      
+        if ($tipoDoc == "CREDIT_NOTE") $serie="FNC1";     
     }
 
     $table = "";

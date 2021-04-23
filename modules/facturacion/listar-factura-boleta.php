@@ -8,13 +8,17 @@ if(isset($_POST["ESTADO"])){
     $query_adic = " WHERE status=$estado ";
 }
 
-$sqlStatement = $pdo->prepare("SELECT * FROM tbl_credit_note $query_adic ORDER BY id DESC");
+$sqlStatement = $pdo->prepare("(SELECT id, series, number, date, registration_date FROM tbl_invoice)
+    UNION ALL
+    (SELECT id, series, number, date, registration_date FROM tbl_receipt)
+    ORDER BY registration_date DESC");
+
 $sqlStatement->execute();
 $rowsNumber = $sqlStatement->rowCount();
 $DATA = array();
 
 if ($rowsNumber > 0) {
-    array_push($DATA, ["id"=>"","text"=>"Seleccione una NC"]);
+    array_push($DATA, ["id"=>"","text"=>"Seleccione una factura o boleta"]);
     while ($LST = $sqlStatement->fetch()) {
         $ID_FAC = $LST["id"];
         $NOM_FAC = $LST["series"] . "-" . $LST["number"] . " | ". date("d-m-Y",strtotime($LST["date"]));
@@ -25,7 +29,7 @@ if ($rowsNumber > 0) {
         array_push($DATA, $ROW);
     }
 } else {
-    array_push($DATA, ["id"=>"","text"=>"No se han encontrado NC"]);
+    array_push($DATA, ["id"=>"","text"=>"No se han encontrado documentos"]);
 }
 
 echo json_encode($DATA);

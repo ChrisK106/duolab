@@ -29,8 +29,17 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     $f_lst_prods = $_POST['facturacion_prods'];
     $f_lst_prods = json_decode($f_lst_prods);
     $f_estado = $_POST["facturacion_estado"];
+
     $f_selectcotizid = $_POST["facturacion_listadofact"];
     $f_selectcotizid = $f_selectcotizid == "" ? 0 : $f_selectcotizid;
+
+    $f_referenced_doc_type = 1;
+    
+    if ($f_series[0] == "F"){
+        $f_referenced_doc_type = 1;
+    } else {
+        $f_referenced_doc_type = 2;
+    }
 
     $f_seller_id = $_POST["facturacion_usuarioid"];
     $f_user_id = $_SESSION['loggedInUser']['USERID'];
@@ -50,7 +59,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     
     $sqlStatement = $pdo->prepare("INSERT INTO tbl_credit_note (series,number,status,referenced_doc_id,referenced_doc_type_id,customer_id,ruc,name,address,reference,payment_days,date,delivery_date,currency,discount_rate,discount_value,total_sub,total_tax,total_net,seller_id,user_id,registration_date,last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     if ($sqlStatement) {
-        $sqlStatement->execute([$f_series,$f_faccod, $f_estado, $f_selectcotizid, 1, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
+        $sqlStatement->execute([$f_series,$f_faccod, $f_estado, $f_selectcotizid, $f_referenced_doc_type, $f_cliid, $f_cli_ruc, $f_clinom, $f_clidirecc, $f_clirefer, $f_diaspag, $f_fecha, $f_clifecentreg, $f_currency, $f_porcdesc, $f_valdesc, $f_subtotal, $f_taxigv, $f_totalneto, $f_seller_id, $f_user_id, $f_fecreg, $f_fecreg]);
         echo "OK_INSERT";
 
         $LSTMAXID = $pdo->prepare("SELECT MAX(id) AS MAXID FROM tbl_credit_note ORDER BY id DESC");
