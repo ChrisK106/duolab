@@ -1,5 +1,7 @@
 <?php
 
+include('./global/config.php');
+
 $url_sistema = explode("/", $_SERVER["REQUEST_URI"]);
 $directorio_sistema = "/" . $url_sistema[1];
 $root_sistema = $_SERVER['DOCUMENT_ROOT'] . $directorio_sistema;
@@ -28,7 +30,7 @@ if (isset($_GET["url"])) {
     include($root_sistema . "/views/template/footer.php");
 
     $funciones = new Funciones();
-    $ruta_file_js = $funciones->direct_sistema()."/ajax/".$pagname.".js";
+    $ruta_file_js = $funciones->direct_sistema()."/ajax/".$pagname.".js?v=".SCRIPT_VER;
 
     //RUTA RELATIVA DEL ARCHIVO AJAX
     $ruta_rel_file = $funciones->directorio_carpetas()."/ajax/".$pagname.".js";
