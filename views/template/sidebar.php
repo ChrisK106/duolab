@@ -199,6 +199,30 @@
             </ul>
           </li>
 
+          <li class="nav-item has-treeview menu-close">
+            <a id="m_compras" href="#" class="nav-link">
+              <i class="nav-icon fas fa-receipt"></i>
+              <p>
+                Compras
+                <i class="right fas fa-angle-left nav-icon"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a id="m_compra_interna" href="<?php echo $funciones->direct_paginas()."compras/compra-interna" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p>Compra Interna</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_resumen_compra" href="<?php echo $funciones->direct_paginas()."compras/resumen-compras" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p>Resumen de Compras</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-header"><i class="nav-icon fas fa-chart-line"></i> REPORTES</li>
 
           <li class="nav-item">

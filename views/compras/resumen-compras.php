@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-receipt"></i>&nbsp;&nbsp;Resumen de Órdenes
+                        <i class="fas fa-receipt"></i>&nbsp;&nbsp;Resumen de Compras
                     </div>
                 </div>
             </div>
@@ -17,6 +17,7 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <div class="row">
+                            <!--
                             <div class="col-md-4">
                                 <div class="card-title">Filtrar por tipo de orden:</div>
                             </div>
@@ -31,8 +32,11 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button id="btn-nuevo" js-type="" type="button" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva Orden</button>
+                                <button id="btn-nuevo" js-type="" type="button" class="btn btn-success btn-block"><i class="fa fa-plus fa-1x"></i> Nueva Compra</button>
                             </div>
                         </div>
                     </div>
@@ -40,8 +44,8 @@
                         <div class="row">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="form-group">
-                                    <label>N° Orden</label>
-                                    <input type="text" name="orden_numero" class="form-control" placeholder="Nro de orden">
+                                    <label>N° Compra</label>
+                                    <input type="text" name="orden_numero" class="form-control" placeholder="Nro de compra">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-3">
@@ -71,7 +75,7 @@
                             </div>
                             <div class="col-md-8">
                                 <button id="btn-buscar" class="btn btn-success btn-block" type="button">
-                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Órdenes
+                                   <i class="fa fa-search"></i>&nbsp;&nbsp;Buscar Compras
                                 </button>
                             </div>
                         </div>
@@ -88,12 +92,12 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Código</th>
+                                        <th>Nro. Compra</th>
+                                        <th>Fecha</th>
                                         <th>Proveedor</th>
-                                        <th>Descripción</th>
+                                        <th>Moneda</th>
                                         <th>Total Neto</th>
                                         <th>Estado</th>
-                                        <th>TIPO</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

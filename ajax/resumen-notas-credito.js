@@ -59,12 +59,6 @@ $('input[name="factura_fecini"], input[name="factura_fecfin"]').on("change", fun
     fact_fini = $('input[name="factura_fecini"]').val();
     fact_ffin = $('input[name="factura_fecfin"]').val();
 
-    if(fact_fini != "" && fact_ffin != ""){
-        $("#btn-buscar").prop("disabled",false);
-    } else {
-        $("#btn-buscar").prop("disabled",true);
-    }
-
     if(moment(fact_fini).isValid() && moment(fact_ffin).isValid()){
         fecinic = $('input[name="factura_fecini"]');
         fecfin = $('input[name="factura_fecfin"]');
