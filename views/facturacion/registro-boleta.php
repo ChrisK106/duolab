@@ -191,8 +191,8 @@
                                 <div class="col-md-3">
                                     <label>Tipo de Moneda</label>
                                     <select name="facturacion_tipmon" class="form-control select2" required>
-                                        <option value="" selected>Seleccione moneda</option>
-                                        <option value="MN">Moneda Nacional</option>
+                                        <option value="">Seleccione moneda</option>
+                                        <option value="MN" selected>Moneda Nacional</option>
                                         <option value="ME">Moneda Extranjera</option>
                                     </select>
                                 </div>

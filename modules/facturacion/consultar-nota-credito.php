@@ -3,7 +3,7 @@ require '../../global/connection.php';
 $FILTER_ID = $_POST["FILTER"];
 $ESTADO_FAC = $_POST["ESTADO"];
 
-$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.series AS SERIEFAC, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.referenced_doc_id AS REFERENCED_DOC_ID, ti.referenced_doc_type_id AS REFERENCED_DOC_TYPE, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_credit_note ti ";
+$QUERY_SELECT = "SELECT ti.id AS IDFACT, ti.series AS SERIEFAC, ti.number AS NUMFAC, ti.status AS ESTFAC, ti.referenced_doc_id AS REFERENCED_DOC_ID, ti.referenced_doc_type_id AS REFERENCED_DOC_TYPE, ti.customer_id AS CLIID, ti.ruc AS CLIRUC, ti.name AS CLINOM, ti.address AS CLIADD, ti.reference AS CLIREF, ti.payment_days AS PAYDAYS, ti.delivery_date AS DELDATE, ti.currency AS CURRENCY, ti.reason AS REASON, ti.discount_rate AS DESCRATE, ti.discount_value AS DESCVAL, ti.total_sub AS TOTSUB, ti.total_tax AS TOTTAX, ti.total_net AS TOTNETO, ti.seller_id AS SELLERID, ti.user_id AS USERID, ti.date AS FECHA, ti.registration_date AS REGDATE FROM tbl_credit_note ti ";
 
 if ($FILTER_ID == "ALL") {
     $sqlquery_adic = "";
@@ -35,6 +35,7 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['PAY_DAYS'] = $ROW["PAYDAYS"];
             $ROWDATA['DELIV_DATE'] = date("Y-m-d",strtotime($ROW["DELDATE"]));
             $ROWDATA['CURRENCY'] = $ROW["CURRENCY"];
+            $ROWDATA['REASON'] = $ROW["REASON"];
             $ROWDATA['DESC_RATE'] = $ROW["DESCRATE"];
             $ROWDATA['DESC_VAL'] = $ROW["DESCVAL"];
             $ROWDATA['TOTAL_SUB'] = $ROW["TOTSUB"];
@@ -95,6 +96,7 @@ if ($FILTER_ID == "ALL") {
             $ROWDATA['PAY_DAYS'] = $ROW["PAYDAYS"];
             $ROWDATA['DELIV_DATE'] = date("Y-m-d",strtotime($ROW["DELDATE"]));
             $ROWDATA['CURRENCY'] = $ROW["CURRENCY"];
+            $ROWDATA['REASON'] = $ROW["REASON"];
             $ROWDATA['DESC_RATE'] = $ROW["DESCRATE"];
             $ROWDATA['DESC_VAL'] = $ROW["DESCVAL"];
             $ROWDATA['TOTAL_SUB'] = $ROW["TOTSUB"];

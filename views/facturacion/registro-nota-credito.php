@@ -39,7 +39,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div class="card-title">Datos de Facturación</div>
+                                    <div class="card-title">Datos de Nota de Crédito</div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="" style="height: 2.2rem;">
@@ -193,11 +193,25 @@
                                 <div class="col-md-3">
                                     <label>Tipo de Moneda</label>
                                     <select name="facturacion_tipmon" class="form-control select2" required>
-                                        <option value="" selected>Seleccione moneda</option>
-                                        <option value="MN">Moneda Nacional</option>
+                                        <option value="">Seleccione moneda</option>
+                                        <option value="MN" selected>Moneda Nacional</option>
                                         <option value="ME">Moneda Extranjera</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-md-6">
+                            		<label>Motivo de Nota de Crédito</label>
+                                    <select name="facturacion_motivo_nc" class="form-control select2" required>
+                                        <option value="" selected>Seleccione motivo</option>
+                                        <option value="ANULACION">Anulación de la operación</option>
+                                        <option value="CORRECCION">Corrección por error en la descripción</option>
+                                        <option value="DEVOLUCION_TOTAL">Devolución total</option>
+                                      	<option value="DEVOLUCION_ITEM">Devolución por ítem</option>
+                                        <option value="DISMINUCION_VALOR">Disminución en el valor</option>
+                                        <option value="OTROS">Otros conceptos</option>
+                                    </select>
+                            	</div>
                             </div>
                         </div>
                     </div>

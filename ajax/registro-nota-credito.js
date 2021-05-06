@@ -425,6 +425,9 @@ $("#btn-select-factura").click(function() {
           $('select[name="facturacion_tipmon"]').val(data_json[0]["CURRENCY"]);
           $('select[name="facturacion_tipmon"]').trigger("change");
 
+          $('select[name="facturacion_motivo_nc"]').val(data_json[0]["REASON"]);
+          $('select[name="facturacion_motivo_nc"]').trigger("change");
+
           $('input[name="facturacion_porcdesc"]').val(data_json[0]["DESC_RATE"]);
           $('input[name="facturacion_cantdesc"]').val(data_json[0]["DESC_VAL"]);
           $('input[name="facturacion_opergrab"]').val(parseFloat(data_json[0]["TOTAL_SUB"]).toFixed(2));

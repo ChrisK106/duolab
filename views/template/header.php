@@ -18,12 +18,12 @@
   <title>DuoLab Group</title>
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
   <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/select2/css/select2-bootstrap4.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+  <!-- Datatables -->
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/datatables/buttons.bootstrap4.min.css">
@@ -31,13 +31,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css"> 
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/notifyjs/dist/notify.css" />
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/css/style-duolab.css" />
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!-- CONTEXT MENU-->
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/plugins/context-menu/jquery.contextMenu.css" />
   
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $funciones->direct_sistema(); ?>/css/adminlte.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 

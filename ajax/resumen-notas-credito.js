@@ -29,7 +29,7 @@ var tbl_facturas = $("#table-facturas").DataTable({
   language: { url: "../../plugins/datatables/Spanish.json" }
 });
 
-listarDocumentos();
+listarDocumentos(true);
 
 tbl_facturas.columns([0]).visible(false);
 
@@ -273,13 +273,19 @@ $("#btn-reset").click(function (e) {
     location.reload();
 });
 
-function listarDocumentos(){
+function listarDocumentos(loadMode){
 	fact_nroo = $('input[name="factura_numero"]').val();
     fact_client = $('input[name="factura_cliente"]').val();
     fact_fini = $('input[name="factura_fecini"]').val();
     fact_ffin = $('input[name="factura_fecfin"]').val();
     fact_estado = $('select[name="factura_estado"]').val();
     fact_vendedor = $('select[name="factura_vendedor"]').val();
+
+    defaultLoad = 0;
+    
+    if (loadMode == true){
+    	defaultLoad = 1;
+    }
 
     Swal.fire({
         html: "<h4>Cargando notas de crédito</h4>",
@@ -291,7 +297,7 @@ function listarDocumentos(){
 
     $.post(
         "../../modules/facturacion/filtrar-doc.php",
-        { TIPO_DOC: 'CREDIT_NOTE', fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, 
+        { TIPO_DOC: 'CREDIT_NOTE', defaultLoad: defaultLoad, fact_nroo:fact_nroo, fact_client:fact_client, fact_fini:fact_fini, 
           fact_ffin:fact_ffin, fact_estado:fact_estado, fact_vendedor: fact_vendedor },
         function(data) {
             tbl_facturas.clear().draw();

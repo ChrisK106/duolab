@@ -12,10 +12,14 @@
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="<?php echo $funciones->direct_sistema(); ?>/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery Core -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<!-- Script for Notifications -->
 <script src="<?php echo $funciones->direct_sistema(); ?>/js/jquery.core.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- jQuery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap 4 -->
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -27,7 +31,7 @@
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/flot/jquery.flot.js"></script>
 
 <!-- Select2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- CONTEXT MENU JS -->
 <script src="<?php echo $funciones->direct_sistema(); ?>/plugins/context-menu/jquery.contextMenu.min.js"></script>

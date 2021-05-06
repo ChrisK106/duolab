@@ -239,7 +239,7 @@
           </li>
           <li class="nav-item">
             <a id="m_rpt_productos" href="<?php echo $funciones->direct_paginas()."reportes/productos" ?>" class="nav-link">
-              <i class="fas fa-chart-bar nav-icon"></i>
+              <i class="fas fa-file-alt nav-icon"></i>
               <p>Productos</p>
             </a>
           </li>

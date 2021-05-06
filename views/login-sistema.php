@@ -14,7 +14,7 @@ if (isset($_SESSION['loggedInUser'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>DuoLab Group</title>
-    <meta name="description" content="Empresa peruana del rubro cosmético y farmacéutico, dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos.">
+    <meta name="description" content="Empresa peruana dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos del rubro cosmético y farmacéutico.">
 
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="DuoLab Group"/>
@@ -83,7 +83,7 @@ if (isset($_SESSION['loggedInUser'])) {
 
       <p class="mt-5 mb-3 text-muted text-center">© 2021 DuoLab Group</p>
     </form>
-    <script src="./plugins/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="./plugins/toastr/toastr.min.js"></script>
     <script type="text/javascript">
       toastr.options = {
