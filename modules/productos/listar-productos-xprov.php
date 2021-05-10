@@ -1,9 +1,12 @@
 <?php
+
 require '../../global/connection.php';
+
 $ID_PROV = "";
 $COND_PROV = "";
 $sqlquery_adic = "";
 $ESTADO_PROD = $_POST["ESTADO"];
+$REPORT = "";
 
 if(isset($_POST["PROV_ID"])){
     $ID_PROV = $_POST["PROV_ID"];
@@ -17,6 +20,10 @@ if(isset($_POST["PROV_ID"])){
     }
 }
 
+if(isset($_POST["REPORT"])){
+    $REPORT = $_POST["REPORT"];
+}
+
 $sqlStatement = $pdo->prepare("SELECT tbl_product.id AS ID, tbl_product.name as NAME, tbl_product.code as CODE FROM tbl_product JOIN tbl_provider ON tbl_product.provider_id=tbl_provider.id $COND_PROV $sqlquery_adic ORDER BY name ASC");
 
 if(isset($_POST["PROV_ID"])){
@@ -27,7 +34,11 @@ $sqlStatement->execute();
 $rowsNumber = $sqlStatement->rowCount();
 $DATA = array();
 
-array_push($DATA, ["id" => "", "text" => "Seleccione un producto"]);
+if ($REPORT == ""){
+    array_push($DATA, ["id" => "", "text" => "Seleccione un producto"]);
+}else{
+    array_push($DATA, ["id" => "0", "text" => "(Todos)"]);
+}
 
 if ($rowsNumber > 0) {
     

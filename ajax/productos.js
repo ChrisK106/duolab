@@ -1,13 +1,27 @@
 $(document).ready(function(){
-//  $("#m_almacen").attr("class","nav-link active");
-//  $("#m_almacen").parent().attr("class","nav-item has-treeview menu-open");
   $("#m_rpt_productos").attr("class","nav-link active");
-  $(document).prop('title', 'Reporte de Productos - DuoLab Group');
+  $(document).prop('title', 'Reportes de Productos - DuoLab Group');
 });
 
-$("#btn-product-list").click(function (e) {
+$.post(
+  "../../modules/productos/listar-productos-xprov.php",
+  { ESTADO: "ALL", REPORT : 1 },
+  function(data) {
+    $('select[name="product_list"]').empty();
+    $('select[name="product_list"]').select2({
+      data: JSON.parse(data)
+    });
+  }
+);
+
+$("#btn-rpt-unidades-vendidas-cliente").click(function (e) {
     e.preventDefault();
-    window.location.assign("../../views/productos/listado-producto");
+    var productId=$('select[name="product_list"]').val();
+    var dateFrom = $('input[name="date_from"]').val();
+    var dateTo = $('input[name="date_to"]').val();
+    var url="../../modules/reportes/unidades-vendidas-por-cliente.php?productid=" + productId 
+    + "&datefrom=" + dateFrom + "&dateto=" + dateTo;
+    window.open(url);
 });
 
 $("#btn-rpt-top-mas-vendido").click(function (e) {
@@ -20,4 +34,9 @@ $("#btn-rpt-top-menos-vendido").click(function (e) {
     e.preventDefault();
     var url="../../modules/reportes/top-productos.php?mode=2";
     window.open(url,"Top 10 Productos Más Vendidos","");
+});
+
+$("#btn-product-list").click(function (e) {
+    e.preventDefault();
+    window.location.assign("../../views/productos/listado-producto");
 });

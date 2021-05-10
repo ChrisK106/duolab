@@ -226,6 +226,18 @@
           <li class="nav-header"><i class="nav-icon fas fa-chart-line"></i> REPORTES</li>
 
           <li class="nav-item">
+            <a id="m_rpt_clientes" href="<?php echo $funciones->direct_paginas()."reportes/clientes" ?>" class="nav-link">
+              <i class="fas fa-file-alt nav-icon"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="m_rpt_productos" href="<?php echo $funciones->direct_paginas()."reportes/productos" ?>" class="nav-link">
+              <i class="fas fa-file-alt nav-icon"></i>
+              <p>Productos</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a id="m_score_ventas" href="<?php echo $funciones->direct_paginas()."reportes/score-ventas" ?>" class="nav-link">
               <i class="fas fa-chart-bar nav-icon"></i>
               <p>Score de Ventas</p>
@@ -237,12 +249,7 @@
               <p>Ventas por Periodo</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a id="m_rpt_productos" href="<?php echo $funciones->direct_paginas()."reportes/productos" ?>" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>Productos</p>
-            </a>
-          </li>
+          
 
           <li class="nav-header"><i class="nav-icon fas fa-layer-group"></i> SISTEMA</li>
 

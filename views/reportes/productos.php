@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-chart-bar"></i>&nbsp;&nbsp;Reporte de Productos
+                        <i class="fas fa-file-alt"></i>&nbsp;&nbsp;Reporte de Productos
                     </div>
                 </div>
             </div>
@@ -15,7 +15,43 @@
             <div style="max-width: 1140px;margin: 0 auto;">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <div class="card-title">Reportes</div>
+                        <div class="card-title">Unidades Vendidas por Cliente</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Seleccione un producto</label>
+                                    <select class="form-control select2" name="product_list"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Fecha Inicio</label>
+                                    <input type="date" name="date_from" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Fecha Fin</label>
+                                    <input type="date" name="date_to" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4" >
+                                <button id="btn-rpt-unidades-vendidas-cliente" class="btn btn-block btn-success">
+                                    <i class="fa fa-file-alt fa-1x"></i>&nbsp;&nbsp;Ver reporte
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title">Top Productos</div>
                     </div>
                     <div class="card-body">
                         <div class="row mb-2">
@@ -25,7 +61,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-6" >
                                 <button id="btn-rpt-top-mas-vendido" class="btn btn-block btn-success">
-                                    <i class="fa fa-chart-bar fa-1x"></i>&nbsp;&nbsp;Top 10 de Productos más vendidos
+                                    <i class="fa fa-file-alt fa-1x"></i>&nbsp;&nbsp;Top 20 de Productos más vendidos
                                 </button>
                             </div>
                             <div class="col-md-3"></div>
@@ -34,161 +70,20 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <button id="btn-rpt-top-menos-vendido" class="btn btn-block btn-danger">
-                                    <i class="fa fa-chart-bar fa-1x"></i>&nbsp;&nbsp;Top 10 de Productos menos vendidos
+                                    <i class="fa fa-file-alt fa-1x"></i>&nbsp;&nbsp;Top 20 de Productos menos vendidos
                                 </button>
                             </div>
                             <div class="col-md-3"></div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
-                        <div class="col-12">
-                            <button id="btn-product-list" class="btn btn-secondary">
-                                <i class="fa fa-box fa-1x"></i>&nbsp;&nbsp;Ver Listado de Productos
-                            </button>
-                            <!--
-                            <button id="btn-new" class="btn btn-primary">
-                                <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar campos
-                            </button>
-                            <div class="float-right">
-                                <button type="submit" id="btn-save-product" class="btn btn-success btn-md"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Guardar producto</font></button>
-                            </div>
-                            -->
-                        </div>
+                    <div class="col-12">
+                        <button id="btn-product-list" class="btn btn-secondary">
+                            <i class="fa fa-box fa-1x"></i>&nbsp;&nbsp;Ver Listado de Productos
+                        </button>
                     </div>
-
-                <!--
-                <form id="FRM_RPT_PRODUCTO" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/productos/insert-update-producto.php" enctype="multipart/form-data">
-                    <input type="hidden" name="producto_id" id="">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <div class="card-title">Reportes</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Código de Producto</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese código" name="producto_code" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-people-carry"></i> Proveedor</label>
-                                        <select class="form-control select2" name="producto_proveedor" required>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group text-right">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="prod_estado" name="producto_estado">
-                                            <label for="prod_estado" class="custom-control-label">Desactivado</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese nombre de producto" name="producto_nombre" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Marca</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese marca de producto" name="producto_marca" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Descripción</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese descripción de producto" name="producto_description">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Nro. Guía / Orden</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese número de guía u orden" name="producto_proveedor_referencia">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Precio</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-dollar-sign"></i>
-                                                </span>
-                                            </div>
-                                            <input type="number" min="0" step="any" class="form-control"name="producto_precio" value="" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Stock</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-box"></i>
-                                                </span>
-                                            </div>
-                                            <input type="number" min="0" class="form-control" name="producto_cantidad" placeholder="Cantidad del producto" value="1" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Valor de Medida</label>
-                                        <select class="form-control select2" name="producto_unitvalue">
-                                            <option value="">Seleccione</option>
-                                            <option value="gr">gr (Gramos)</option>
-                                            <option value="mg">mg (Miligramos)</option>
-                                            <option value="lt">lt (Litros)</option>
-                                            <option value="ml">ml (Mililitros)</option>
-                                            <option value="gl">gl (Galones)</option>
-                                            <option value="und">und (Unidad)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Fecha de Vencimiento</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <input type="date" class="form-control" name="producto_fecvenc" value="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button id="btn-new" class="btn btn-primary">
-                                <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar campos
-                            </button>
-                            <button id="btn-product-list" class="btn btn-secondary">
-                                <i class="fa fa-box fa-1x"></i>&nbsp;&nbsp;Listado de Productos
-                            </button>
-                            <div class="float-right">
-                                <button type="submit" id="btn-save-product" class="btn btn-success btn-md"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Guardar producto</font></button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                -->
+                </div>
             </div>
         </div>
     </div>
