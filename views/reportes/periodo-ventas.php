@@ -6,7 +6,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-chart-bar"></i>&nbsp;&nbsp;Reporte de ventas por periodo
+                        <i class="fas fa-chart-bar"></i>&nbsp;&nbsp;Gráfico de Ventas Acumuladas por Periodo
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
     <div class="content">
         <div class="container-fluid">
             <div style="max-width: 1140px;margin: 0 auto;">
-
+                <!--
                 <div class="card card-primary">
                     <div class="card-header">
                         <div class="card-title">Filtrar reporte</div>
@@ -65,27 +65,20 @@
                         </div>
                     </div>
                 </div>
-
+                -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <div class="card-title">Ventas en tiempo real</div>
+                        <div class="card-title">Ventas Acumuladas en Tiempo Real</div>
                     </div>
                     <div class="card-body">
-                        <div id="header">
-                            <h2></h2>
-                        </div>
-
                         <div id="content">
-
-                            <div id="bar-chart" style="width: 100%; height: 400px;"></div>
-
-                            <div class="form-inline mt-2">
-
-                            <p>Intervalo de actualización &nbsp;<input id="updateInterval" type="number" step="100" min="3000" class="form-control" style="text-align: right; width:5em"> &nbsp;milisegundos</p>
+                            <div id="bar-chart" style="width: 100%; height: 600px;"></div>
+                            <div style="float:right;">
+                                <button type="button" class="btn btn-secondary">
+                                    Intervalo de actualización (ms) <span class="badge bg-secondary"><input id="updateInterval" type="number" step="100" min="3000" style="text-align: right; width:5em"></span>
+                                </button>
                             </div>
-                            
                         </div>
-
                     </div>
                 </div>
             </div>

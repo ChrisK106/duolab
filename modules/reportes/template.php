@@ -2,6 +2,8 @@
 
 require '../../plugins/fpdf/fpdf.php';
 
+date_default_timezone_set('America/Lima');
+
 class PDF extends FPDF
 {
 	var $headerTitle="";
@@ -22,7 +24,13 @@ class PDF extends FPDF
 		$this->SetFont('Arial','B',14);
 		//$this->Cell(30);
 		$this->Cell(0,10, $this->HeaderTitle(), 0,0,'C');
-		$this->Ln(20);
+		$this->Ln(10);
+		$this->SetFont('Arial','B',9);
+		$this->Cell(222);
+		$this->Cell(22,10, utf8_decode("Fecha y Hora:"), 0,0,'L');
+		$this->SetFont('Arial','',9);
+		$this->Cell(0,10, date("d/m/Y H:i:s"), 0,0,'R');
+		$this->Ln(12);
 	}
 	
 	function Footer()

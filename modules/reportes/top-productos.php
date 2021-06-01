@@ -27,7 +27,7 @@ $sqlString="SELECT id, code, brand, name, description, STATUS, PROV_CODE, busine
 (SELECT p.id, p.code, p.brand, p.name, p.description,
 (CASE
  WHEN p.active_status=1 THEN 'Activo'
- WHEN p.active_status=2 THEN 'Inactivo'
+ WHEN p.active_status=0 THEN 'Inactivo'
 END) AS STATUS,
 pr.code AS PROV_CODE, pr.business_name, SUM(item_quantity) AS QUANTITY
 FROM tbl_invoice_detail td
@@ -40,7 +40,7 @@ UNION
 (SELECT p.id, p.code, p.brand, p.name, p.description,
 (CASE
  WHEN p.active_status=1 THEN 'Activo'
- WHEN p.active_status=2 THEN 'Inactivo'
+ WHEN p.active_status=0 THEN 'Inactivo'
 END) AS STATUS,
 pr.code AS PROV_CODE, pr.business_name, SUM(item_quantity) AS QUANTITY
 FROM tbl_receipt_detail td
@@ -101,6 +101,5 @@ if ($rowsNumber > 0) {
 		$rowNumber++;
 	}
 }
-
 
 $pdf->Output("I", $reportTitle . ".pdf", true);
