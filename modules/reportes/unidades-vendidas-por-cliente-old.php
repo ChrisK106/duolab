@@ -57,8 +57,7 @@ if ($dateFrom!= "" && $dateTo!= ""){
 	$rptDateInterval = "UNIDADES VENDIDAS DEL " . date("d/m/Y", strtotime($dateFrom)) . " AL " . date("d/m/Y", strtotime($dateTo));
 }
 
-$sqlString = "SELECT ruc, name, SUM(SOLD_UNITS) AS SOLD_UNITS FROM 
-((SELECT th.ruc, th.name, SUM(td.item_quantity) AS SOLD_UNITS
+$sqlString = "(SELECT th.ruc, th.name, SUM(td.item_quantity) AS SOLD_UNITS
 FROM tbl_invoice_detail td
 JOIN tbl_invoice th on th.id=td.invoice_id
 WHERE th.status NOT IN (2) " . $productString . $dateString .
@@ -68,18 +67,10 @@ UNION
 (SELECT th.ruc, th.name, SUM(td.item_quantity) AS SOLD_UNITS
 FROM tbl_receipt_detail td
 JOIN tbl_receipt th on th.id=td.receipt_id
-WHERE th.status NOT IN (2) " . $productString . $dateString .
+WHERE th.status NOT IN (2)" . $productString . $dateString .
 " GROUP BY 1
-ORDER BY SOLD_UNITS)
-UNION
-(SELECT th.ruc, th.name, SUM(td.item_quantity*-1) AS SOLD_UNITS
-FROM tbl_credit_note_detail td
-JOIN tbl_credit_note th on th.id=td.credit_note_id
-WHERE th.status NOT IN (2) " . $productString . $dateString .
-" GROUP BY 1
-ORDER BY SOLD_UNITS)) AS RPT
-GROUP BY 1
-ORDER BY 2 ASC";
+ORDER BY SOLD_UNITS)  
+ORDER BY name ASC";
 
 $sqlStatement = $pdo->prepare($sqlString);
 

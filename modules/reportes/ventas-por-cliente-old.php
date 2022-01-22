@@ -81,23 +81,7 @@ total_net,
 END) AS STATUS
 FROM tbl_receipt th
 WHERE th.ruc= '" . $customerId . "' " . $dateString . ")
-UNION
-(SELECT id, CONCAT(series, '-',number) AS DOC_NUMBER,
-date,
-delivery_date,
-currency,
-total_sub,
-total_tax,
-total_net*-1,
-(CASE
- WHEN th.status=1 THEN 'Vigente'
- WHEN th.status=2 THEN 'Anulado'
- WHEN th.status=3 THEN 'Pendiente de Pago'
- WHEN th.status=4 THEN 'Cancelado'
-END) AS STATUS
-FROM tbl_credit_note th
-WHERE th.ruc= '" . $customerId . "' " . $dateString . ")
-ORDER BY date DESC";
+ORDER BY id DESC";
 
 $sqlStatement = $pdo->prepare($sqlString);
 
@@ -138,7 +122,7 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,6,utf8_decode($rptDateInterval),1,0,'C',1);
 $pdf->Ln();
-$pdf->Cell(16,6,utf8_decode('TBLID'),1,0,'C',1);
+$pdf->Cell(16,6,utf8_decode('ID'),1,0,'C',1);
 $pdf->Cell(28,6,utf8_decode('Nro. Doc.'),1,0,'C',1);
 $pdf->Cell(30,6,utf8_decode('Fecha Emisión'),1,0,'C',1);
 $pdf->Cell(30,6,utf8_decode('Fecha Entrega'),1,0,'C',1);
