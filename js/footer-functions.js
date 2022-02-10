@@ -1,7 +1,8 @@
 $(document).ready(function() {
-    $(".select2").select2({
+    $('.select2').select2({
       language: "es"
     });
+        
     $("#table-clientes").DataTable();
     $("#table-proveedores").DataTable();
     $("#table-productos").DataTable();

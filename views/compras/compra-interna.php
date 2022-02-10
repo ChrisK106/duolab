@@ -29,7 +29,7 @@
                         <button type="button" id="btn-nuevacompra" class="btn btn-primary btn-block"><i class="fa fa-plus fa-1x"></i>&nbsp;&nbsp;<font>Nueva Compra</font></button>
                     </div>
 	            </div>
-	            <form id="FRM_INSERT_DETA_ORDCOMPRA" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/compras/insert-update-compra.php" enctype="multipart/form-data">
+	            <form id="FRM_INSERT_DETA_ORDCOMPRA" method="post" action="<?php echo $functions->direct_sistema(); ?>/modules/compras/insert-update-compra.php" enctype="multipart/form-data">
 	                <input type="hidden" name="orden_id">
 	                <div class="card card-primary">
 	                    <div class="card-header">

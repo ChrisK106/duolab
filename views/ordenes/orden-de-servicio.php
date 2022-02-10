@@ -30,7 +30,7 @@
 			            </div>
         			</div>
         		</div>
-	            <form id="FRM_INSERT_DETA_ORDSERV" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/ordenes/insert-update-orden.php" enctype="multipart/form-data">
+	            <form id="FRM_INSERT_DETA_ORDSERV" method="post" action="<?php echo $functions->direct_sistema(); ?>/modules/ordenes/insert-update-orden.php" enctype="multipart/form-data">
 	                <input type="hidden" name="orden_id">
 	                <div class="card card-primary">
 	                    <div class="card-header">

@@ -33,7 +33,7 @@
                         <button type="button" id="btn-nuevafac" class="btn btn-primary btn-block"><i class="fa fa-plus fa-1x"></i>&nbsp;&nbsp;<font>Nueva factura</font></button>
                     </div>
                 </div>
-                <form id="FRM_INSERT_FACTURA" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/facturacion/insert-factura.php" enctype="multipart/form-data">
+                <form id="FRM_INSERT_FACTURA" method="post" action="<?php echo $functions->direct_sistema(); ?>/modules/facturacion/insert-factura.php" enctype="multipart/form-data">
                     <input type="hidden" name="id_factura">
                     <div class="card card-primary">
                         <div class="card-header">

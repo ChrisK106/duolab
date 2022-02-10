@@ -16,7 +16,7 @@
     <div class="content">
         <div class="container-fluid">
             <div style="max-width: 1140px;margin: 0 auto;">
-                <form id="FRM_INSERT_EMPLEADO" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/empleados/insert-update-empleado.php" enctype="multipart/form-data">
+                <form id="FRM_INSERT_EMPLEADO" method="post" action="<?php echo $functions->direct_sistema(); ?>/modules/empleados/insert-update-empleado.php" enctype="multipart/form-data">
                     <input type="hidden" name="empleado_id">
                     <div class="card card-primary">
                         <div class="card-header">

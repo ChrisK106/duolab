@@ -13,7 +13,7 @@
     <div class="content">
         <div class="container-fluid">
             <div style="max-width: 1140px;margin: 0 auto;">
-                <form id="FRM_INSERT_PRODUCTO" method="post" action="<?php echo $funciones->direct_sistema(); ?>/modules/productos/insert-update-producto.php" enctype="multipart/form-data">
+                <form id="FRM_INSERT_PRODUCTO" method="post" action="<?php echo $functions->direct_sistema(); ?>/modules/productos/insert-update-producto.php" enctype="multipart/form-data">
                     <input type="hidden" name="producto_id" id="">
                     <div class="card card-primary">
                         <div class="card-header">

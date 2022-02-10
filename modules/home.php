@@ -1,5 +1,5 @@
 <?php
 
-include(  $root_sistema.'/global/session.php');
+include($web_root_dir.'/global/session.php');
 
 ?>
