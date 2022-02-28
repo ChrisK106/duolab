@@ -11,17 +11,15 @@ $MESES = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agos
 $YEAR_P = $_POST["YEAR"];
 
 if($YEAR_P != ""){
-    $QUERY_PERIODO = " WHERE YEAR(th.date) = '" . $YEAR_P . "' AND th.status NOT IN (2) ";
+    $QUERY_PERIODO = " WHERE YEAR(th.issue_date) = '" . $YEAR_P . "' AND th.status NOT IN ('Anulada','Pendiente') ";
 }else{
-    $QUERY_PERIODO = " WHERE YEAR(th.date) = '" . date("Y") . "' AND th.status NOT IN (2) ";
+    $QUERY_PERIODO = " WHERE YEAR(th.issue_date) = '" . date("Y") . "' AND th.status NOT IN ('Anulada','Pendiente') ";
 }
-$QUERY_GROUP = " GROUP BY MONTH(th.date) ";
-$QUERY_ORDER = " ORDER BY MONTH(th.date) ASC) ";
+$QUERY_GROUP = " GROUP BY MONTH(th.issue_date) ";
+$QUERY_ORDER = " ORDER BY MONTH(th.issue_date) ASC) ";
 
 $query = "SELECT MONTH, SUM(TOTAL) AS TOTAL FROM(";
-$query .= "(SELECT MONTH(th.date) AS MONTH, SUM(th.total_net) AS TOTAL FROM tbl_invoice th" . $QUERY_PERIODO . $QUERY_GROUP . $QUERY_ORDER . " UNION ";
-$query .= "(SELECT MONTH(th.date) AS MONTH, SUM(th.total_net) AS TOTAL FROM tbl_receipt th" . $QUERY_PERIODO . $QUERY_GROUP . $QUERY_ORDER . " UNION ";
-$query .= "(SELECT MONTH(th.date) AS MONTH, SUM(th.total_net*-1) AS TOTAL FROM tbl_credit_note th $QUERY_PERIODO $QUERY_GROUP $QUERY_ORDER ";
+$query .= "(SELECT MONTH(th.issue_date) AS MONTH, SUM(th.total_net) AS TOTAL FROM tbl_purchase th" . $QUERY_PERIODO . $QUERY_GROUP . $QUERY_ORDER;
 $query .= ") AS RPT GROUP BY 1 ORDER BY 1";
 
 $LST_REPORT = $pdo->prepare($query);

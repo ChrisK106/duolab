@@ -36,7 +36,7 @@ if ($FILTER_COTIZ == "ALL") {
             $ROWDATA['TOTAL_TAX'] = $ROW["TOTTAX"];
             $ROWDATA['TOTAL_NET'] = $ROW["TOTNETO"];
             $ROWDATA['USER_ID'] = $ROW["SELLERID"];
-            $ROWDATA['FECREG'] = date("d-m-Y",strtotime($ROW["FECHA"]));
+            $ROWDATA['FECREG'] = date("d/m/Y",strtotime($ROW["FECHA"]));
             array_push($json_data, $ROWDATA);
         }        
     }
@@ -75,7 +75,7 @@ if ($FILTER_COTIZ == "ALL") {
             $ROWDATA['TOTAL_TAX'] = $ROW["TOTTAX"];
             $ROWDATA['TOTAL_NET'] = $ROW["TOTNETO"];
             $ROWDATA['USER_ID'] = $ROW["SELLERID"];
-            $ROWDATA['FECREG'] = date("Y-m-d",strtotime($ROW["FECHA"]));
+            $ROWDATA['FECREG'] = date("d/m/Y",strtotime($ROW["FECHA"]));
             array_push($json_data, $ROWDATA);
         }        
     }

@@ -24,7 +24,7 @@ if(isset($_POST["REPORT"])){
     $REPORT = $_POST["REPORT"];
 }
 
-$sqlStatement = $pdo->prepare("SELECT tbl_product.id AS ID, tbl_product.name as NAME, tbl_product.code as CODE FROM tbl_product JOIN tbl_provider ON tbl_product.provider_id=tbl_provider.id $COND_PROV $sqlquery_adic ORDER BY name ASC");
+$sqlStatement = $pdo->prepare("SELECT tbl_product.id AS ID, tbl_product.name as NAME, tbl_product.code as CODE FROM tbl_product $COND_PROV $sqlquery_adic ORDER BY name ASC");
 
 if(isset($_POST["PROV_ID"])){
     $sqlStatement->bindParam("PROVID", $ID_PROV, PDO::PARAM_INT);

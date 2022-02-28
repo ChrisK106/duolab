@@ -12,12 +12,12 @@ if (isset($_SESSION['loggedInUser'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DuoLab Group</title>
   <meta name="description" content="Empresa peruana dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos del rubro cosmético y farmacéutico.">
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="DuoLab Group"/>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DuoLab Group">
   <meta property="og:site" content="DuoLab Group">
-  <meta property="og:url" content="https://duolabgroup.com"/>
-  <meta property="og:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar."/>
-  <meta property="og:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png"/>
+  <meta property="og:url" content="https://duolabgroup.com">
+  <meta property="og:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar.">
+  <meta property="og:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png">
 
   <meta property="twitter:title" content="DuoLab Group">
   <meta property="twitter:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar.">

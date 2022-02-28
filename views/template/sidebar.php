@@ -54,13 +54,25 @@
               <li class="nav-item">
                 <a id="m_registro_producto" href="<?php echo $functions->direct_paginas()."productos/registro-producto" ?>" class="nav-link">
                   <i class="nav-icon far fa-circle text-danger"></i>
-                  <p>Registro de Productos</p>
+                  <p>Registro de Producto</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a id="m_listado_producto" href="<?php echo $functions->direct_paginas()."productos/listado-producto" ?>" class="nav-link">
                   <i class="nav-icon far fa-circle text-info"></i>
                   <p>Listado de Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_actualizar_stock" href="<?php echo $functions->direct_paginas()."productos/actualizar-stock" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-warning"></i>
+                  <p>Actualizar Stock</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_historial_movimiento" href="<?php echo $functions->direct_paginas()."productos/historial-movimiento" ?>" class="nav-link">
+                  <i class="nav-icon far fa-circle text-info"></i>
+                  <p>Historial de Movimientos</p>
                 </a>
               </li>
             </ul>
@@ -227,35 +239,49 @@
             </ul>
           </li>
 
-          <li class="nav-header"><i class="nav-icon fas fa-chart-line"></i> REPORTES</li>
-
-          <li class="nav-item">
-            <a id="m_rpt_clientes" href="<?php echo $functions->direct_paginas()."reportes/clientes" ?>" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>Clientes</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a id="m_rpt_productos" href="<?php echo $functions->direct_paginas()."reportes/productos" ?>" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>Productos</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a id="m_score_ventas" href="<?php echo $functions->direct_paginas()."reportes/score-ventas" ?>" class="nav-link">
-              <i class="fas fa-chart-bar nav-icon"></i>
-              <p>Score de Ventas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a id="m_ventas_periodo" href="<?php echo $functions->direct_paginas()."reportes/periodo-ventas" ?>" class="nav-link">
-              <i class="fas fa-chart-bar nav-icon"></i>
-              <p>Ventas por Periodo</p>
-            </a>
-          </li>
-          
-
           <li class="nav-header"><i class="nav-icon fas fa-layer-group"></i> SISTEMA</li>
+
+          <li class="nav-item has-treeview menu-close">
+            <a id="m_reportes" href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Reportes
+                <i class="right fas fa-angle-left nav-icon"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a id="m_rpt_clientes" href="<?php echo $functions->direct_paginas()."reportes/clientes" ?>" class="nav-link">
+                <i class="fas fa-file-alt nav-icon"></i>
+                <p>Clientes</p>
+              </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_rpt_productos" href="<?php echo $functions->direct_paginas()."reportes/productos" ?>" class="nav-link">
+                  <i class="fas fa-file-alt nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_score_ventas" href="<?php echo $functions->direct_paginas()."reportes/score-ventas" ?>" class="nav-link">
+                  <i class="fas fa-chart-bar nav-icon"></i>
+                  <p>Score de Ventas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_ventas_periodo" href="<?php echo $functions->direct_paginas()."reportes/ventas-periodo" ?>" class="nav-link">
+                  <i class="fas fa-chart-bar nav-icon"></i>
+                  <p>Ventas por Periodo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="m_gastos_compras" href="<?php echo $functions->direct_paginas()."reportes/gastos-compras" ?>" class="nav-link">
+                  <i class="fas fa-chart-bar nav-icon"></i>
+                  <p>Gastos en Compras</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a id="m_empleados" href="<?php echo $functions->direct_paginas()."empleados/registro-empleado" ?>" class="nav-link">

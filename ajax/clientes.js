@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  $("#m_reportes").attr("class","nav-link active");
+  $("#m_reportes").parent().attr("class","nav-item has-treeview menu-open");
   $("#m_rpt_clientes").attr("class","nav-link active");
   $(document).prop('title', 'Reportes de Clientes - DuoLab Group');
 });

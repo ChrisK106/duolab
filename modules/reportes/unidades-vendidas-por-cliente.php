@@ -33,13 +33,12 @@ if ($productId!= 0 && $productId!= ""){
 	$reportTitle = "Unidades de Producto Vendidas por Cliente";
 	$productString = " AND td.item_id = " . $productId;
 
-	$sqlProductInfo = "SELECT p.id, p.code, p.brand, p.name, p.description, pr.business_name,
+	$sqlProductInfo = "SELECT p.id, p.code, p.brand, p.name, p.description,
 		(CASE
 			WHEN p.active_status = 1 THEN 'ACTIVO'
 		 	WHEN p.active_status = 0 THEN 'INACTIVO'
 		END) AS status
 		FROM tbl_product p
-		JOIN tbl_provider pr ON p.provider_id=pr.id
 		WHERE p.id = " . $productId;
 
 	$sqlStatement = $pdo->prepare($sqlProductInfo);
@@ -127,11 +126,6 @@ if ($productId!= 0 && $productId!= ""){
 	$pdf->Cell(20,6,utf8_decode('Descripción'),1,0,'R',1);
 	$pdf->SetFont('Arial','',9);
 	$pdf->Cell(0,6,utf8_decode($productData['description']),1,0,'L',0);
-	$pdf->Ln();
-	$pdf->SetFont('Arial','B',9);
-	$pdf->Cell(20,6,utf8_decode('Proveedor'),1,0,'R',1);
-	$pdf->SetFont('Arial','',9);
-	$pdf->Cell(0,6,utf8_decode($productData['business_name']),1,0,'L',0);
 	$pdf->Ln(10);
 }
 

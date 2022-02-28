@@ -11,6 +11,12 @@ $(document).ready(function() {
     $("#table-ordenes").DataTable();
     $("#table-cotizaciones").DataTable();
     $("#table-facturas").DataTable();
+
+    if(!localStorage.getItem('darkMode')) {
+      populateStorage();
+    } else {
+      setStyle();
+    }
 });
 
 $('form input').keydown(function (e) {
@@ -23,6 +29,36 @@ $('form input').keydown(function (e) {
         return false;
     }
 });
+
+$('#switch-dark-mode-item').on('click', function (e) {
+  e.stopPropagation();
+
+  switchMode();
+  localStorage.setItem('darkMode', $('#switchDarkMode').prop('checked'));
+});
+
+function populateStorage() {
+  localStorage.setItem('darkMode', "false");
+}
+
+function setStyle() {
+  var currentMode = localStorage.getItem('darkMode');
+
+  if (currentMode == "true"){
+    $('body').addClass('dark-mode');
+    $('#switchDarkMode').prop('checked', true);
+  }
+}
+
+function switchMode() {
+  if ( $('#switchDarkMode').is(":checked") ){
+    $('body').removeClass('dark-mode');
+    $('#switchDarkMode').prop('checked', false);
+  }else{
+    $('body').addClass('dark-mode');
+    $('#switchDarkMode').prop('checked', true);
+  }
+}
 
 function crear_cookie(name, value, days2expire, path) {
     var date = new Date();

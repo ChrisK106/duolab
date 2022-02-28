@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-box"></i>&nbsp;&nbsp;Editar Producto
+                        <i class="fas fa-box"></i>&nbsp;&nbsp;Registro de Productos
                     </div>
                 </div>
             </div>
@@ -24,13 +24,30 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Código</label>
+                                        <label>Código de Producto</label>
                                         <input type="text" class="form-control" placeholder="Ingrese código" name="producto_code" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-people-carry"></i> Proveedor</label>
+                                        <select class="form-control select2" name="producto_proveedor" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group text-right">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="prod_estado" name="producto_estado">
+                                            <label for="prod_estado" class="custom-control-label">Desactivado</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <input type="text" class="form-control" placeholder="Ingrese nombre de producto" name="producto_nombre" required>
@@ -52,16 +69,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Valor de Medida</label>
-                                        <select class="form-control select2" name="producto_unitvalue">
-                                            <option value="">Seleccione</option>
-                                            <option value="gr">gr (Gramos)</option>
-                                            <option value="mg">mg (Miligramos)</option>
-                                            <option value="lt">lt (Litros)</option>
-                                            <option value="ml">ml (Mililitros)</option>
-                                            <option value="gl">gl (Galones)</option>
-                                            <option value="und">und (Unidad)</option>
-                                        </select>
+                                        <label>Nro. Guía / Orden</label>
+                                        <input type="text" class="form-control" placeholder="Ingrese número de guía u orden" name="producto_proveedor_referencia">
                                     </div>
                                 </div>
                             </div>
@@ -88,15 +97,34 @@
                                                     <i class="fas fa-box"></i>
                                                 </span>
                                             </div>
-                                            <input type="number" min="0" class="form-control" name="producto_cantidad" placeholder="Cantidad del producto" value="1" disabled>
+                                            <input type="number" min="0" class="form-control" name="producto_cantidad" placeholder="Cantidad del producto" value="1" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="form-group text-right">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="prod_estado" name="producto_estado">
-                                            <label for="prod_estado" class="custom-control-label">Desactivado</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Valor de Medida</label>
+                                        <select class="form-control select2" name="producto_unitvalue">
+                                            <option value="">Seleccione</option>
+                                            <option value="gr">gr (Gramos)</option>
+                                            <option value="mg">mg (Miligramos)</option>
+                                            <option value="lt">lt (Litros)</option>
+                                            <option value="ml">ml (Mililitros)</option>
+                                            <option value="gl">gl (Galones)</option>
+                                            <option value="und">und (Unidad)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Fecha de Vencimiento</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" name="producto_fecvenc" value="<?php echo date('Y-m-d'); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -105,9 +133,13 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button id="btn-cancel" class="btn btn-primary"><i class="fa fa-window-close fa-1x"></i>&nbsp;&nbsp;Cancelar</button>
+                            <button id="btn-new" class="btn btn-primary">
+                                <i class="fa fa-broom fa-1x"></i>&nbsp;&nbsp;Limpiar campos
+                            </button>
+                            <button id="btn-product-list" class="btn btn-secondary">
+                                <i class="fa fa-box fa-1x"></i>&nbsp;&nbsp;Listado de Productos
+                            </button>
                             <div class="float-right">
-                                <button type="button" js-id="" id="btn-delete-product" class="btn btn-danger"><i class="fa fa-trash fa-1x"></i>&nbsp;&nbsp;Eliminar producto</button>
                                 <button type="submit" id="btn-save-product" class="btn btn-success btn-md"><i class="fa fa-save fa-1x"></i>&nbsp;&nbsp;<font>Guardar producto</font></button>
                             </div>
                         </div>

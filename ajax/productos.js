@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  $("#m_reportes").attr("class","nav-link active");
+  $("#m_reportes").parent().attr("class","nav-item has-treeview menu-open");
   $("#m_rpt_productos").attr("class","nav-link active");
   $(document).prop('title', 'Reportes de Productos - DuoLab Group');
 });
@@ -27,13 +29,13 @@ $("#btn-rpt-unidades-vendidas-cliente").click(function (e) {
 $("#btn-rpt-top-mas-vendido").click(function (e) {
     e.preventDefault();
     var url="../../modules/reportes/top-productos.php?mode=1";
-    window.open(url,"Top 10 Productos Más Vendidos","");
+    window.open(url,"Top 20 Productos Más Vendidos","");
 });
 
 $("#btn-rpt-top-menos-vendido").click(function (e) {
     e.preventDefault();
     var url="../../modules/reportes/top-productos.php?mode=2";
-    window.open(url,"Top 10 Productos Más Vendidos","");
+    window.open(url,"Top 20 Productos Menos Vendidos","");
 });
 
 $("#btn-product-list").click(function (e) {

@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-box"></i>&nbsp;&nbsp;Registro de Productos
+                        <i class="fas fa-box"></i>&nbsp;&nbsp;Registro Maestro de Productos
                     </div>
                 </div>
             </div>
@@ -24,30 +24,13 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Código de Producto</label>
+                                        <label>Código</label>
                                         <input type="text" class="form-control" placeholder="Ingrese código" name="producto_code" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-people-carry"></i> Proveedor</label>
-                                        <select class="form-control select2" name="producto_proveedor" required>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group text-right">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="prod_estado" name="producto_estado">
-                                            <label for="prod_estado" class="custom-control-label">Desactivado</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <input type="text" class="form-control" placeholder="Ingrese nombre de producto" name="producto_nombre" required>
@@ -69,8 +52,16 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Nro. Guía / Orden</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese número de guía u orden" name="producto_proveedor_referencia">
+                                        <label>Valor de Medida</label>
+                                        <select class="form-control select2" name="producto_unitvalue">
+                                            <option value="">Seleccione</option>
+                                            <option value="gr">gr (Gramos)</option>
+                                            <option value="mg">mg (Miligramos)</option>
+                                            <option value="lt">lt (Litros)</option>
+                                            <option value="ml">ml (Mililitros)</option>
+                                            <option value="gl">gl (Galones)</option>
+                                            <option value="und">und (Unidad)</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -88,6 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Stock</label>
@@ -101,30 +93,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Valor de Medida</label>
-                                        <select class="form-control select2" name="producto_unitvalue">
-                                            <option value="">Seleccione</option>
-                                            <option value="gr">gr (Gramos)</option>
-                                            <option value="mg">mg (Miligramos)</option>
-                                            <option value="lt">lt (Litros)</option>
-                                            <option value="ml">ml (Mililitros)</option>
-                                            <option value="gl">gl (Galones)</option>
-                                            <option value="und">und (Unidad)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Fecha de Vencimiento</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <input type="date" class="form-control" name="producto_fecvenc" value="<?php echo date('Y-m-d'); ?>">
+                                -->
+                                <div class="col-md-10">
+                                    <div class="form-group text-right">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="prod_estado" name="producto_estado">
+                                            <label for="prod_estado" class="custom-control-label">Desactivado</label>
                                         </div>
                                     </div>
                                 </div>

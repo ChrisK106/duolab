@@ -23,17 +23,16 @@ if ($mode == 1){
 	return;
 }
 
-$sqlString="SELECT id, code, brand, name, description, STATUS, PROV_CODE, business_name, SUM(QUANTITY) AS TOTAL FROM(
+$sqlString="SELECT id, code, brand, name, description, STATUS, SUM(QUANTITY) AS TOTAL FROM(
 (SELECT p.id, p.code, p.brand, p.name, p.description,
 (CASE
  WHEN p.active_status=1 THEN 'Activo'
  WHEN p.active_status=0 THEN 'Inactivo'
 END) AS STATUS,
-pr.code AS PROV_CODE, pr.business_name, SUM(item_quantity) AS QUANTITY
+SUM(item_quantity) AS QUANTITY
 FROM tbl_invoice_detail td
 JOIN tbl_invoice th ON th.id=td.invoice_id
 JOIN tbl_product p ON td.item_id=p.id
-JOIN tbl_provider pr ON p.provider_id=pr.id
 WHERE th.status NOT IN (2)
 GROUP BY p.id)
 UNION
@@ -42,14 +41,13 @@ UNION
  WHEN p.active_status=1 THEN 'Activo'
  WHEN p.active_status=0 THEN 'Inactivo'
 END) AS STATUS,
-pr.code AS PROV_CODE, pr.business_name, SUM(item_quantity) AS QUANTITY
+SUM(item_quantity) AS QUANTITY
 FROM tbl_receipt_detail td
 JOIN tbl_receipt th ON th.id=td.receipt_id
 JOIN tbl_product p ON td.item_id=p.id
-JOIN tbl_provider pr ON p.provider_id=pr.id
 WHERE th.status NOT IN (2)
 GROUP BY p.id)) AS T
-GROUP BY id, code, brand, name, description, STATUS, PROV_CODE, business_name
+GROUP BY id, code, brand, name, description, STATUS
 ORDER BY TOTAL " . $orderString . " LIMIT 20";
 
 $sqlStatement = $pdo->prepare($sqlString);
@@ -70,11 +68,9 @@ $pdf->SetFillColor(232,232,232);
 $pdf->SetFont('Arial','B',10);
 
 $pdf->Cell(8,6,utf8_decode('N°'),1,0,'C',1);
-$pdf->Cell(10,6,utf8_decode('ID'),1,0,'C',1);
-$pdf->Cell(25,6,utf8_decode('Código'),1,0,'C',1);
-$pdf->Cell(30,6,utf8_decode('Marca'),1,0,'C',1);
-$pdf->Cell(115,6,utf8_decode('Nombre'),1,0,'C',1);
-$pdf->Cell(54,6,utf8_decode('Proveedor'),1,0,'C',1);
+$pdf->Cell(30,6,utf8_decode('Código'),1,0,'C',1);
+$pdf->Cell(40,6,utf8_decode('Marca'),1,0,'C',1);
+$pdf->Cell(164,6,utf8_decode('Nombre'),1,0,'C',1);
 $pdf->Cell(15,6,utf8_decode('Estado'),1,0,'C',1);
 $pdf->Cell(20,6,utf8_decode('UNIDADES'),1,0,'C',1);
 $pdf->Ln();
@@ -86,18 +82,12 @@ $rowNumber=1;
 if ($rowsNumber > 0) {
     foreach ($sqlStatement as $row) {
     	$pdf->Cell(8,6,utf8_decode($rowNumber),1,0,'C',1);
-		$pdf->Cell(10,6,utf8_decode($row['id']),1,0,'C');
-		$pdf->Cell(25,6,utf8_decode($row['code']),1,0,'C');
-		$pdf->Cell(30,6,utf8_decode($row['brand']),1,0,'C');
-		$pdf->Cell(115,6,utf8_decode($row['name']),1,0,'L');
-		$pdf->Cell(54,6,utf8_decode($row['business_name']),1,0,'C');
+		$pdf->Cell(30,6,utf8_decode($row['code']),1,0,'C');
+		$pdf->Cell(40,6,utf8_decode($row['brand']),1,0,'C');
+		$pdf->Cell(164,6,utf8_decode($row['name']),1,0,'L');
 		$pdf->Cell(15,6,utf8_decode($row['STATUS']),1,0,'C');
 		$pdf->Cell(20,6,utf8_decode($row['TOTAL']),1,0,'C');
 		$pdf->Ln();
-
-		//$pdf->Cell(100,6,utf8_decode($row['description']),1,0,'C');
-		//$pdf->Cell(10,6,utf8_decode($row['PROV_CODE']),1,0,'C');
-
 		$rowNumber++;
 	}
 }

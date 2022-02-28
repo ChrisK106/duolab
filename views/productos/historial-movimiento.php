@@ -4,7 +4,7 @@
             <div class="row mb-0">
                 <div class="col-md-12">
                     <div class="m-0 text-dark text-center text-lg">
-                        <i class="fas fa-box"></i>&nbsp;&nbsp;Listado Maestro de Productos
+                        <i class="fas fa-box"></i>&nbsp;&nbsp;Historial de Movimientos de Almacén
                     </div>
                 </div>
             </div>
@@ -14,26 +14,24 @@
         <div class="container-fluid">
             <div class="card card-primary mt-1">
                 <div class="card-header">
-                    Productos
+                    Movimientos
                 </div>
                 <div class="card-body">
-                    <div>
-                        <label>Haga clic sobre un ítem para editar los datos del producto.</label>
-                    </div>
                     <div class="table-responsive">
-                        <table id="table-productos" class="table table-bordered table-hover" style="width: 100%">
+                        <table id="table-movimientos" class="table table-bordered table-hover" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Tipo</th>
                                     <th>Código</th>
-                                    <th>Marca</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Medida</th>
-                                    <th>Stock</th>
-                                    <th>Precio</th>
-                                    <th>Estado</th>
-                                    <th>Fec. Registro</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Proveedor</th>
+                                    <th>Vencimiento</th>
+                                    <th>Guía/Orden</th>
+                                    <th>Observación</th>
+                                    <th>Usuario</th>
+                                    <th>F. Operación</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

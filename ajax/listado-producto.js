@@ -22,11 +22,8 @@ tabla_productos.DataTable({
         { "data": "VALORMEDIDA" },
         { "data": "CANTIDAD" },
         { "data": "PRECIO" },
-        { "data": "PROVEEDOR" },
-        { "data": "PROVEEDOR_REF" },
-        { "data": "FECVENC" },
-        { "data": "FECREG" },
-        { "data": "ESTADO" }
+        { "data": "ESTADO" },
+        { "data": "FECREG" }
     ],
     "order": [[0, "DESC"]],
     dom: 'Bfrtip',

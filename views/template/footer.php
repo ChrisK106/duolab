@@ -27,13 +27,19 @@
 <!-- AdminLTE App -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
-<!-- Flot -->
-<script src="<?php echo $functions->direct_sistema(); ?>/plugins/flot/jquery.flot.js"></script>
+<!-- Flot - Attractive JavaScript plotting for jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/flot@4.2.2/dist/es5/jquery.flot.min.js"></script>
 
 <!-- Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
 <!-- Select2 Spanish Language -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script>
+
+<!-- Toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+<!-- Font Awesome Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 <!-- Context Menu JS -->
 <script src="<?php echo $functions->direct_sistema(); ?>/plugins/context-menu/jquery.contextMenu.min.js"></script>
@@ -53,8 +59,8 @@
 <script src="<?php echo $functions->direct_sistema(); ?>/plugins/datatables/vfs_fonts.js"></script>
 
 <!-- Moment JS -->
-<script src="<?php echo $functions->direct_sistema(); ?>/plugins/moment/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/4.0.1/moment-range.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-range@4.0.2/dist/moment-range.js"></script>
 <script>
   window['moment-range'].extendMoment(moment);
 </script>

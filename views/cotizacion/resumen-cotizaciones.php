@@ -75,6 +75,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nro. Cotización</th>
+                                        <th>F. Emisión</th>
                                         <th>Cliente</th>
                                         <th>Monto</th>
                                         <th>Estado</th>

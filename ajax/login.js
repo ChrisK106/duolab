@@ -17,7 +17,6 @@ $(document).on('submit', '#login-form', function(event){
 			toastr.error(response,'Error desconocido');
 			return;
 		}
-
 		if(!response.error){
 			location.href = 'views/home';
 		}else{

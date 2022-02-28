@@ -3,6 +3,8 @@ $('select[name="reporte_periodo_year"]').prop("disabled",true);
 $("#div-filtro-periodo").hide();
 
 $(document).ready(function(){
+  $("#m_reportes").attr("class","nav-link active");
+  $("#m_reportes").parent().attr("class","nav-item has-treeview menu-open");
   $("#m_score_ventas").attr("class","nav-link active");
   $(document).prop('title', 'Score de Ventas - DuoLab Group');
 });

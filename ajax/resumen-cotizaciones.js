@@ -43,12 +43,13 @@ $.post(
           {
             0: data_cotiz[i]["CODIGOID"],
             1: data_cotiz[i]["CODIGO"],
-            2: data_cotiz[i]["CLIENTNAME"],
-            3: data_cotiz[i]["TOTAL_NET"],
-            4: data_cotiz[i]["ESTADO_VAL"]
-          }
-        ])
-        .draw();
+            2: data_cotiz[i]["FECREG"],
+            3: data_cotiz[i]["CLIENTNAME"],
+            4: data_cotiz[i]["TOTAL_NET"],
+            5: data_cotiz[i]["ESTADO_VAL"]
+          }]).draw();
+
+          tbl_cotizaciones.columns.adjust().draw();
     }
   }
 ).then(function() {
@@ -151,12 +152,13 @@ $("#btn-buscar").click(function(){
                     {
                       0: data_cotiz[i]["CODIGOID"],
                       1: data_cotiz[i]["CODIGO"],
-                      2: data_cotiz[i]["CLIENTNAME"],
-                      3: data_cotiz[i]["TOTAL_NET"],
-                      4: data_cotiz[i]["ESTADO_VAL"]
-                    }
-                    ])
-                    .draw();
+                      2: data_cotiz[i]["FECREG"],
+                      3: data_cotiz[i]["CLIENTNAME"],
+                      4: data_cotiz[i]["TOTAL_NET"],
+                      5: data_cotiz[i]["ESTADO_VAL"]
+                    }]).draw();
+
+                    tbl_cotizaciones.columns.adjust().draw();
                 }
             }
         ).then(function() {
@@ -196,12 +198,13 @@ $("#table-cotizaciones").contextMenu({
                                 {
                                   0: data_cotiz[i]["CODIGOID"],
                                   1: data_cotiz[i]["CODIGO"],
-                                  2: data_cotiz[i]["CLIENTNAME"],
-                                  3: data_cotiz[i]["TOTAL_NET"],
-                                  4: data_cotiz[i]["ESTADO_VAL"]
-                                }
-                              ])
-                              .draw();
+                                  2: data_cotiz[i]["FECREG"],
+                                  3: data_cotiz[i]["CLIENTNAME"],
+                                  4: data_cotiz[i]["TOTAL_NET"],
+                                  5: data_cotiz[i]["ESTADO_VAL"]
+                                }]).draw();
+
+                                tbl_cotizaciones.columns.adjust().draw();
                           }
                         }
                       )
