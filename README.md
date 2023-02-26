@@ -1,5 +1,7 @@
-[![CodeQL](https://github.com/ChrisK106/duolab/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ChrisK106/duolab/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/ChrisK106/duolab/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/ChrisK106/duolab/actions/workflows/codeql.yml)
 [![pages-build-deployment](https://github.com/ChrisK106/duolab/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ChrisK106/duolab/actions/workflows/pages/pages-build-deployment)
+
+
 
 # ![DUOLAB Logo](docs/duolab_logo.png)
 **DUOLAB** es un modesto **sistema web** para gestión de clientes, productos, ventas y más...
