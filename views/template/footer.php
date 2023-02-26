@@ -5,7 +5,7 @@
       
     </div>
     <!-- Default to the left -->
-    <strong>&copy; 2022 DuoLab Group</strong>
+    <strong>&copy; 2023 DuoLab Group</strong>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -13,7 +13,7 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 
 <!-- Script for Notifications -->
 <script src="<?php echo $functions->direct_sistema(); ?>/js/notifications.js"></script>

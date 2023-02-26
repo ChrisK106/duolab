@@ -91,7 +91,7 @@ if (isset($_SESSION['loggedInUser'])) {
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       -->
-      <p class="mt-5 mb-3 text-muted text-center">© 2022 DuoLab Group</p>
+      <p class="mt-5 mb-3 text-muted text-center">© 2023 DuoLab Group</p>
     </div>
     <!-- /.card-body -->
   </div>
