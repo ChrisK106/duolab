@@ -1,12 +1,8 @@
 [![CodeQL](https://github.com/ChrisK106/duolab/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/ChrisK106/duolab/actions/workflows/codeql.yml)
-[![pages-build-deployment](https://github.com/ChrisK106/duolab/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ChrisK106/duolab/actions/workflows/pages/pages-build-deployment)
-
-
 
 # ![DUOLAB Logo](docs/duolab_logo.png)
 **DUOLAB** es un modesto **sistema web** para gestión de clientes, productos, ventas y más...
 Escrito utilizando **PHP** y **JavaScript**.
-
 
 ## Módulos disponibles
 - Clientes
@@ -17,6 +13,12 @@ Escrito utilizando **PHP** y **JavaScript**.
 - Empleados
 - Usuarios (Registro y Gestión de Accesos)
 - Reportes (Clientes, Productos, Ventas, Gastos)
+
+## Instalación
+Puedes revisar el archivo *[manual de instalación](https://github.com/ChrisK106/duolab/blob/master/docs/duolab_manual_de_instalacion.pdf)* que se encuentra dentro de la carpeta *docs* del repositorio.
+Este te servirá como guía para realizar la instalación de **XAMPP**, una solución open source de servidor web **Apache** con soporte para aplicaciones **PHP** más un gestor de base de datos SQL **MariaDB**.
+También encontrarás instrucciones para realizar la instalación del script *db_duolab.sql* utilizando **phpMyAdmin**.
+Así como pasos para la instalación, configuración del sitio web y las credenciales por defecto del usuario administrador del sitio.
 
 ## Capturas
 ![DUOLAB Login](docs/preview/duolab_login.png)
