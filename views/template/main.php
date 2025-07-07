@@ -2,10 +2,14 @@
 
 include './global/config.php';
 
+// Get the web directory name from the URL
+// This is useful for setting paths relative to the web root
 $url_array = explode("/", $_SERVER["REQUEST_URI"]);
 $web_dir_name = "/" . $url_array[1];
 $web_root_dir = $_SERVER['DOCUMENT_ROOT'] . $web_dir_name;
 
+// Set the default timezone
+// This is important for date and time functions to work correctly
 date_default_timezone_set("America/Lima");
 
 if (isset($_GET["url"])) {
@@ -20,7 +24,7 @@ if (isset($_GET["url"])) {
     // Web Header (Navbar)
     include $web_root_dir."/views/template/header.php";
 
-    //Web Sidebar
+    // Web Sidebar
     include $web_root_dir."/views/template/sidebar.php";
 
     // Web View (Content)
