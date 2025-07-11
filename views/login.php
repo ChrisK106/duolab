@@ -1,5 +1,9 @@
 <?php
+// Start a session to manage user login state
 session_start();
+
+// Check if the user is already logged in and redirect to home if so
+// This prevents logged-in users from accessing the login page again
 if (isset($_SESSION['loggedInUser'])) {
   header('Location: views/home');
 }
@@ -10,20 +14,20 @@ if (isset($_SESSION['loggedInUser'])) {
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DuoLab Group</title>
+  <title>DuoLab</title>
   <meta name="description" content="Empresa peruana dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos del rubro cosmético y farmacéutico.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="DuoLab Group">
-  <meta property="og:site" content="DuoLab Group">
-  <meta property="og:url" content="https://duolabgroup.com">
-  <meta property="og:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar.">
-  <meta property="og:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png">
+  <meta property="og:title" content="DuoLab">
+  <meta property="og:site" content="DuoLab">
+  <meta property="og:url" content="http://localhost/duolab">
+  <meta property="og:description" content="Bienvenido a DuoLab. Inicie sesión para continuar.">
+  <meta property="og:image" content="../img/duolabgroup_logo.png">
 
-  <meta property="twitter:title" content="DuoLab Group">
-  <meta property="twitter:description" content="Bienvenido a DuoLab Group. Inicie sesión para continuar.">
-  <meta name="twitter:image" content="https://duolabgroup.com/duolab/img/duolabgroup_logo.png">
+  <meta property="twitter:title" content="DuoLab">
+  <meta property="twitter:description" content="Bienvenido a DuoLab. Inicie sesión para continuar.">
+  <meta name="twitter:image" content="../img/duolabgroup_logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!--<meta name="twitter:site" content="@duolabgroup">-->
+  <!--<meta name="twitter:site" content="@duolab">-->
   
   <meta name="theme-color" content="#e9ecef">
   <meta name="author" content="Christian Cano">
@@ -34,13 +38,13 @@ if (isset($_SESSION['loggedInUser'])) {
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
   <!-- AdminLTE Template Style -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/4.0.0-rc3/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -91,7 +95,7 @@ if (isset($_SESSION['loggedInUser'])) {
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       -->
-      <p class="mt-5 mb-3 text-muted text-center">© 2023 DuoLab Group</p>
+      <p class="mt-5 mb-3 text-muted text-center">© 2025 DuoLab</p>
     </div>
     <!-- /.card-body -->
   </div>
@@ -101,12 +105,12 @@ if (isset($_SESSION['loggedInUser'])) {
 
 <!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Toastr -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-<!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/4.0.0-rc3/js/adminlte.min.js"></script>
 
 <script type="text/javascript">
   toastr.options = {
