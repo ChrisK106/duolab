@@ -5,7 +5,7 @@
       
     </div>
     <!-- Default to the left -->
-    <strong>&copy; 2023 DuoLab Group</strong>
+    <strong>&copy; 2025 DuoLab Group</strong>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -13,7 +13,7 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <!-- Script for Notifications -->
 <script src="<?php echo $functions->direct_sistema(); ?>/js/notifications.js"></script>
@@ -21,17 +21,18 @@
 <!-- jQuery UI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-rc3/dist/js/adminlte.min.js"></script>
 
 <!-- Flot - Attractive JavaScript plotting for jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/flot@4.2.2/dist/es5/jquery.flot.min.js"></script>
 
 <!-- Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+
 <!-- Select2 Spanish Language -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script>
 
@@ -39,7 +40,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
 <!-- Font Awesome Icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/js/all.min.js"></script>
 
 <!-- Context Menu JS -->
 <script src="<?php echo $functions->direct_sistema(); ?>/plugins/context-menu/jquery.contextMenu.min.js"></script>

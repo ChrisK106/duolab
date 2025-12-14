@@ -15,6 +15,7 @@ if (isset($_SESSION['loggedInUser'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Empresa peruana dedicada a la IMPORTACIÓN, COMERCIALIZACIÓN Y DISTRIBUCIÓN de productos del rubro cosmético y farmacéutico.">
   <meta name="author" content="Christian Cano">
+
   <title>DuoLab</title>
   
   <meta property="og:type" content="website">
